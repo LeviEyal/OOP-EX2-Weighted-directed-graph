@@ -7,6 +7,7 @@ public class DWGraph_DS implements directed_weighted_graph {
 
     private HashMap<Integer, node_data> v = new HashMap<>();
     private HashMap<Integer, HashMap<Integer, edge_data>> e = new HashMap<>();
+//    private HashMap<Integer, HashMap<Integer, node_data>> ni = new HashMap<>();
     private int nodeSize;
     private int edgeSize;
     private int mc;
@@ -21,6 +22,30 @@ public class DWGraph_DS implements directed_weighted_graph {
         return v.get(key);
     }
 
+
+    /**
+     * return true iff (if and only if) there is an edge between node1 and node2
+     * Note: this method should run in O(1) time.
+     * check if has two Vertex in the graph by src && dest
+     * check if has two Vertex in the edge by src && dest
+     * if the two nodes are exist we check if to src has neighbor to dest && to dest has neighbor src
+     * @param src key
+     * @param dest key
+     * @return true if are they neighbors from both sides, false if they don't have
+     */
+    public boolean hasEdge(int src, int dest) {
+        return  v.containsKey(src) &&
+                v.containsKey(dest) &&
+                e.containsKey(src) &&
+                e.containsKey(dest) &&
+                e.get(src).containsKey(dest) &&
+                e.get(dest).containsKey(src) &&
+//                ni.containsKey(src) &&
+//                ni.containsKey(dest) &&
+//                ni.get(src).containsKey(dest) &&
+//                ni.get(dest).containsKey(src) &&
+                src != dest;
+    }
     /**
      * returns the data of the edge (src,dest), null if none.
      * Note: this method should run in O(1) time.
@@ -62,6 +87,7 @@ public class DWGraph_DS implements directed_weighted_graph {
     public void connect(int src, int dest, double w) {
         if (src != dest) {
             e.get(src).putIfAbsent(dest ,new EdgeData(src,dest,w));
+            //ni.get(src).putIfAbsent(v.get(dest).getKey() ,v.get(dest));
             edgeSize++;
             mc++;
         }

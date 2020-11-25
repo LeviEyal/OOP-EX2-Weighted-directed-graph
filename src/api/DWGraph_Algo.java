@@ -36,7 +36,21 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      */
     @Override
     public directed_weighted_graph copy() {
-        return null;
+        directed_weighted_graph newG = new DWGraph_DS();
+        for (node_data V : g.getV()){
+            node_data newNode = new DWGraph_DS.NodeData(V.getKey());
+            newNode.setInfo(V.getInfo());
+            newNode.setLocation(V.getLocation());
+            newNode.setTag(V.getTag());
+            newNode.setWeight(V.getWeight());
+            newG.addNode(newNode);
+        }
+        for (node_data V : g.getV()){
+            for (edge_data Ni : g.getE(V.getKey())){
+                newG.connect( V.getKey(), Ni.getDest(), Ni.getWeight());
+            }
+        }
+        return newG;
     }
 
     /**
