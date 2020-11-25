@@ -10,7 +10,7 @@ public class DWGraph_DS implements directed_weighted_graph {
 //    private HashMap<Integer, HashMap<Integer, node_data>> ni = new HashMap<>();
     private int nodeSize;
     private int edgeSize;
-    private int mc;;
+    private int mc;
 
     /************************ CONSTRUCTORS *************************/
     public DWGraph_DS() {
