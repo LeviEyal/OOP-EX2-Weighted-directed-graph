@@ -131,12 +131,6 @@ public class NodeData implements node_data {
 
     @Override
     public String toString() {
-        return "NodeData{" +
-                "key=" + key +
-                ", tag=" + tag +
-                ", info='" + info + '\'' +
-                ", location=" + location +
-                ", weight=" + weight +
-                '}';
+        return "#"+key;
     }
 }

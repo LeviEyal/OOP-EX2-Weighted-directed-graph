@@ -3,6 +3,8 @@ package api;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 class DWGraph_AlgoTest {
 
@@ -11,11 +13,10 @@ class DWGraph_AlgoTest {
     static directed_weighted_graph g2 = new DWGraph_DS();
     static directed_weighted_graph g3 = new DWGraph_DS();
 
-    static directed_weighted_graph createG(int size, directed_weighted_graph g) {
+    static void createG(int size, directed_weighted_graph g) {
         for(int i = 1; i <= size; i++){
             g.addNode(new NodeData(i));
         }
-        return g;
     }
     @BeforeAll
     static void setUp() {
@@ -29,11 +30,8 @@ class DWGraph_AlgoTest {
         g1.connect(6,7,3.1);
         g1.connect(7,6,3.1);
         g1.connect(8,9,1.8);
-
         g1.connect(4,9,9.6);
         g1.connect(2,6,5.6);
-
-
 
         createG(10,g2);
         g2.connect(1,6,5);
@@ -56,10 +54,6 @@ class DWGraph_AlgoTest {
         g2.connect(9,10,10);
         g2.connect(10,3,15);
         g2.connect(10,2,5);
-        ga.init(g2);
-        System.out.println(ga.getGraph());
-
-//        System.out.println(ga.getGraph());
     }
 
     @Test
@@ -97,14 +91,44 @@ class DWGraph_AlgoTest {
     }
 
     @Test
-    void shortestPath() {
+    void shortestPathGraph1() {
+        ga.init(g1);
+        assertEquals("[#4, #9, #7, #6]", ga.shortestPath(4,6).toString());
+        assertEquals("[#1, #2, #6, #7]", ga.shortestPath(1,7).toString());
+        assertEquals("[#3, #4, #9, #7, #6]", ga.shortestPath(3,6).toString());
+        assertEquals("[#1]", ga.shortestPath(1,1).toString());
+        assertEquals("[#2, #6]", ga.shortestPath(2,6).toString());
+        assertEquals("[#4, #9, #7]", ga.shortestPath(4,7).toString());
+        assertNull(ga.shortestPath(0,3));
+        assertNull(ga.shortestPath(20,4));
+        assertNull(ga.shortestPath(8,4));
+        assertNull(ga.shortestPath(7,1));
+    }
+    @Test
+    void shortestPathGraph2() {
+        ga.init(g2);
+        assertEquals("[#8, #1, #6]", ga.shortestPath(8,6).toString());
+        assertEquals("[#8, #1, #5]", ga.shortestPath(8,5).toString());
+        assertEquals("[#9, #2, #4, #5]", ga.shortestPath(9,5).toString());
+        assertEquals("[#10, #2]", ga.shortestPath(10,2).toString());
+        assertEquals("[#10]", ga.shortestPath(10,10).toString());
+        assertEquals("[#10]", ga.shortestPath(10,10).toString());
+        assertNull(ga.shortestPath(11,3));
+        assertNull(ga.shortestPath(11,11));
+        assertNull(ga.shortestPath(6,1));
+        assertNull(ga.shortestPath(6,2));
+        assertNull(ga.shortestPath(6,3));
+        assertNull(ga.shortestPath(6,4));
+        assertNull(ga.shortestPath(6,5));
+
+
     }
 
     @Test
     void saveAndLoad() {
-        ga.save("e.json");
+        ga.save("e");
         dw_graph_algorithms new_ga = new DWGraph_Algo();
-        new_ga.load("e.json");
-        System.out.println(new_ga.getGraph());
+//        new_ga.load("e.json");
+//        System.out.println(new_ga.getGraph());
     }
 }

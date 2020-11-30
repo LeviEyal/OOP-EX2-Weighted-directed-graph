@@ -21,6 +21,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     private static final int NOT_VISITED = 0;
     private static final double INFINITY = Double.POSITIVE_INFINITY;
     private HashMap<node_data,Double> tags = new HashMap<>();
+    private HashMap<Integer, Integer> map = new LinkedHashMap<>();
     /**
      * Init the graph on which this set of algorithms operates on.
      *
@@ -109,7 +110,8 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         node_data destination = g.getNode(dest);
         if (source == null || destination == null)
             return -1;
-
+        map.clear();
+        map.put(src, -1);
         setAllTags(INFINITY);
         Queue<node_data> q = new PriorityQueue<>(new NodesComparator());
         tags.put(source, 0.0);
@@ -123,6 +125,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 if (weightFromSrc < tags.get(n)) {
                     q.add(n);
                     tags.put(n, weightFromSrc);
+                    map.put(n.getKey(), v.getKey());
                 }
             }
         }
@@ -142,7 +145,24 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      */
     @Override
     public List<node_data> shortestPath(int src, int dest) {
-        return null;
+        node_data source = g.getNode(src);
+        node_data destination = g.getNode(dest);
+        if (source == null || destination == null) return null;
+        List<node_data> path = new ArrayList<>();
+        if (src == dest) {
+            path.add(source);
+            return path;
+        }
+        shortestPathDist(src,dest);
+        if(!map.containsKey(dest)){
+            return null;
+        }
+        while (dest != -1) {
+            path.add(g.getNode(dest));
+            dest = map.get(dest);
+        }
+        Collections.reverse(path);
+        return path;
     }
 
     /**
