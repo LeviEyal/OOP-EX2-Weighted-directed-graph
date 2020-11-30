@@ -8,12 +8,18 @@ class DWGraph_AlgoTest {
 
     static dw_graph_algorithms ga = new DWGraph_Algo();
     static directed_weighted_graph g1 = new DWGraph_DS();
+    static directed_weighted_graph g2 = new DWGraph_DS();
+    static directed_weighted_graph g3 = new DWGraph_DS();
 
+    static directed_weighted_graph createG(int size, directed_weighted_graph g) {
+        for(int i = 1; i <= size; i++){
+            g.addNode(new NodeData(i));
+        }
+        return g;
+    }
     @BeforeAll
     static void setUp() {
-        for(int i=0; i<10; i++){
-            g1.addNode(new NodeData(i));
-        }
+        createG(10,g1);
         g1.connect(1,2,0.5);
         g1.connect(1,3,2.5);
         g1.connect(3,4,1.98);
@@ -26,7 +32,33 @@ class DWGraph_AlgoTest {
 
         g1.connect(4,9,9.6);
         g1.connect(2,6,5.6);
-        ga.init(g1);
+
+
+
+        createG(10,g2);
+        g2.connect(1,6,5);
+        g2.connect(1,5,20);
+        g2.connect(1,4,20);
+        g2.connect(1,2,10);
+        g2.connect(1,7,15);
+        g2.connect(2,4,10);
+        g2.connect(2,3,5);
+        g2.connect(3,4,5);
+        g2.connect(3,2,15);
+        g2.connect(4,5,10);
+        g2.connect(5,6,5);
+        g2.connect(7,6,10);
+        g2.connect(8,7,5);
+        g2.connect(8,1,5);
+        g2.connect(8,2,20);
+        g2.connect(9,8,20);
+        g2.connect(9,2,15);
+        g2.connect(9,10,10);
+        g2.connect(10,3,15);
+        g2.connect(10,2,5);
+        ga.init(g2);
+        System.out.println(ga.getGraph());
+
 //        System.out.println(ga.getGraph());
     }
 
@@ -36,11 +68,32 @@ class DWGraph_AlgoTest {
     }
 
     @Test
-    void shortestPathDist() {
-        System.out.println("shortest 2->6: "+ga.shortestPathDist(2,6));
-        System.out.println("shortest 1->2: "+ga.shortestPathDist(1,2));
-        System.out.println("shortest 1->4: "+ga.shortestPathDist(1,4));
-        System.out.println("shortest 8->6: "+ga.shortestPathDist(8,6));
+    void shortestPathDistGraph1() {
+        ga.init(g1);
+        assertEquals(5.6,ga.shortestPathDist(2,6));
+        assertEquals(0.5,ga.shortestPathDist(1,2));
+        assertEquals(4.48,ga.shortestPathDist(1,4));
+        assertEquals(7.300000000000001,ga.shortestPathDist(8,6));
+        assertEquals(-1.0,ga.shortestPathDist(9,4));
+        assertEquals(0.0,ga.shortestPathDist(3,3));
+        assertEquals(-1.0,ga.shortestPathDist(20,20));
+        assertEquals(-1.0,ga.shortestPathDist(1,20));
+    }
+    @Test
+    void shortestPathDistGraph2() {
+        ga.init(g2);
+        assertEquals(25.0,ga.shortestPathDist(2,6));
+        assertEquals(10.0,ga.shortestPathDist(1,2));
+        assertEquals(20.0,ga.shortestPathDist(1,4));
+        assertEquals(10.0,ga.shortestPathDist(8,6));
+        assertEquals(25.0,ga.shortestPathDist(9,4));
+        assertEquals(25.0,ga.shortestPathDist(9,1));
+        assertEquals(-1.0,ga.shortestPathDist(10,1));
+        assertEquals(0.0,ga.shortestPathDist(3,3));
+        assertEquals(-1.0,ga.shortestPathDist(20,20));
+        assertEquals(-1.0,ga.shortestPathDist(1,20));
+        assertEquals(5.0,ga.shortestPathDist(3,4));
+        assertEquals(30.0,ga.shortestPathDist(10,6));
     }
 
     @Test
