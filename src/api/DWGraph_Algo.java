@@ -193,10 +193,10 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     class NodesComparator implements Comparator<node_data>{
         @Override
         public int compare(node_data n1, node_data n2) {
-            if(tags.get(n1) < tags.get(n2)){
+            if(tags.get(n1) > tags.get(n2)){
                 return -1;
             }
-            else if(tags.get(n1) > tags.get(n2)){
+            else if(tags.get(n1) < tags.get(n2)){
                 return 1;
             }
             return 0;

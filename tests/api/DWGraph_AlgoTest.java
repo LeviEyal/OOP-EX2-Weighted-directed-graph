@@ -23,6 +23,9 @@ class DWGraph_AlgoTest {
         g1.connect(6,7,3.1);
         g1.connect(7,6,3.1);
         g1.connect(8,9,1.8);
+
+        g1.connect(4,9,9.6);
+        g1.connect(2,6,5.6);
         ga.init(g1);
 //        System.out.println(ga.getGraph());
     }
