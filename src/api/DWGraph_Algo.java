@@ -1,5 +1,17 @@
 package api;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -49,9 +61,20 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     public boolean isConnected() {
         if (g.nodeSize() == 0 || g.nodeSize() == 1) return true;
 
-        setAllTags(NOT_VISITED);
+        for(node_data v : g.getV()){
+            setAllTags(NOT_VISITED);
+            BFS(v);
+            for (node_data n : g.getV()) {
+                if (n.getTag() == NOT_VISITED)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    private void BFS(node_data node) {
+        node_data v = node;
         Queue<node_data> q = new LinkedList<>();
-        node_data v = g.getV().iterator().next(); //pick some node
         v.setTag(VISITED);
         q.add(v);
         while (!q.isEmpty()) {
@@ -64,10 +87,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 }
             }
         }
-        for (node_data n : g.getV())
-            if (n.getTag() == 0)
-                return false;
-        return true;
     }
 
     //Sets al nodes' tags value to a given integer number t
@@ -107,12 +126,21 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Saves this weighted (directed) graph to the given
      * file name - in JSON format
      *
-     * @param file - the file name (may include a relative path).
+     * @param file_name - the file name (may include a relative path).
      * @return true - iff the file was successfully saved
      */
     @Override
-    public boolean save(String file) {
-        return false;
+    public boolean save(String file_name) {
+        Gson gson = new Gson();
+        String graph_string = gson.toJson(this.g);
+        System.out.println(graph_string);
+        try {
+            Files.writeString(Path.of(file_name), graph_string, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -126,6 +154,16 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      */
     @Override
     public boolean load(String file) {
-        return false;
+        Gson gson = new Gson();
+        try {
+            String in = Files.readString(Path.of(file));
+            g = gson.fromJson(in, DWGraph_DS.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }
