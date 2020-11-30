@@ -7,7 +7,7 @@ public class DWGraph_DS implements directed_weighted_graph {
 
     private HashMap<Integer, node_data> V = new HashMap<>();
     private HashMap<Integer, HashMap<Integer, edge_data>> E = new HashMap<>();
-    //    private HashMap<Integer, HashMap<Integer, node_data>> ni = new HashMap<>();
+//    private HashMap<Integer, HashMap<Integer, node_data>> ni = new HashMap<>();
     private int nodeSize;
     private int edgeSize;
     private int mc;
@@ -125,7 +125,7 @@ public class DWGraph_DS implements directed_weighted_graph {
      * @return Collection<node_data>
      */
     @Override
-    public Collection<node_data> getV(int key) {
+    public Collection<node_data> getV() {
         return V.values();
     }
 
@@ -134,6 +134,7 @@ public class DWGraph_DS implements directed_weighted_graph {
      * collection representing all the edges getting out of
      * the given node (all the edges starting (source) at the given node).
      * Note: this method should run in O(k) time, k being the collection size.
+     *
      * @param src
      * @return Collection<edge_data>
      */

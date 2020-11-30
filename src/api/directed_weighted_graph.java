@@ -43,9 +43,8 @@ public interface directed_weighted_graph {
 	 * collection representing all the nodes in the graph. 
 	 * Note: this method should run in O(1) time.
 	 * @return Collection<node_data>
-     * @param key
 	 */
-	public Collection<node_data> getV(int key);
+	public Collection<node_data> getV();
 	/**
 	 * This method returns a pointer (shallow copy) for the
 	 * collection representing all the edges getting out of 

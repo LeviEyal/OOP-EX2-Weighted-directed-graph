@@ -62,7 +62,7 @@ public class MyFrame extends JFrame{
 	}
 	private void drawGraph(Graphics g) {
 		directed_weighted_graph gg = _ar.getGraph();
-		Iterator<node_data> iter = gg.getV(del.getKey()).iterator();
+		Iterator<node_data> iter = gg.getV().iterator();
 		while(iter.hasNext()) {
 			node_data n = iter.next();
 			g.setColor(Color.blue);
