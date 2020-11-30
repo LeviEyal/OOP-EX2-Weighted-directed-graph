@@ -120,15 +120,14 @@ class DWGraph_AlgoTest {
         assertNull(ga.shortestPath(6,3));
         assertNull(ga.shortestPath(6,4));
         assertNull(ga.shortestPath(6,5));
-
-
     }
 
     @Test
-    void saveAndLoad() {
-        ga.save("e");
+    void save_Load() {
+        ga.init(g1);
+        ga.save("e.json");
         dw_graph_algorithms new_ga = new DWGraph_Algo();
-//        new_ga.load("e.json");
-//        System.out.println(new_ga.getGraph());
+        new_ga.load("e.json");
+        System.out.println(new_ga.getGraph());
     }
 }
