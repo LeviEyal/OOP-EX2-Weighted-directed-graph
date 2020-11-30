@@ -14,17 +14,17 @@ class DWGraph_AlgoTest {
         for(int i=0; i<10; i++){
             g1.addNode(new NodeData(i));
         }
-        g1.connect(1,2,2);
-        g1.connect(1,3,2);
-        g1.connect(3,4,2);
-        g1.connect(2,5,2);
-        g1.connect(5,7,2);
-        g1.connect(9,7,2);
-        g1.connect(6,7,2);
-        g1.connect(7,6,2);
-        g1.connect(8,9,2);
+        g1.connect(1,2,0.5);
+        g1.connect(1,3,2.5);
+        g1.connect(3,4,1.98);
+        g1.connect(2,5,8.3);
+        g1.connect(5,7,4.1);
+        g1.connect(9,7,2.4);
+        g1.connect(6,7,3.1);
+        g1.connect(7,6,3.1);
+        g1.connect(8,9,1.8);
         ga.init(g1);
-        System.out.println(ga.getGraph());
+//        System.out.println(ga.getGraph());
     }
 
     @Test
@@ -34,6 +34,10 @@ class DWGraph_AlgoTest {
 
     @Test
     void shortestPathDist() {
+        System.out.println("shortest 2->6: "+ga.shortestPathDist(2,6));
+        System.out.println("shortest 1->2: "+ga.shortestPathDist(1,2));
+        System.out.println("shortest 1->4: "+ga.shortestPathDist(1,4));
+        System.out.println("shortest 8->6: "+ga.shortestPathDist(8,6));
     }
 
     @Test
