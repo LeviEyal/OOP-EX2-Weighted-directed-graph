@@ -79,8 +79,8 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         q.add(v);
         while (!q.isEmpty()) {
             v = q.remove();
-            for (edge_data n : g.getE(v.getKey())) {
-                node_data t = g.getNode(n.getDest());
+            for (edge_data e : g.getE(v.getKey())) {
+                node_data t = g.getNode(e.getDest());
                 if (t.getTag() == NOT_VISITED) {
                     q.add(t);
                     t.setTag(VISITED);
