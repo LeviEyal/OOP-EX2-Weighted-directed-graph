@@ -15,7 +15,7 @@ import java.util.List;
 import javax.swing.WindowConstants;
 
 public class Ex2_Client implements Runnable{
-
+	//wegw
 	private static MyFrame _win;
 	private static Arena _ar;
 
