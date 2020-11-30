@@ -12,15 +12,15 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class DWGraph_Algo implements dw_graph_algorithms {
 
     private directed_weighted_graph g;
     private static final int VISITED = 1;
     private static final int NOT_VISITED = 0;
+    private static final double INFINITY = Double.POSITIVE_INFINITY;
+    private HashMap<node_data,Double> tags = new HashMap<>();
     /**
      * Init the graph on which this set of algorithms operates on.
      *
@@ -90,9 +90,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     }
 
     //Sets al nodes' tags value to a given integer number t
-    private void setAllTags(int t) {
+    private void setAllTags(double t) {
         for (node_data n : g.getV())
-            n.setTag(t);
+            tags.put(n, t);
     }
     /**
      * returns the length of the shortest path between src to dest
@@ -104,7 +104,30 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      */
     @Override
     public double shortestPathDist(int src, int dest) {
-        return 0;
+        if (src == dest) return 0;
+        node_data source = g.getNode(src);
+        node_data destination = g.getNode(dest);
+        if (source == null || destination == null)
+            return -1;
+
+        setAllTags(INFINITY);
+        Queue<node_data> q = new PriorityQueue<>(new NodesComparator());
+        tags.put(source, 0.0);
+        q.add(source);
+        while (!q.isEmpty()) {
+            node_data v = q.poll();
+            for (edge_data e : g.getE(v.getKey())) {
+                node_data n = g.getNode(e.getDest());
+                double w = g.getEdge(v.getKey(), n.getKey()).getWeight(); //weight (v<->n)
+                double weightFromSrc = tags.get(v) + w;
+                if (weightFromSrc < tags.get(n)) {
+                    q.add(n);
+                    tags.put(n, weightFromSrc);
+                }
+            }
+        }
+        double t = tags.get(destination);
+        return (t == INFINITY)? -1 : t;
     }
 
     /**
@@ -165,5 +188,18 @@ public class DWGraph_Algo implements dw_graph_algorithms {
             e.printStackTrace();
         }
         return true;
+    }
+
+    class NodesComparator implements Comparator<node_data>{
+        @Override
+        public int compare(node_data n1, node_data n2) {
+            if(tags.get(n1) < tags.get(n2)){
+                return -1;
+            }
+            else if(tags.get(n1) > tags.get(n2)){
+                return 1;
+            }
+            return 0;
+        }
     }
 }
