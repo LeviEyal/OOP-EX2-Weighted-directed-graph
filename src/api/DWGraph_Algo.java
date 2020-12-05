@@ -1,17 +1,8 @@
 package api;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.*;
 import java.util.*;
 
 public class DWGraph_Algo implements dw_graph_algorithms {
@@ -25,7 +16,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     /**
      * Init the graph on which this set of algorithms operates on.
      *
-     * @param g
+     * @param g directed_weighted_graph
      */
     @Override
     public void init(directed_weighted_graph g) {
@@ -35,7 +26,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     /**
      * Return the underlying graph of which this class works.
      *
-     * @return
+     * @return g
      */
     @Override
     public directed_weighted_graph getGraph() {
@@ -45,7 +36,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     /**
      * Compute a deep copy of this weighted graph.
      *
-     * @return
+     * @return g
      */
     @Override
     public directed_weighted_graph copy() {
@@ -56,12 +47,11 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Returns true if and only if (iff) there is a valid path from each node to each
      * other node. NOTE: assume directional graph (all n*(n-1) ordered pairs).
      *
-     * @return
+     * @return true, false
      */
     @Override
     public boolean isConnected() {
         if (g.nodeSize() == 0 || g.nodeSize() == 1) return true;
-
         for(node_data v : g.getV()){
             setAllTags(NOT_VISITED);
             BFS(v);
@@ -174,12 +164,32 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      */
     @Override
     public boolean save(String file_name) {
-        Gson gson = new Gson();
-        String graph_string = gson.toJson(this.g);
-        System.out.println(graph_string);
+        JsonObject json = new JsonObject();
+        JsonArray jsonArrEdges = new JsonArray();
+        JsonArray jsonArrVertex = new JsonArray();
+        json.add("Edges", jsonArrEdges);
+        json.add("Nodes", jsonArrVertex);
+        for(node_data v : g.getV()){
+            JsonObject jv = new JsonObject();
+            jv.addProperty("pos", "" + v.getLocation().x() + "," + v.getLocation().y() + "," + v.getLocation().z());
+            jv.addProperty("id", v.getKey());
+            jsonArrVertex.add(jv);
+            for(edge_data e : g.getE(v.getKey())){
+                JsonObject je = new JsonObject();
+                je.addProperty("src",e.getSrc());
+                je.addProperty("w",e.getWeight());
+                je.addProperty("dest",e.getDest());
+                jsonArrEdges.add(je);
+            }
+        }
+        System.out.println("json = " + json);
         try {
-            Files.writeString(Path.of(file_name), graph_string, StandardCharsets.UTF_8);
-        } catch (IOException e) {
+            Gson g = new Gson();
+            File file = new File(file_name);
+            FileWriter myWriter = new FileWriter(file);
+            myWriter.write(g.toJson(json));
+            myWriter.close();
+        }catch ( IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -197,19 +207,34 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      */
     @Override
     public boolean load(String file) {
-        Gson gson = new Gson();
         try {
-            String in = Files.readString(Path.of(file));
-            g = gson.fromJson(in, DWGraph_DS.class);
+            //create a Gson object
+            Gson g = new Gson();
+            directed_weighted_graph newG = new DWGraph_DS();
+            //read from file as JsonObject
+            JsonObject json = new JsonParser().parse(new FileReader(file)).getAsJsonObject();
+            JsonArray E = json.getAsJsonArray("Edges");
+            JsonArray V = json.getAsJsonArray("Nodes");
+            //run by json and convert it to Nodes
+            for (JsonElement node: V){
+                String[] pos = ((JsonObject) node).get("pos").getAsString().split(",");
+                geo_location location = new GeoLocation(Double.parseDouble(pos[0]),Double.parseDouble(pos[1]),Double.parseDouble(pos[2]));
+                node_data newN = new NodeData(((JsonObject)node).get("id").getAsInt(),location);
+                newG.addNode(newN);
+            }
+            //run by json and convert it to Edges
+            for (JsonElement edge : E){
+                JsonObject e = (JsonObject)edge;
+                newG.connect(e.get("src").getAsInt(),e.get("dest").getAsInt(),e.get("w").getAsDouble());
+            }
+            this.g = newG;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return true;
     }
-
     class NodesComparator implements Comparator<node_data>{
         @Override
         public int compare(node_data n1, node_data n2) {

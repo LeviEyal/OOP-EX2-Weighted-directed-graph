@@ -1,6 +1,10 @@
 package api;
 
-public class NodeData implements node_data {
+import gameClient.util.Point3D;
+
+import java.io.Serializable;
+
+public class NodeData implements node_data, Serializable {
 
     private int key;
     private int tag;
@@ -12,7 +16,7 @@ public class NodeData implements node_data {
         key = -1;
         tag = 0;
         info = "";
-        location = null;
+        location = new Point3D(0,0,0);
         weight = 0;
     }
 
@@ -20,7 +24,7 @@ public class NodeData implements node_data {
         this.key = key;
         tag = 0;
         info = "";
-        location = null;
+        location = new Point3D(0,0,0);
         weight = 0;
     }
 
@@ -32,6 +36,13 @@ public class NodeData implements node_data {
         this.weight = weight;
     }
 
+    public NodeData(int key, geo_location location) {
+        this.key = key;
+        this.tag = 0;
+        this.info = "";
+        this.location = location;
+        this.weight = 0;
+    }
     public NodeData(node_data o) {
         this(o.getKey(), o.getTag(), o.getInfo(), o.getLocation(), o.getWeight());
     }

@@ -1,6 +1,7 @@
 package api;
 
 /*********************************** EDGE DATA CLASS ***************************************/
+
 public class EdgeData implements edge_data {
 
     private int src, dst;
@@ -19,7 +20,7 @@ public class EdgeData implements edge_data {
     /**
      * The id of the source node of this edge.
      *
-     * @return
+     * @return src
      */
     @Override
     public int getSrc() {
@@ -29,7 +30,7 @@ public class EdgeData implements edge_data {
     /**
      * The id of the destination node of this edge
      *
-     * @return
+     * @return dst
      */
     @Override
     public int getDest() {
@@ -47,7 +48,7 @@ public class EdgeData implements edge_data {
     /**
      * Returns the remark (meta data) associated with this edge.
      *
-     * @return
+     * @return info
      */
     @Override
     public String getInfo() {
@@ -57,7 +58,7 @@ public class EdgeData implements edge_data {
     /**
      * Allows changing the remark (meta data) associated with this edge.
      *
-     * @param s
+     * @param s String
      */
     @Override
     public void setInfo(String s) {
@@ -68,7 +69,7 @@ public class EdgeData implements edge_data {
      * Temporal data (aka color: e,g, white, gray, black)
      * which can be used be algorithms
      *
-     * @return
+     * @return tag
      */
     @Override
     public int getTag() {

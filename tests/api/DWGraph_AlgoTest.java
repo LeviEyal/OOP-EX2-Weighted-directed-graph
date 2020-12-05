@@ -3,8 +3,6 @@ package api;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 class DWGraph_AlgoTest {
 
@@ -123,11 +121,17 @@ class DWGraph_AlgoTest {
     }
 
     @Test
-    void save_Load() {
+    void save_Load(){
         ga.init(g1);
+        //System.out.println(g1.toString());
         ga.save("e.json");
         dw_graph_algorithms new_ga = new DWGraph_Algo();
-        new_ga.load("e.json");
-        System.out.println(new_ga.getGraph());
+        directed_weighted_graph g = g1;
+        for (int i = 0; i < 6; i++){
+            new_ga.load("files/A"+i+"");
+            assertNotEquals(g,new_ga.getGraph());
+            System.out.println("after load graph A"+i+" from Json:\n" + new_ga.getGraph());
+            g = new_ga.getGraph();
+        }
     }
 }
