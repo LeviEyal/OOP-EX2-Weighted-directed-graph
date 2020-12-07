@@ -182,7 +182,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 jsonArrEdges.add(je);
             }
         }
-        System.out.println("json = " + json);
+       // System.out.println("json = " + json);
         try {
             Gson g = new Gson();
             File file = new File(file_name);
@@ -228,7 +228,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 newG.connect(e.get("src").getAsInt(),e.get("dest").getAsInt(),e.get("w").getAsDouble());
             }
             this.g = newG;
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
