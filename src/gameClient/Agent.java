@@ -12,7 +12,6 @@ public class Agent {
 		private static int _count = 0;
 		private static int _seed = 3331;
 		private int _id;
-	//	private long _key;
 		private geo_location _pos;
 		private double _speed;
 		private edge_data _curr_edge;
@@ -35,7 +34,6 @@ public class Agent {
 		public void update(String json) {
 			JSONObject line;
 			try {
-				// "GameServer":{"graph":"A0","pokemons":3,"agents":1}}
 				line = new JSONObject(json);
 				JSONObject ttt = line.getJSONObject("Agent");
 				int id = ttt.getInt("id");
@@ -60,6 +58,7 @@ public class Agent {
 		}
 		//@Override
 		public int getSrcNode() {return this._curr_node.getKey();}
+
 		public String toJSON() {
 			int d = this.getNextNode();
 			String ans = "{\"Agent\":{"
@@ -99,18 +98,15 @@ public class Agent {
 			return ans;
 		}
 		public int getID() {
-			// TODO Auto-generated method stub
 			return this._id;
 		}
 	
 		public geo_location getLocation() {
-			// TODO Auto-generated method stub
 			return _pos;
 		}
 
 		
 		public double getValue() {
-			// TODO Auto-generated method stub
 			return this._value;
 		}
 

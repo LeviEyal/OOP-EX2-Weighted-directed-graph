@@ -235,6 +235,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         }
         return true;
     }
+
     class NodesComparator implements Comparator<node_data>{
         @Override
         public int compare(node_data n1, node_data n2) {

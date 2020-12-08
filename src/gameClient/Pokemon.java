@@ -15,7 +15,7 @@ public class Pokemon {
 		_type = t;
 	//	_speed = s;
 		_value = v;
-		set_edge(e);
+		_edge = e;
 		_pos = p;
 		min_dist = -1;
 		min_ro = -1;
@@ -32,36 +32,26 @@ public class Pokemon {
 		}
 		return ans;
 	}
-	public String toString() {return "F:{v="+_value+", t="+_type+"}";}
-	public edge_data get_edge() {
-		return _edge;
-	}
 
-	public void set_edge(edge_data _edge) {
-		this._edge = _edge;
-	}
-
-	public Point3D getLocation() {
-		return _pos;
-	}
+	public edge_data get_edge() {return _edge;}
+	public void set_edge(edge_data _edge) {this._edge = _edge;}
+	public Point3D getLocation() { return _pos;}
 	public int getType() {return _type;}
-//	public double getSpeed() {return _speed;}
 	public double getValue() {return _value;}
+	public double getMin_dist() {return min_dist;}
+	public void setMin_dist(double mid_dist) {this.min_dist = mid_dist;}
+	public int getMin_ro() {return min_ro;}
+	public void setMin_ro(int min_ro) {this.min_ro = min_ro;}
 
-	public double getMin_dist() {
-		return min_dist;
+	@Override
+	public String toString() {
+		return "Pokemon{" +
+				"_edge=" + _edge +
+				", _value=" + _value +
+				", _type=" + _type +
+				", _pos=" + _pos +
+				", min_dist=" + min_dist +
+				", min_ro=" + min_ro +
+				'}';
 	}
-
-	public void setMin_dist(double mid_dist) {
-		this.min_dist = mid_dist;
-	}
-
-	public int getMin_ro() {
-		return min_ro;
-	}
-
-	public void setMin_ro(int min_ro) {
-		this.min_ro = min_ro;
-	}
-
 }

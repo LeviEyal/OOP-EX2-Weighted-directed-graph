@@ -1,35 +1,35 @@
 package api;
 
+import gameClient.util.Point3D;
+
 public class GeoLocation implements geo_location {
 
-    private double x,y,z;
+    private Point3D p;
 
     public GeoLocation(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        p = new Point3D(x,y,z);
     }
 
     @Override
     public double x() {
-        return x;
+        return p.x();
     }
 
     @Override
     public double y() {
-        return y;
+        return p.y();
     }
 
     @Override
     public double z() {
-        return z;
+        return p.z();
     }
 
     @Override
     public double distance(geo_location g) {
-        double t1 = Math.pow(x - g.x(),2);
-        double t2 = Math.pow(y - g.y(),2);
-        double t3 = Math.pow(z - g.z(),2);
+        double t1 = Math.pow(p.x() - g.x(),2);
+        double t2 = Math.pow(p.y() - g.y(),2);
+        double t3 = Math.pow(p.z() - g.z(),2);
         return Math.sqrt(t1 +t2 +t3);
     }
 }
