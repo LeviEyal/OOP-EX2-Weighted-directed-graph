@@ -12,10 +12,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class represents a multi Agents Arena which move on a graph - grabs Pokemons and avoid the Zombies.
@@ -31,6 +28,7 @@ public class Arena {
 	private List<Pokemon> _pokemons;
 	private List<String> _info;
 	private dw_graph_algorithms _algo;
+	private HashMap<Pokemon, Boolean> available = new HashMap<>();
 
 	//========================= CONSTRUCTORS ===========================
 
@@ -38,8 +36,12 @@ public class Arena {
 		_info = new ArrayList<>();
 		_game = game;
 		_graph = graphJsonToGraph(game.getGraph());
+		System.out.println(_graph);
+
 		_algo = new DWGraph_Algo();
 		_algo.init(_graph);
+		System.out.println("is connected: "+_algo.isConnected());
+
 		_pokemons = json2Pokemons(game.getPokemons());
 		initAgents();
 
@@ -211,7 +213,7 @@ public class Arena {
 	public void setGraph(directed_weighted_graph g) {this._graph =g;}
 	public void set_info(List<String> _info) {this._info = _info;}
 
-	public List<Agent> JsonToAgents() {return _agents;}
+	public List<Agent> JsonToAgents() {return getAgents(_game.getAgents());}
 	public List<Pokemon> getPokemons() {return _pokemons;}
 	public directed_weighted_graph getGraph() {return _graph;}
 	public List<String> get_info() { return _info;}
@@ -220,44 +222,76 @@ public class Arena {
 	public void moveAgents() {
 		_agents = getAgents(_game.move());
 
-		List<Pokemon> ffs = json2Pokemons(_game.getPokemons());
-		this.setPokemons(ffs);
+//		if(_agents.isEmpty()){
+//			_agents = getAgents(_game.move());
+//		}
+//		for(Agent ag : _agents) {
+//			if (ag.Q().isEmpty())
+//				_agents = getAgents(_game.move());
+//		}
+
+		this.setPokemons(json2Pokemons(_game.getPokemons()));
 
 		for(Agent ag : _agents) {
 			int id = ag.getID();
-			int dest = ag.getNextNode();
 			int src = ag.getSrcNode();
 			double v = ag.getValue();
-			if(dest == -1) {
-				dest = nextNode(src);
+//			if(ag.Q().isEmpty()){
+//				nextNode(ag, src);
+//			}
+//			else{
+//				int dst = ag.Q().remove().getKey();
+//				_game.chooseNextEdge(ag.getID(), dst);
+//				System.out.println("Agent: "+id+", val: "+v+" to node: "+dst);
+//				ag.setNextNode(dst);
+//			}
+			if(!ag.isMoving()) {
+				int dest = nextNode(ag, src);
 				_game.chooseNextEdge(ag.getID(), dest);
 				System.out.println("Agent: "+id+", val: "+v+" turned to node: "+dest);
+				ag.setNextNode(dest);
 			}
-			ag.setNextNode(dest);
+
+			System.out.println(ag);
 		}
 	}
-	private int nextNode(int src) {
-		Collection<edge_data> ee = _graph.getE(src);
-		Iterator<edge_data> itr = ee.iterator();
+	private int nextNode(Agent ag, int src) {
+		//update pokemons from server
 		_pokemons = json2Pokemons(_game.getPokemons());
+		for(Pokemon p : _pokemons){
+			available.putIfAbsent(p, true);
+		}
 
 		int dst = src;
 		for(Pokemon p : _pokemons){
-			double p1 = _algo.shortestPathDist(src, p.get_edge().getDest());
-//			double p2 = _algo.shortestPathDist(src, p.get_edge().getSrc());
-//			p.setMin_dist(Math.min(p1,p2));
-			p.setMin_dist(p1);
-		}
-		Pokemon chosen = _pokemons.get(0);
-		double min = Double.MAX_VALUE;
-		for(Pokemon p : _pokemons){
-			double dis = p.getMin_dist();
-			if(p.getMin_dist() < min && dis !=0){
-				min = p.getMin_dist();
-				chosen = p;
+			double p1 = _algo.shortestPathDist(src, p.get_edge().getSrc());
+			double p2 = _algo.shortestPathDist(src, p.get_edge().getDest());
+			if(p1 > p2){
+				p.setMin_ro(p.get_edge().getSrc());
+				p.setMin_dist(p1);
+			}
+			else{
+				p.setMin_ro(p.get_edge().getDest());
+				p.setMin_dist(p2);
 			}
 		}
-		List<node_data> l = _algo.shortestPath(src, chosen.get_edge().getDest());
-		return l.get(1).getKey();
+		Pokemon chosen = _pokemons.get(0);
+
+		double min = Double.MAX_VALUE;
+		for(Pokemon p : _pokemons){
+			if(available.get(p)) {
+				double dis = p.getMin_dist();
+				if (dis < min && dis != 0 && dis != -1) {
+					min = dis;
+					chosen = p;
+				}
+			}
+		}
+		available.replace(chosen, false);
+		List<node_data> path = _algo.shortestPath(src, chosen.getMin_ro());
+		System.out.println(path);
+//		ag.Q().addAll(l);
+		return path.get(1).getKey();
 	}
+
 }

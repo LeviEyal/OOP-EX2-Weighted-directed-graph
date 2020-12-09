@@ -10,6 +10,7 @@ public class Pokemon {
 	private Point3D _pos;
 	private double min_dist;
 	private int min_ro;
+	private boolean taken = false;
 	
 	public Pokemon(Point3D p, int t, double v, double s, edge_data e) {
 		_type = t;
@@ -42,6 +43,9 @@ public class Pokemon {
 	public void setMin_dist(double mid_dist) {this.min_dist = mid_dist;}
 	public int getMin_ro() {return min_ro;}
 	public void setMin_ro(int min_ro) {this.min_ro = min_ro;}
+	public boolean isTaken(){return taken;}
+	public void setTaken(){taken = true;}
+	public void setNotTaken(){taken = false;}
 
 	@Override
 	public String toString() {

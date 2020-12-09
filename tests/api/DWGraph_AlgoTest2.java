@@ -3,13 +3,17 @@ package api;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.*;
-class DWGraph_AlgoTest {
+
+class DWGraph_AlgoTest2 {
 
     static dw_graph_algorithms ga = new DWGraph_Algo();
     static directed_weighted_graph g1 = new DWGraph_DS();
     static directed_weighted_graph g2 = new DWGraph_DS();
     static directed_weighted_graph g3 = new DWGraph_DS();
+    static directed_weighted_graph g4 = new DWGraph_DS();
+    static directed_weighted_graph g5 = new DWGraph_DS();
 
     static void createG(int size, directed_weighted_graph g) {
         for(int i = 1; i <= size; i++){
@@ -52,14 +56,49 @@ class DWGraph_AlgoTest {
         g2.connect(9,10,10);
         g2.connect(10,3,15);
         g2.connect(10,2,5);
+
+        createG(4,g3);
+        g3.connect(1,2,5);
+        g3.connect(3,2,5);
+        g3.connect(1,3,5);
+        g3.connect(4,1,5);
+        g3.connect(2,4,5);
+        g3.connect(4,2,5);
+
+        createG(4,g4);
+        g4.connect(1,2,5);
+        g4.connect(3,2,5);
+        g4.connect(3,1,5);
+        g4.connect(1,4,5);
+        g4.connect(2,4,5);
+        g4.connect(4,2,5);
+
+
+        createG(3,g5);
+        g5.connect(1,2,5);
+        g5.connect(2,3,5);
+        g5.connect(3,1,5);
+
     }
 
     @Test
     void isConnected() {
         ga.init(g1);
+        System.out.println("g1 = " + ga.isConnected());
         assertFalse(ga.isConnected());
+
         ga.init(g2);
+        System.out.println("g2 = " + ga.isConnected());
         assertFalse(ga.isConnected());
+        ga.init(g3);
+        System.out.println("g3 = " + ga.isConnected());
+        assertTrue(ga.isConnected());
+        ga.init(g4);
+        System.out.println("g4 = " + ga.isConnected());
+        assertFalse(ga.isConnected());
+        ga.init(g5);
+        System.out.println("g5 = " + ga.isConnected());
+        assertTrue(ga.isConnected());
     }
 
     @Test
