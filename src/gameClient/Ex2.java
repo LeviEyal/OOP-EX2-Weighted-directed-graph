@@ -19,11 +19,11 @@ public class Ex2 implements Runnable{
     @Override
     public void run() {
         long id = 1000;
-        int scenario_num = 20;
+        int scenario_num = 22;
 
         _game = Game_Server_Ex2.getServer(scenario_num);
         _game.login(id);
-        System.out.println(_game);
+//        System.out.println(_game);
 
         _ar = new Arena(_game);
         _gui = new MyFrame(_ar);
@@ -38,6 +38,7 @@ public class Ex2 implements Runnable{
 
             try {
                 if(ind%1==0) {
+                    _gui.revalidate();
                     _gui.repaint();
                 }
                 if(ind%10 == 0){

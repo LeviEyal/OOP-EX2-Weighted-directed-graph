@@ -50,6 +50,21 @@ public class MyFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        t.repaint();
+        Menu.repaint();
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+        super.paintComponents(g);
+        t.revalidate();
+        t.repaint();
+        Menu.repaint();
+    }
+
     private void otherComponents() {
         Header = new JPanel();
         iconMinMaxclose = new JPanel();
@@ -317,7 +332,7 @@ public class MyFrame extends javax.swing.JFrame {
         Menu.add(menuHide, BorderLayout.CENTER);
         getContentPane().add(Menu, BorderLayout.LINE_START);
 
-        JLabel t = new JLabel();
+        t = new JLabel();
         t.setText("ttl: "+ Ex2._game.timeToEnd()/1000 +"");
         Menu.add(t);
     }
@@ -342,11 +357,11 @@ public class MyFrame extends javax.swing.JFrame {
         maximizePNL.setBackground(color_header);
     }
     private void maxWindowBTNMouseClicked(java.awt.event.MouseEvent evt) {
-        if(this.getExtendedState() != frame_skiza.MAXIMIZED_BOTH){
-            this.setExtendedState(frame_skiza.MAXIMIZED_BOTH);
+        if(this.getExtendedState() != MyFrame.MAXIMIZED_BOTH){
+            this.setExtendedState(MyFrame.MAXIMIZED_BOTH);
         }
         else{
-            this.setExtendedState(frame_skiza.NORMAL);
+            this.setExtendedState(MyFrame.NORMAL);
         }
     }
 
@@ -442,4 +457,5 @@ public class MyFrame extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeWindowBTN;
     private javax.swing.JLabel settingsBTN;
     private JPanel settingsPNL;
+    private JLabel t;
 }

@@ -10,6 +10,8 @@ import gameClient.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
 import gameClient.util.Range2D;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MyPanel extends JPanel {
 
@@ -30,7 +32,7 @@ public class MyPanel extends JPanel {
     private void updateFrame() {
         time = Ex2._game.timeToEnd()/1000;
         Range rx = new Range(20, this.getWidth()-20);
-        Range ry = new Range(this.getHeight()-15, 10);
+        Range ry = new Range(this.getHeight()-15, 50);
         Range2D frame = new Range2D(rx,ry);
         directed_weighted_graph g = _ar.getGraph();
         _w2f = Arena.w2f(g, frame);
@@ -43,7 +45,7 @@ public class MyPanel extends JPanel {
         int h = this.getHeight();
         g.clearRect(0, 0, w, h);
 
-        t.setText("ttl: "+ Ex2._game.timeToEnd()/1000);
+        t.setText("Timer: "+ Ex2._game.timeToEnd()/1000+"   score: "+getScore()+"   Moves: "+getMoves());
         g.drawString("Timer: "+Ex2._game.timeToEnd()/1000, 50,50);
 
         updateFrame();
@@ -53,6 +55,33 @@ public class MyPanel extends JPanel {
         drawInfo(g);
 
     }
+
+
+
+    private double getScore() {
+        double score = -1;
+        try {
+            JSONObject line = new JSONObject(Ex2._game.toString());
+            JSONObject ttt = line.getJSONObject("GameServer");
+            score = ttt.getDouble("grade");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return score;
+    }
+
+    private double getMoves() {
+        double moves = -1;
+        try {
+            JSONObject line = new JSONObject(Ex2._game.toString());
+            JSONObject ttt = line.getJSONObject("GameServer");
+            moves = ttt.getDouble("moves");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return moves;
+    }
+
     private void drawInfo(Graphics g) {
         List<String> str = _ar.get_info();
         String dt = "none";
@@ -88,13 +117,10 @@ public class MyPanel extends JPanel {
                 g2.setColor(Color.green);
                 if(f.getType()<0) {g2.setColor(Color.orange);}
                 if(c!=null) {
-
                     geo_location fp = this._w2f.world2frame(c);
 
                     Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pika.png"));
                     g2.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
-
-
                 }
             }
         }
@@ -106,12 +132,15 @@ public class MyPanel extends JPanel {
         int i=0;
         while(rs!=null && i<rs.size()) {
             geo_location c = rs.get(i).getLocation();
-            int r=8;
+            int t=8;
+            int r = (int)(0.03 * this.getHeight());
             i++;
             if(c!=null) {
 
                 geo_location fp = this._w2f.world2frame(c);
-                g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
+//                g.fillOval((int)fp.x()-t, (int)fp.y()-t, 2*t, 2*t);
+                Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pokeball.png"));
+                g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
             }
         }
     }
