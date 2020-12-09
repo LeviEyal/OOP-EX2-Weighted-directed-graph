@@ -101,7 +101,7 @@ public class MyPanel extends JPanel {
         if(fs != null) {
             for (Pokemon f : fs) {
                 Point3D c = f.getLocation();
-                int r = (int) (0.01 * this.getHeight());
+                int r = (int) (0.02 * this.getHeight());
                 g2.setColor(Color.green);
                 if (f.getType() < 0) {
                     g2.setColor(Color.orange);
@@ -122,7 +122,7 @@ public class MyPanel extends JPanel {
         while(rs!=null && i<rs.size()) {
             geo_location c = rs.get(i).getLocation();
             int t=8;
-            int r = (int)(0.01 * this.getHeight());
+            int r = (int)(0.02 * this.getHeight());
             i++;
             if(c!=null) {
 
@@ -139,7 +139,7 @@ public class MyPanel extends JPanel {
         geo_location fp = this._w2f.world2frame(pos);
         int r = (int)(0.009 * this.getHeight());
         g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
-        g.drawString(""+n.getKey(), (int)fp.x(), (int)fp.y()-4*r);
+        g.drawString(""+n.getKey(), (int)fp.x()-2*r, (int)fp.y()-2*r);
     }
 
     private void drawEdge(edge_data e, Graphics g) {

@@ -28,7 +28,8 @@ public class Arena {
 	private List<Pokemon> _pokemons;
 	private List<String> _info;
 	private dw_graph_algorithms _algo;
-	private HashMap<Pokemon, Boolean> available = new HashMap<>();
+	private ArrayList<Point3D> _taken = new ArrayList<>();
+	HashMap<Integer, Queue<node_data>> map = new HashMap<>();
 
 	//========================= CONSTRUCTORS ===========================
 
@@ -64,12 +65,16 @@ public class Arena {
 			System.out.println(_game.getPokemons());
 			int src_node = 0;  // arbitrary node, you should start at one of the pokemon
 			ArrayList<Pokemon> cl_fs = json2Pokemons(_game.getPokemons());
-			for(int a = 0;a<cl_fs.size();a++) { Arena.updateEdge(cl_fs.get(a), _graph);}
-			for(int a = 0;a<rs;a++) {
+			for(int a = 0; a<cl_fs.size(); a++) {
+				Arena.updateEdge(cl_fs.get(a), _graph);
+			}
+			for(int a = 0; a < rs ;a++) {
 				int ind = a%cl_fs.size();
 				Pokemon c = cl_fs.get(ind);
 				int nn = c.get_edge().getDest();
-				if(c.getType()<0 ) {nn = c.get_edge().getSrc();}
+				if(c.getType()<0 ) {
+					nn = c.get_edge().getSrc();
+				}
 
 				_game.addAgent(nn);
 			}
@@ -78,7 +83,7 @@ public class Arena {
 	}
 
 	public List<Agent> getAgents(String aa) {
-		ArrayList<Agent> ans = new ArrayList<Agent>();
+		ArrayList<Agent> ans = new ArrayList<>();
 		try {
 			JSONObject ttt = new JSONObject(aa);
 			JSONArray ags = ttt.getJSONArray("Agents");
@@ -213,7 +218,10 @@ public class Arena {
 	public void setGraph(directed_weighted_graph g) {this._graph =g;}
 	public void set_info(List<String> _info) {this._info = _info;}
 
-	public List<Agent> JsonToAgents() {return getAgents(_game.getAgents());}
+	public List<Agent> JsonToAgents() {
+		return _agents;
+//		return getAgents(_game.getAgents());
+	}
 	public List<Pokemon> getPokemons() {return _pokemons;}
 	public directed_weighted_graph getGraph() {return _graph;}
 	public List<String> get_info() { return _info;}
@@ -248,50 +256,61 @@ public class Arena {
 			if(!ag.isMoving()) {
 				int dest = nextNode(ag, src);
 				_game.chooseNextEdge(ag.getID(), dest);
-				System.out.println("Agent: "+id+", val: "+v+" turned to node: "+dest);
+//				System.out.println("Agent: "+id+", val: "+v+" turned to node: "+dest);
 				ag.setNextNode(dest);
 			}
-
-			System.out.println(ag);
 		}
 	}
 	private int nextNode(Agent ag, int src) {
 		//update pokemons from server
 		_pokemons = json2Pokemons(_game.getPokemons());
-		for(Pokemon p : _pokemons){
-			available.putIfAbsent(p, true);
-		}
 
 		int dst = src;
 		for(Pokemon p : _pokemons){
-			double p1 = _algo.shortestPathDist(src, p.get_edge().getSrc());
-			double p2 = _algo.shortestPathDist(src, p.get_edge().getDest());
-			if(p1 > p2){
-				p.setMin_ro(p.get_edge().getSrc());
-				p.setMin_dist(p1);
-			}
-			else{
-				p.setMin_ro(p.get_edge().getDest());
-				p.setMin_dist(p2);
-			}
+			p.setMin_dist(distanceToPokemon(src, p));
+//			double p1 = _algo.shortestPathDist(src, p.get_edge().getDest());
+//			double p2 = _algo.shortestPathDist(src, p.get_edge().getDest());
+//			if(p1 > p2){
+//				p.setMin_ro(p.get_edge().getSrc());
+//				p.setMin_dist(p1);
+//			}
+//			else{
+//				p.setMin_ro(p.get_edge().getDest());
+//				p.setMin_dist(p2);
+//			}
 		}
 		Pokemon chosen = _pokemons.get(0);
 
 		double min = Double.MAX_VALUE;
 		for(Pokemon p : _pokemons){
-			if(available.get(p)) {
-				double dis = p.getMin_dist();
-				if (dis < min && dis != 0 && dis != -1) {
-					min = dis;
-					chosen = p;
-				}
+			for(Point3D t : _taken){
+				if(p.getLocation().close2equals(t))
+					break;
+			}
+			double dis = p.getMin_dist();
+			if (dis < min && dis != 0 && dis != -1) {
+				min = dis;
+				chosen = p;
 			}
 		}
-		available.replace(chosen, false);
+		_taken.add(chosen.getLocation());
 		List<node_data> path = _algo.shortestPath(src, chosen.getMin_ro());
-		System.out.println(path);
-//		ag.Q().addAll(l);
+		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+path);
 		return path.get(1).getKey();
+	}
+
+	private double distanceToPokemon(int src, Pokemon p) {
+		directed_weighted_graph g = new DWGraph_DS(_graph);
+		node_data n = new NodeData();
+		edge_data e = p.get_edge();
+		double w_src = p.getLocation().distance(g.getNode(e.getSrc()).getLocation());
+		double w_dst = p.getLocation().distance(g.getNode(e.getDest()).getLocation());
+		g.addNode(n);
+		g.connect(n.getKey(), e.getSrc(), w_src);
+		g.connect(n.getKey(), e.getDest(), w_dst);
+		dw_graph_algorithms ga = new DWGraph_Algo();
+		ga.init(g);
+		return ga.shortestPathDist(src, n.getKey());
 	}
 
 }

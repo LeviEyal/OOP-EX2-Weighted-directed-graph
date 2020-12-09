@@ -176,4 +176,14 @@ class DWGraph_AlgoTest2 {
             g = new_ga.getGraph();
         }
     }
+
+    @Test
+    void t1(){
+        ga.load("data/A2");
+        System.out.println(ga.getGraph());
+        System.out.println("28 -> 29 : "+ga.shortestPath(28,29));
+        System.out.println("29 -> 28 : "+ga.shortestPath(29,28));
+        System.out.println("5 -> 29 : "+ga.shortestPath(5,29));
+//        System.out.println(ga.shortestPathDist(28,29));
+    }
 }
