@@ -8,6 +8,7 @@ import java.util.*;
 public class DWGraph_Algo implements dw_graph_algorithms {
 
     private directed_weighted_graph g;
+    private directed_weighted_graph InvertG;
     private static final int VISITED = 1;
     private static final int NOT_VISITED = 0;
     private static final double INFINITY = Double.POSITIVE_INFINITY;
@@ -21,11 +22,11 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     @Override
     public void init(directed_weighted_graph g) {
         this.g = g;
+        InvertG = createInvertedGraph();
     }
 
     /**
      * Return the underlying graph of which this class works.
-     *
      * @return g
      */
     @Override
@@ -35,7 +36,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Compute a deep copy of this weighted graph.
-     *
      * @return g
      */
     @Override
@@ -46,24 +46,28 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     /**
      * Returns true if and only if (iff) there is a valid path from each node to each
      * other node. NOTE: assume directional graph (all n*(n-1) ordered pairs).
-     *
      * @return true, false
      */
     @Override
     public boolean isConnected() {
         if (g.nodeSize() == 0 || g.nodeSize() == 1) return true;
-        for(node_data v : g.getV()){
-            setAllTags(NOT_VISITED);
-            BFS(v);
-            for (node_data n : g.getV()) {
-                if (n.getTag() == NOT_VISITED)
-                    return false;
-            }
+        node_data v = g.getV().iterator().next();
+        return isConnected(createInvertedGraph(),v) && isConnected(g,v);
+    }
+
+    private boolean isConnected(directed_weighted_graph g, node_data v) {
+        setAllTags(NOT_VISITED);
+        BFS(v,g);
+        for (node_data n : g.getV()) {
+            if (n.getTag() == NOT_VISITED)
+                return false;
         }
         return true;
     }
 
-    private void BFS(node_data node) {
+
+
+    private void BFS(node_data node,directed_weighted_graph g) {
         node_data v = node;
         Queue<node_data> q = new LinkedList<>();
         v.setTag(VISITED);
@@ -88,14 +92,13 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     /**
      * returns the length of the shortest path between src to dest
      * Note: if no such path --> returns -1
-     *
      * @param src  - start node
      * @param dest - end (target) node
      * @return
      */
     @Override
     public double shortestPathDist(int src, int dest) {
-        if (src == dest) return 0;
+        if (src == dest && g.getNode(src) != null) return 0;
         node_data source = g.getNode(src);
         node_data destination = g.getNode(dest);
         if (source == null || destination == null)
@@ -233,6 +236,19 @@ public class DWGraph_Algo implements dw_graph_algorithms {
             return false;
         }
         return true;
+    }
+
+    private directed_weighted_graph createInvertedGraph() {
+        directed_weighted_graph g = new DWGraph_DS();
+        for (node_data v : this.g.getV()){
+            g.addNode(new NodeData(v.getKey()));
+        }
+        for (node_data v : this.g.getV()){
+            for (edge_data ni : this.g.getE(v.getKey())){
+                g.connect(ni.getDest(), v.getKey(), ni.getWeight());
+            }
+        }
+        return g;
     }
 
     class NodesComparator implements Comparator<node_data>{

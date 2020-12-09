@@ -7,6 +7,10 @@ import api.node_data;
 import gameClient.util.Point3D;
 import org.json.JSONObject;
 
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class Agent {
 		public static final double EPS = 0.0001;
 		private static int _count = 0;
@@ -19,7 +23,7 @@ public class Agent {
 		private directed_weighted_graph _gg;
 		private Pokemon _curr_fruit;
 		private long _sg_dt;
-		
+		private Queue<node_data> queue;
 		private double _value;
 		
 		
@@ -30,6 +34,7 @@ public class Agent {
 			_pos = _curr_node.getLocation();
 			_id = -1;
 			setSpeed(0);
+			queue = new LinkedList<>();
 		}
 		public void update(String json) {
 			JSONObject line;
@@ -162,4 +167,6 @@ public class Agent {
 		public void set_sg_dt(long _sg_dt) {
 			this._sg_dt = _sg_dt;
 		}
+
+		public Queue<node_data> Q(){return queue;}
 	}

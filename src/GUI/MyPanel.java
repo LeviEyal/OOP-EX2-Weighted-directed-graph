@@ -17,6 +17,9 @@ public class MyPanel extends JPanel {
 
     JLabel t = new JLabel();
     double time;
+    double grade;
+    double moves;
+    int level;
     private Arena _ar;
     private gameClient.util.Range2Range _w2f;
 
@@ -45,8 +48,8 @@ public class MyPanel extends JPanel {
         int h = this.getHeight();
         g.clearRect(0, 0, w, h);
 
-        t.setText("Timer: "+ Ex2._game.timeToEnd()/1000+"   score: "+getScore()+"   Moves: "+getMoves());
-        g.drawString("Timer: "+Ex2._game.timeToEnd()/1000, 50,50);
+        fetchData();
+        t.setText("Level: "+ level +"   Timer: "+ time+"   Grade: "+grade+"   Moves: "+moves);
 
         updateFrame();
         drawGraph(g);
@@ -56,30 +59,17 @@ public class MyPanel extends JPanel {
 
     }
 
-
-
-    private double getScore() {
-        double score = -1;
+    private void fetchData() {
         try {
             JSONObject line = new JSONObject(Ex2._game.toString());
             JSONObject ttt = line.getJSONObject("GameServer");
-            score = ttt.getDouble("grade");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return score;
-    }
-
-    private double getMoves() {
-        double moves = -1;
-        try {
-            JSONObject line = new JSONObject(Ex2._game.toString());
-            JSONObject ttt = line.getJSONObject("GameServer");
+            grade = ttt.getDouble("grade");
             moves = ttt.getDouble("moves");
+            level = ttt.getInt("game_level");
+            time = Ex2._game.timeToEnd() / 1000;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return moves;
     }
 
     private void drawInfo(Graphics g) {
@@ -109,31 +99,30 @@ public class MyPanel extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
         List<Pokemon> fs = _ar.getPokemons();
         if(fs != null) {
-            Iterator<Pokemon> itr = fs.iterator();
-            while(itr.hasNext()) {
-                Pokemon f = itr.next();
+            for (Pokemon f : fs) {
                 Point3D c = f.getLocation();
-                int r = (int)(0.03 * this.getHeight());
+                int r = (int) (0.01 * this.getHeight());
                 g2.setColor(Color.green);
-                if(f.getType()<0) {g2.setColor(Color.orange);}
-                if(c!=null) {
+                if (f.getType() < 0) {
+                    g2.setColor(Color.orange);
+                }
+                if (c != null) {
                     geo_location fp = this._w2f.world2frame(c);
 
                     Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pika.png"));
-                    g2.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
+                    g2.drawImage(img1, (int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r, this);
                 }
             }
         }
     }
     private void drawAgents(Graphics g) {
         List<Agent> rs = _ar.JsonToAgents();
-        //	Iterator<OOP_Point3D> itr = rs.iterator();
         g.setColor(Color.red);
         int i=0;
         while(rs!=null && i<rs.size()) {
             geo_location c = rs.get(i).getLocation();
             int t=8;
-            int r = (int)(0.03 * this.getHeight());
+            int r = (int)(0.01 * this.getHeight());
             i++;
             if(c!=null) {
 
