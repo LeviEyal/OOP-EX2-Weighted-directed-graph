@@ -38,26 +38,60 @@ public class Arena {
 		_game = game;
 		_graph = graphJsonToGraph(game.getGraph());
 		_pokemons = json2Pokemons(game.getPokemons());
-//		_agents = getAgents(game.move());
+		_agents = JsonToAgents(game.toString());
 
 		exportJsonToFile("GameJSON", game.toString());
 		exportJsonToFile("GameGraph", game.getGraph());
-//		exportJsonToFile("GameAgents", game.getAgents());
+		exportJsonToFile("GameAgents", game.getAgents());
 		exportJsonToFile("GamePokemons", game.getPokemons());
 	}
 
 	//========================== JSON CONVERTING ==============================
 
 	private ArrayList<Agent> JsonToAgents(String json) {
-		ArrayList<Agent> ans = new  ArrayList<>();
+		ArrayList<Agent> ans = new ArrayList<>();
 		try{
+
+			JSONObject object = new JSONObject(json);
+			JSONObject game_server = object.getJSONObject("GameServer");
+			int numOfAgents = game_server.getInt("agents");
+
+//			JSONObject ttt = new JSONObject(json);
+			JSONArray ags = object.getJSONArray("Agents");
+
+//			for (int i = 0; i < ags.length(); i++) {
+			for (int i = 0; i < numOfAgents; i++) {
+				Agent agent;
+				int startNode;
+				try{
+					startNode = _pokemons.get(i).get_edge().getDest();
+				}catch(Exception e){
+					startNode = 0;
+				}
+				agent = new Agent(_graph, startNode);
+				agent.update(ags.get(i).toString());
+				ans.add(agent);
+				_game.addAgent(startNode);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return ans;
+	}
+	private ArrayList<Agent> JsonToAgents2(String json) {
+		ArrayList<Agent> ans = new ArrayList<>();
+		try{
+
 //			JSONObject object = new JSONObject(json);
 //			JSONObject game_server = object.getJSONObject("GameServer");
+//			int numOfAgents = game_server.getInt("agents");
 
 			JSONObject ttt = new JSONObject(json);
 			JSONArray ags = ttt.getJSONArray("Agents");
 
 			for (int i = 0; i < ags.length(); i++) {
+//			for (int i = 0; i < numOfAgents; i++) {
 				Agent agent;
 				int startNode;
 				try{
@@ -219,8 +253,9 @@ public class Arena {
 
 	public void moveAgents() {
 		String lg = _game.move();
-		List<Agent> log = JsonToAgents(lg);
-		this.setAgents(log);
+		_agents = JsonToAgents2(lg);
+//		this.setAgents(log);
+
 		String fs =  _game.getPokemons();
 		List<Pokemon> ffs = json2Pokemons(fs);
 		this.setPokemons(ffs);
