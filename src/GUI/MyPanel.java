@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.Format;
 import java.util.Iterator;
 import java.util.List;
 
@@ -102,16 +103,14 @@ public class MyPanel extends JPanel {
             for (Pokemon f : fs) {
                 Point3D c = f.getLocation();
                 int r = (int) (0.02 * this.getHeight());
-                g2.setColor(Color.green);
-                if (f.getType() < 0) {
-                    g2.setColor(Color.orange);
-                }
+                g2.setColor(Color.RED);
+                g2.setFont(new Font("Arial", Font.BOLD, 16));
                 if (c != null) {
                     geo_location fp = this._w2f.world2frame(c);
 
                     Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pika.png"));
                     g2.drawImage(img1, (int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r, this);
-                    g.drawString(""+f.getValue(), (int)fp.x()-2*r, (int)fp.y()-2*r);
+                    g.drawString(String.format("%.0f", f.getValue()), (int)fp.x()-2*r, (int)fp.y()-2*r);
                 }
             }
         }

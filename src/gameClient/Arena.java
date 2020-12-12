@@ -55,27 +55,27 @@ public class Arena {
 	//========================== JSON CONVERTING ==============================
 
 	public void initAgents(){
-		String info = _game.toString();
 		JSONObject line;
 		try {
-			line = new JSONObject(info);
+			line = new JSONObject(_game.toString());
 			JSONObject ttt = line.getJSONObject("GameServer");
 			int rs = ttt.getInt("agents");
-			System.out.println(info);
-			System.out.println(_game.getPokemons());
-			int src_node = 0;  // arbitrary node, you should start at one of the pokemon
 			ArrayList<Pokemon> cl_fs = json2Pokemons(_game.getPokemons());
+			cl_fs.sort((o1, o2) -> Double.compare(o2.getValue(), o1.getValue()));
+			Queue<Pokemon> q = new PriorityQueue<>((o1, o2) -> Double.compare(o2.getValue(), o1.getValue()));
+			q.addAll(cl_fs);
+			System.out.println(cl_fs);
+			System.out.println(q);
 			for(int a = 0; a<cl_fs.size(); a++) {
 				Arena.updateEdge(cl_fs.get(a), _graph);
 			}
 			for(int a = 0; a < rs ;a++) {
-				int ind = a%cl_fs.size();
-				Pokemon c = cl_fs.get(ind);
+//				int ind = a%cl_fs.size();
+				Pokemon c = cl_fs.get(a);
 				int nn = c.get_edge().getDest();
 				if(c.getType()<0 ) {
 					nn = c.get_edge().getSrc();
 				}
-
 				_game.addAgent(nn);
 			}
 		}
@@ -149,14 +149,12 @@ public class Arena {
 	//================================ EDGES ====================================
 
 	public static void updateEdge(Pokemon fr, directed_weighted_graph g) {
-		Iterator<node_data> itr = g.getV().iterator();
-		while(itr.hasNext()) {
-			node_data v = itr.next();
-			Iterator<edge_data> iter = g.getE(v.getKey()).iterator();
-			while(iter.hasNext()) {
-				edge_data e = iter.next();
-				boolean f = isOnEdge(fr.getLocation(), e,fr.getType(), g);
-				if(f) {fr.set_edge(e);}
+		for (node_data v : g.getV()) {
+			for (edge_data e : g.getE(v.getKey())) {
+				boolean f = isOnEdge(fr.getLocation(), e, fr.getType(), g);
+				if (f) {
+					fr.set_edge(e);
+				}
 			}
 		}
 	}
@@ -305,10 +303,15 @@ public class Arena {
 
 	private boolean available(Pokemon p, Agent a) {
 		for(Agent ag : _agents){
-			if(a.getID()!=ag.getID() && p.equals(map.get(ag.getID())))
+			if((a.getID()!=ag.getID() && p.equals(map.get(ag.getID()))) || dist(ag,p) < dist(a,p))
 				return false;
 		}
 		return true;
+	}
+
+	private double dist(Agent ag, Pokemon p) {
+		double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
+		return _algo.shortestPathDist(ag.getSrcNode(), p.getFrom()) + extra;
 	}
 
 

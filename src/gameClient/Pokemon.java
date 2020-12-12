@@ -56,15 +56,21 @@ public class Pokemon {
 		this.worth = worth;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Pokemon{" +
+//				"_edge=" + _edge +
+//				", _value=" + _value +
+//				", _type=" + _type +
+//				", _pos=" + _pos +
+//				", min_dist=" + min_dist +
+//				", min_ro=" + from +
+//				'}';
+//	}
 	@Override
 	public String toString() {
 		return "Pokemon{" +
-				"_edge=" + _edge +
 				", _value=" + _value +
-				", _type=" + _type +
-				", _pos=" + _pos +
-				", min_dist=" + min_dist +
-				", min_ro=" + from +
 				'}';
 	}
 
