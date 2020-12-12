@@ -1,6 +1,5 @@
 package gameClient;
 
-import GUI.MyPanel;
 import api.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
@@ -269,7 +268,7 @@ public class Arena {
 				p.setFrom(Math.min(e.getSrc(), e.getDest()));
 				p.setTo(Math.max(e.getSrc(), e.getDest()));
 			}
-			double dis2pokemon = dist(ag, p);
+			double dis2pokemon = totalDistanceToPokemon(ag, p);
 			p.setMin_dist(dis2pokemon);
 
 			if(dis2pokemon > max_dist) max_dist = dis2pokemon;
@@ -279,15 +278,16 @@ public class Arena {
 
 			p.setWorth(0.8*p.getValue()-p.getMin_dist());
 
-			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
 		Range valuesRange = new Range(min_val, max_val);
 		Range distRange = new Range(min_dist, max_dist);
 
 		for(Pokemon p : _pokemons){
 			double val = valuesRange.getPortion(p.getValue()) * 100;
-			double dist = distRange.getPortion(p.getMin_dist()) * 100;
-			p.setWorth(0.5*val + 0.5*dist);
+			double dist = 100 - (distRange.getPortion(p.getMin_dist()) * 100);
+			System.out.println(val +"   "+dist);
+			p.setWorth(0.3*val + 0.7*dist);
+			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
 
 		Pokemon chosen = _pokemons.get(0);
@@ -313,19 +313,16 @@ public class Arena {
 
 	private boolean available(Pokemon p, Agent a) {
 		for(Agent ag : _agents){
-			if((a.getID()!=ag.getID() && p.equals(map.get(ag.getID()))) || dist(ag,p) < dist(a,p))
+			if((a.getID()!=ag.getID() && p.equals(map.get(ag.getID()))) || totalDistanceToPokemon(ag,p) < totalDistanceToPokemon(a,p))
 				return false;
 		}
 		return true;
 	}
 
-	private double dist(Agent ag, Pokemon p) {
-//		geo_location t1 = MyPanel.get_w2f().world2frame(p.getLocation());
-//		geo_location t2 = MyPanel.get_w2f().world2frame(_graph.getNode(p.getFrom()).getLocation());
-		geo_location t1 = p.getLocation();
-		geo_location t2 = _graph.getNode(p.getFrom()).getLocation();
-		double extra = t1.distance(t2);
-		return _algo.shortestPathDist(ag.getSrcNode(), p.getFrom()) + extra;
+	private double totalDistanceToPokemon(Agent ag, Pokemon p) {
+		double extra1 = ag.getLocation().distance(_graph.getNode(ag.getSrcNode()).getLocation());
+		double extra2 = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
+		return _algo.shortestPathDist(ag.getSrcNode(), p.getFrom()) + extra2 - extra1;
 	}
 
 

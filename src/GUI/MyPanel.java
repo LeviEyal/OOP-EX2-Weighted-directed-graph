@@ -9,7 +9,6 @@ import gameClient.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
 import gameClient.util.Range2D;
-import gameClient.util.Range2Range;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,7 +55,6 @@ public class MyPanel extends JPanel {
         drawPokemons(g);
         drawAgents(g);
         drawInfo(g);
-
     }
 
     private void fetchData() {
@@ -75,19 +73,22 @@ public class MyPanel extends JPanel {
     private void drawInfo(Graphics g) {
         List<String> str = _ar.get_info();
         String dt = "none";
-        for(int i=0;i<str.size();i++) {
+        for(int i=0; i<str.size(); i++) {
             g.drawString(str.get(i)+" dt: "+dt,100,60+i*20);
         }
 
     }
     private void drawGraph(Graphics g) {
+        Graphics2D g2 = (Graphics2D)g;
         directed_weighted_graph gg = _ar.getGraph();
         for (node_data n : gg.getV()) {
             for (edge_data e : gg.getE(n.getKey())) {
-                g.setColor(Color.gray);
+                g2.setColor(new Color(43, 43, 43));
                 drawEdge(e, g);
             }
-            g.setColor(Color.BLACK);
+        }
+        g2.setColor(Color.BLUE);
+        for (node_data n : gg.getV()) {
             drawNode(n, g);
         }
     }
@@ -136,17 +137,13 @@ public class MyPanel extends JPanel {
     }
 
     private void drawEdge(edge_data e, Graphics g) {
+        Graphics2D g2 = (Graphics2D)g;
         directed_weighted_graph gg = _ar.getGraph();
         geo_location s = gg.getNode(e.getSrc()).getLocation();
         geo_location d = gg.getNode(e.getDest()).getLocation();
         geo_location s0 = _w2f.world2frame(s);
         geo_location d0 = _w2f.world2frame(d);
-        g.drawLine((int)s0.x(), (int)s0.y(), (int)d0.x(), (int)d0.y());
+        g2.drawLine((int)s0.x(), (int)s0.y(), (int)d0.x(), (int)d0.y());
         //	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
     }
-
-    public static Range2Range get_w2f(){
-        return _w2f;
-    }
-
 }
