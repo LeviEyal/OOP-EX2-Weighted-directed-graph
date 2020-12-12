@@ -1,15 +1,10 @@
 package gameClient;
 
-import api.directed_weighted_graph;
-import api.edge_data;
-import api.geo_location;
-import api.node_data;
+import api.*;
 import gameClient.util.Point3D;
 import org.json.JSONObject;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class Agent {
 		public static final double EPS = 0.0001;
@@ -25,7 +20,8 @@ public class Agent {
 		private long _sg_dt;
 		private Queue<node_data> queue;
 		private double _value;
-		
+		List<node_data> path = new ArrayList<>();
+
 		
 		public Agent(directed_weighted_graph g, int start_node) {
 			_gg = g;
@@ -168,5 +164,12 @@ public class Agent {
 			this._sg_dt = _sg_dt;
 		}
 
-		public Queue<node_data> Q(){return queue;}
-	}
+		public List<edge_data> getPathAsEdges(){
+			List<edge_data> edges = new ArrayList<>();
+			for(int i=0 ; i < path.size()-1 ; i++){
+				edge_data e = new EdgeData(path.get(i).getKey(), path.get(i+1).getKey(), 0);
+				edges.add(e);
+			}
+			return edges;
+		}
+}

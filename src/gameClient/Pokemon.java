@@ -3,22 +3,25 @@ import api.edge_data;
 import gameClient.util.Point3D;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Pokemon {
 	private edge_data _edge;
 	private double _value;
 	private int _type;
 	private Point3D _pos;
 	private double min_dist;
-	private int min_ro;
+	private int from;
+	private int to;
+	private double worth;
 
 	public Pokemon(Point3D p, int t, double v, double s, edge_data e) {
 		_type = t;
-	//	_speed = s;
 		_value = v;
 		_edge = e;
 		_pos = p;
 		min_dist = -1;
-		min_ro = -1;
+		from = -1;
 	}
 	public static Pokemon init_from_json(String json) {
 		Pokemon ans = null;
@@ -40,8 +43,18 @@ public class Pokemon {
 	public double getValue() {return _value;}
 	public double getMin_dist() {return min_dist;}
 	public void setMin_dist(double mid_dist) {this.min_dist = mid_dist;}
-	public int getMin_ro() {return min_ro;}
-	public void setMin_ro(int min_ro) {this.min_ro = min_ro;}
+	public int getFrom() {return from;}
+	public void setFrom(int from) {this.from = from;}
+	public int getTo() {return to;}
+	public void setTo(int from) {this.to = from;}
+
+	public double getWorth() {
+		return worth;
+	}
+
+	public void setWorth(double worth) {
+		this.worth = worth;
+	}
 
 	@Override
 	public String toString() {
@@ -51,7 +64,20 @@ public class Pokemon {
 				", _type=" + _type +
 				", _pos=" + _pos +
 				", min_dist=" + min_dist +
-				", min_ro=" + min_ro +
+				", min_ro=" + from +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Pokemon pokemon = (Pokemon) o;
+		return _type == pokemon._type && Objects.equals(_pos, pokemon._pos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(_type, _pos);
 	}
 }

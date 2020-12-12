@@ -111,25 +111,24 @@ public class MyPanel extends JPanel {
 
                     Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pika.png"));
                     g2.drawImage(img1, (int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r, this);
+                    g.drawString(""+f.getValue(), (int)fp.x()-2*r, (int)fp.y()-2*r);
                 }
             }
         }
     }
     private void drawAgents(Graphics g) {
         List<Agent> rs = _ar.JsonToAgents();
-        g.setColor(Color.red);
-        int i=0;
-        while(rs!=null && i<rs.size()) {
-            geo_location c = rs.get(i).getLocation();
-            int t=8;
+        for(Agent ag: rs){
+            geo_location c = ag.getLocation();
             int r = (int)(0.02 * this.getHeight());
-            i++;
             if(c!=null) {
-
                 geo_location fp = this._w2f.world2frame(c);
-//                g.fillOval((int)fp.x()-t, (int)fp.y()-t, 2*t, 2*t);
                 Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pokeball.png"));
                 g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
+            }
+            g.setColor(Color.MAGENTA);
+            for(edge_data e : ag.getPathAsEdges()){
+                drawEdge(e, g);
             }
         }
     }

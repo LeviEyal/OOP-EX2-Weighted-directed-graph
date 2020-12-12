@@ -15,6 +15,7 @@ import javax.swing.*;
 public class MyFrame extends javax.swing.JFrame {
 
     Arena _ar;
+    double time = -1;
     private static boolean sideMenuOpen = true;
     private static Color color_header = new Color(75, 130, 0);
     private static Color color_leftMenu = new Color(0, 0, 0);
@@ -52,6 +53,7 @@ public class MyFrame extends javax.swing.JFrame {
 
     @Override
     public void paint(Graphics g) {
+        time = Ex2._game.timeToEnd()/1000;
         super.paint(g);
         t.repaint();
         Menu.repaint();
@@ -59,6 +61,7 @@ public class MyFrame extends javax.swing.JFrame {
 
     @Override
     public void paintComponents(Graphics g) {
+        time = Ex2._game.timeToEnd()/1000;
         super.paintComponents(g);
         t.revalidate();
         t.repaint();
@@ -333,7 +336,7 @@ public class MyFrame extends javax.swing.JFrame {
         getContentPane().add(Menu, BorderLayout.LINE_START);
 
         t = new JLabel();
-        t.setText("ttl: "+ Ex2._game.timeToEnd()/1000 +"");
+        t.setText("ttl: "+ time +"");
         Menu.add(t);
     }
     //============================== Header buttons ====================================//
