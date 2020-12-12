@@ -238,10 +238,6 @@ public class Arena {
 		}
 	}
 	private int nextNode(Agent ag, int src) {
-		if(!paths.containsKey(ag.getID())){
-			paths.put(ag.getID(), new ArrayList<>());
-			paths.get(ag.getID()).add(_graph.getNode(ag.getSrcNode()));
-		}
 		System.out.println("============= start ==============");
 
 		_pokemons = json2Pokemons(_game.getPokemons());
@@ -277,9 +273,8 @@ public class Arena {
 			int area = 0;
 			if(p.getFrom()/numOfAreas == ag.getID())
 				area = 100;
-			System.out.println(val +"   "+dist);
-			p.setWorth(1*val + 1*dist + 1000*area);
-			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
+			p.setWorth(1*val + 2*dist + 1*area);
+//			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
 
 		Pokemon chosen = _pokemons.get(0);
@@ -294,13 +289,13 @@ public class Arena {
 				}
 			}
 		}
-		System.out.println("CHOSEN: minimum distance: "+ chosen.getMin_dist()+ ", "+chosen.getValue()+", " + chosen.getWorth());
+//		System.out.println("CHOSEN: minimum distance: "+ chosen.getMin_dist()+ ", "+chosen.getValue()+", " + chosen.getWorth());
 		map.put(ag.getID(), chosen);
-		ag.path = _algo.shortestPath(src, chosen.getFrom());
-		ag.path.add(_graph.getNode(chosen.getTo()));
+//		ag.path = _algo.shortestPath(src, chosen.getFrom());
+//		ag.path.add(_graph.getNode(chosen.getTo()));
 		paths.put(ag.getID(), new ArrayList<>(_algo.shortestPath(src, chosen.getFrom())));
-		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+ag.path);
-		System.out.println("============= end ==============");
+//		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+ag.path);
+//		System.out.println("============= end ==============");
 		return ag.path.get(1).getKey();
 	}
 
