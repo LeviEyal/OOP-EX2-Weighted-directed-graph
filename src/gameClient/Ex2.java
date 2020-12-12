@@ -1,9 +1,7 @@
 package gameClient;
 import GUI.MyFrame;
-//import Server.Game_Server_Ex2;
 import Server.Game_Server_Ex2;
 import api.*;
-import java.util.List;
 
 public class Ex2 implements Runnable{
 
@@ -19,7 +17,7 @@ public class Ex2 implements Runnable{
     @Override
     public void run() {
         long id = 203249073;
-        int scenario_num = 13;
+        int scenario_num = 23;
         _game = Game_Server_Ex2.getServer(scenario_num);
         _game.login(id);
 

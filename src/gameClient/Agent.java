@@ -7,9 +7,7 @@ import org.json.JSONObject;
 import java.util.*;
 
 public class Agent {
-		public static final double EPS = 0.0001;
-		private static int _count = 0;
-		private static int _seed = 3331;
+
 		private int _id;
 		private geo_location _pos;
 		private double _speed;
@@ -18,7 +16,6 @@ public class Agent {
 		private directed_weighted_graph _gg;
 		private Pokemon _curr_fruit;
 		private long _sg_dt;
-		private Queue<node_data> queue;
 		private double _value;
 		List<node_data> path = new ArrayList<>();
 
@@ -30,7 +27,6 @@ public class Agent {
 			_pos = _curr_node.getLocation();
 			_id = -1;
 			setSpeed(0);
-			queue = new LinkedList<>();
 		}
 		public void update(String json) {
 			JSONObject line;

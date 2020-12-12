@@ -120,6 +120,7 @@ public class MyPanel extends JPanel {
                 geo_location fp = _w2f.world2frame(c);
                 Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pokeball.png"));
                 g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
+                g.drawString(""+ag.getID(), (int)fp.x()-2*r, (int)fp.y()-2*r);
             }
             g.setColor(Color.MAGENTA);
             for(edge_data e : ag.getPathAsEdges()){
