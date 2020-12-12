@@ -1,5 +1,6 @@
 package gameClient;
 
+import GUI.MyPanel;
 import api.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
@@ -30,6 +31,7 @@ public class Arena {
 	private dw_graph_algorithms _algo;
 //	HashMap<Integer, Queue<node_data>> map = new HashMap<>();
 	HashMap<Integer, Pokemon> map = new HashMap<>();
+	private gameClient.util.Range2Range _w2f;
 
 	//========================= CONSTRUCTORS ===========================
 
@@ -72,11 +74,19 @@ public class Arena {
 			for(int a = 0; a < rs ;a++) {
 //				int ind = a%cl_fs.size();
 				Pokemon c = cl_fs.get(a);
-				int nn = c.get_edge().getDest();
-				if(c.getType()<0 ) {
-					nn = c.get_edge().getSrc();
+//				int nn = c.get_edge().getDest();
+//				if(c.getType()>0 ) {
+//					nn = c.get_edge().getSrc();
+//				}
+				int t;
+				edge_data e = c.get_edge();
+				if(c.getType() == -1){
+					t = Math.max(e.getSrc(), e.getDest());
 				}
-				_game.addAgent(nn);
+				else{
+					t = Math.min(e.getSrc(), e.getDest());
+				}
+				_game.addAgent(t);
 			}
 		}
 		catch (JSONException e) {e.printStackTrace();}
@@ -228,33 +238,15 @@ public class Arena {
 	public void moveAgents() {
 		_agents = getAgents(_game.move());
 
-//		if(_agents.isEmpty()){
-//			_agents = getAgents(_game.move());
-//		}
-//		for(Agent ag : _agents) {
-//			if (ag.Q().isEmpty())
-//				_agents = getAgents(_game.move());
-//		}
-
 		this.setPokemons(json2Pokemons(_game.getPokemons()));
 
 		for(Agent ag : _agents) {
 			int id = ag.getID();
 			int src = ag.getSrcNode();
 			double v = ag.getValue();
-//			if(ag.Q().isEmpty()){
-//				nextNode(ag, src);
-//			}
-//			else{
-//				int dst = ag.Q().remove().getKey();
-//				_game.chooseNextEdge(ag.getID(), dst);
-//				System.out.println("Agent: "+id+", val: "+v+" to node: "+dst);
-//				ag.setNextNode(dst);
-//			}
 			if(!ag.isMoving()) {
 				int dest = nextNode(ag, src);
 				_game.chooseNextEdge(ag.getID(), dest);
-//				System.out.println("Agent: "+id+", val: "+v+" turned to node: "+dest);
 				ag.setNextNode(dest);
 			}
 		}
@@ -263,6 +255,9 @@ public class Arena {
 		System.out.println("============= start ==============");
 		//update pokemons from server
 		_pokemons = json2Pokemons(_game.getPokemons());
+
+		double min_val = 100, min_dist = 100, max_val = -100, max_dist = -100;
+
 		for(Pokemon p : _pokemons){
 			int type = p.getType();
 			edge_data e = p.get_edge();
@@ -274,25 +269,40 @@ public class Arena {
 				p.setFrom(Math.min(e.getSrc(), e.getDest()));
 				p.setTo(Math.max(e.getSrc(), e.getDest()));
 			}
-			double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
-			p.setMin_dist(_algo.shortestPathDist(src, p.getFrom()) + extra);
-			p.setWorth(p.getValue()-p.getMin_dist());
-			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getLocation());
+			double dis2pokemon = dist(ag, p);
+			p.setMin_dist(dis2pokemon);
+
+			if(dis2pokemon > max_dist) max_dist = dis2pokemon;
+			if(dis2pokemon < min_dist) min_dist = dis2pokemon;
+			if(p.getValue() > max_val) max_val = p.getValue();
+			if(p.getValue() < min_val) min_val = p.getValue();
+
+			p.setWorth(0.8*p.getValue()-p.getMin_dist());
+
+			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
+		}
+		Range valuesRange = new Range(min_val, max_val);
+		Range distRange = new Range(min_dist, max_dist);
+
+		for(Pokemon p : _pokemons){
+			double val = valuesRange.getPortion(p.getValue()) * 100;
+			double dist = distRange.getPortion(p.getMin_dist()) * 100;
+			p.setWorth(0.5*val + 0.5*dist);
 		}
 
 		Pokemon chosen = _pokemons.get(0);
 
-		double max = Double.MIN_VALUE;
+		double max = 0;
 		for(Pokemon p : _pokemons){
 			if(available(p, ag)){
 				double w = p.getWorth();
-				if (w>max) {
+				if (w > max) {
 					max = w;
 					chosen = p;
 				}
 			}
 		}
-		System.out.println("minimum distance: "+ chosen.getMin_dist()+ ", " + chosen.getLocation());
+		System.out.println("CHOSEN: minimum distance: "+ chosen.getMin_dist()+ ", "+chosen.getValue()+", " + chosen.getWorth());
 		map.put(ag.getID(), chosen);
 		ag.path = _algo.shortestPath(src, chosen.getFrom());
 		ag.path.add(_graph.getNode(chosen.getTo()));
@@ -310,7 +320,11 @@ public class Arena {
 	}
 
 	private double dist(Agent ag, Pokemon p) {
-		double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
+//		geo_location t1 = MyPanel.get_w2f().world2frame(p.getLocation());
+//		geo_location t2 = MyPanel.get_w2f().world2frame(_graph.getNode(p.getFrom()).getLocation());
+		geo_location t1 = p.getLocation();
+		geo_location t2 = _graph.getNode(p.getFrom()).getLocation();
+		double extra = t1.distance(t2);
 		return _algo.shortestPathDist(ag.getSrcNode(), p.getFrom()) + extra;
 	}
 

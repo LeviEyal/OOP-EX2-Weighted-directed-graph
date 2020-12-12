@@ -1,11 +1,11 @@
 {"GameServer": {
-    "pokemons": 4,
+    "pokemons": 5,
     "is_logged_in": true,
     "moves": 0,
     "grade": 0,
-    "game_level": 15,
+    "game_level": 16,
     "max_user_level": -1,
     "id": 203249073,
-    "graph": "data/A3",
-    "agents": 1
+    "graph": "data/A4",
+    "agents": 2
 }}

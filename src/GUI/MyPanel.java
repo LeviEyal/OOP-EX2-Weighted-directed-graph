@@ -2,8 +2,6 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.Format;
-import java.util.Iterator;
 import java.util.List;
 
 import api.*;
@@ -11,6 +9,7 @@ import gameClient.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
 import gameClient.util.Range2D;
+import gameClient.util.Range2Range;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +21,7 @@ public class MyPanel extends JPanel {
     double moves;
     int level;
     private Arena _ar;
-    private gameClient.util.Range2Range _w2f;
+    static gameClient.util.Range2Range _w2f;
 
     MyPanel() {
         super();
@@ -83,16 +82,12 @@ public class MyPanel extends JPanel {
     }
     private void drawGraph(Graphics g) {
         directed_weighted_graph gg = _ar.getGraph();
-        Iterator<node_data> iter = gg.getV().iterator();
-        while(iter.hasNext()) {
-            node_data n = iter.next();
-            Iterator<edge_data> itr = gg.getE(n.getKey()).iterator();
-            while(itr.hasNext()) {
-                edge_data e = itr.next();
+        for (node_data n : gg.getV()) {
+            for (edge_data e : gg.getE(n.getKey())) {
                 g.setColor(Color.gray);
                 drawEdge(e, g);
             }
-            g.setColor(Color.blue);
+            g.setColor(Color.BLACK);
             drawNode(n, g);
         }
     }
@@ -106,7 +101,7 @@ public class MyPanel extends JPanel {
                 g2.setColor(Color.RED);
                 g2.setFont(new Font("Arial", Font.BOLD, 16));
                 if (c != null) {
-                    geo_location fp = this._w2f.world2frame(c);
+                    geo_location fp = _w2f.world2frame(c);
 
                     Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pika.png"));
                     g2.drawImage(img1, (int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r, this);
@@ -121,7 +116,7 @@ public class MyPanel extends JPanel {
             geo_location c = ag.getLocation();
             int r = (int)(0.02 * this.getHeight());
             if(c!=null) {
-                geo_location fp = this._w2f.world2frame(c);
+                geo_location fp = _w2f.world2frame(c);
                 Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pokeball.png"));
                 g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
             }
@@ -134,7 +129,7 @@ public class MyPanel extends JPanel {
 
     private void drawNode(node_data n, Graphics g) {
         geo_location pos = n.getLocation();
-        geo_location fp = this._w2f.world2frame(pos);
+        geo_location fp = _w2f.world2frame(pos);
         int r = (int)(0.009 * this.getHeight());
         g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
         g.drawString(""+n.getKey(), (int)fp.x()-2*r, (int)fp.y()-2*r);
@@ -144,10 +139,14 @@ public class MyPanel extends JPanel {
         directed_weighted_graph gg = _ar.getGraph();
         geo_location s = gg.getNode(e.getSrc()).getLocation();
         geo_location d = gg.getNode(e.getDest()).getLocation();
-        geo_location s0 = this._w2f.world2frame(s);
-        geo_location d0 = this._w2f.world2frame(d);
+        geo_location s0 = _w2f.world2frame(s);
+        geo_location d0 = _w2f.world2frame(d);
         g.drawLine((int)s0.x(), (int)s0.y(), (int)d0.x(), (int)d0.y());
         //	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
+    }
+
+    public static Range2Range get_w2f(){
+        return _w2f;
     }
 
 }
