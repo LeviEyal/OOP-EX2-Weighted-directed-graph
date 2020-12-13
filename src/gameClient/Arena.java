@@ -28,7 +28,7 @@ public class Arena {
 	private List<Pokemon> _pokemons;
 	private List<String> _info;
 	private final dw_graph_algorithms _algo;
-	HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
+	public static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
 	HashMap<Integer, Pokemon> map = new HashMap<>();
 
 	//========================= CONSTRUCTORS ===========================
@@ -238,12 +238,45 @@ public class Arena {
 		}
 	}
 	private int nextNode(Agent ag, int src) {
+		int id = ag.getID();
 		System.out.println("============= start ==============");
 
 		_pokemons = json2Pokemons(_game.getPokemons());
 
-		double min_val = 100, min_dist = 100, max_val = -100, max_dist = -100;
+		findWorthOfAllPokemons(ag);
 
+		Pokemon chosen = null;
+
+		double max = 0;
+		for(Pokemon p : _pokemons){
+			if(available(p, ag)){
+				double w = p.getWorth();
+				if (w > max) {
+					max = w;
+					chosen = p;
+				}
+			}
+		}
+//		System.out.println("CHOSEN: minimum distance: "+ chosen.getMin_dist()+ ", "+chosen.getValue()+", " + chosen.getWorth());
+		map.put(id, chosen);
+		if(chosen == null){
+			int base = _graph.nodeSize()/ _agents.size()/2*(id+1);
+			List<node_data> path = _algo.shortestPath(src, base);
+			path.add(_graph.getNode(base+1));
+			paths.put(id, new ArrayList<>(path));
+			return paths.get(id).get(1).getKey();
+		}
+		List<node_data> path = _algo.shortestPath(src, chosen.getFrom());
+		path.add(_graph.getNode(chosen.getTo()));
+		paths.put(id, new ArrayList<>(path));
+//		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+ag.path);
+		System.out.println("============= end ==============");
+		return paths.get(id).get(1).getKey();
+	}
+
+	private void findWorthOfAllPokemons(Agent ag) {
+		int id = ag.getID();
+		double min_val = 100, min_dist = 100, max_val = -100, max_dist = -100;
 		for(Pokemon p : _pokemons){
 			int type = p.getType();
 			edge_data e = p.get_edge();
@@ -271,32 +304,11 @@ public class Arena {
 			double dist = 100 - (distRange.getPortion(p.getMin_dist()) * 100);
 			int numOfAreas = _graph.nodeSize()/_agents.size();
 			int area = 0;
-			if(p.getFrom()/numOfAreas == ag.getID())
+			if(p.getFrom()/numOfAreas == id)
 				area = 100;
-			p.setWorth(1*val + 2*dist + 1*area);
+			p.setWorth(1*val + 1*dist + 0*area);
 //			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
-
-		Pokemon chosen = _pokemons.get(0);
-
-		double max = 0;
-		for(Pokemon p : _pokemons){
-			if(available(p, ag)){
-				double w = p.getWorth();
-				if (w > max) {
-					max = w;
-					chosen = p;
-				}
-			}
-		}
-//		System.out.println("CHOSEN: minimum distance: "+ chosen.getMin_dist()+ ", "+chosen.getValue()+", " + chosen.getWorth());
-		map.put(ag.getID(), chosen);
-//		ag.path = _algo.shortestPath(src, chosen.getFrom());
-//		ag.path.add(_graph.getNode(chosen.getTo()));
-		paths.put(ag.getID(), new ArrayList<>(_algo.shortestPath(src, chosen.getFrom())));
-//		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+ag.path);
-//		System.out.println("============= end ==============");
-		return ag.path.get(1).getKey();
 	}
 
 	private boolean available(Pokemon p, Agent a) {
@@ -310,16 +322,6 @@ public class Arena {
 		}
 		return true;
 	}
-//	private boolean available(Pokemon p, Agent a) {
-//		for(Agent ag : _agents){
-//			if(a.getID()!=ag.getID()) {
-//				if (p.equals(map.get(ag.getID())) ||
-//					totalDistanceToPokemon(ag, p) < totalDistanceToPokemon(a, p))
-//					return false;
-//			}
-//		}
-//		return true;
-//	}
 
 	private double totalDistanceToPokemon(Agent ag, Pokemon p) {
 		double extra1 = ag.getLocation().distance(_graph.getNode(ag.getSrcNode()).getLocation());

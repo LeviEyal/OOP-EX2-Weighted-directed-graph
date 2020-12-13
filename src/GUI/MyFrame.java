@@ -4,8 +4,6 @@ import gameClient.Arena;
 import gameClient.Ex2;
 
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import javax.swing.*;
 
 /**
@@ -16,6 +14,13 @@ public class MyFrame extends javax.swing.JFrame {
 
     Arena _ar;
     double time = -1;
+    public static JPanel t = new JPanel();
+    public static JPanel[] info = new JPanel[]{
+            new JPanel(),
+            new JPanel(),
+            new JPanel(),
+            new JPanel()
+    };
     private static boolean sideMenuOpen = true;
     private static Color color_header = new Color(75, 130, 0);
     private static Color color_leftMenu = new Color(0, 0, 0);
@@ -25,6 +30,10 @@ public class MyFrame extends javax.swing.JFrame {
     private static Color color_sideMenu = new Color(177, 255, 159);
     private static Color color_choosenMenu = color_sideMenu;
     private static Color color_left_menu_line = new Color(150, 150, 150);
+    public static JCheckBox show_edges = new JCheckBox("edges",true);
+    public static JCheckBox show_nodes = new JCheckBox("nodes",true);
+    public static JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers",true);
+    public static JCheckBox show_pokemons_values = new JCheckBox("pokemons values",false);
 
     /**
      * Creates new form MainMenu
@@ -44,7 +53,7 @@ public class MyFrame extends javax.swing.JFrame {
         MyPanel panel = new MyPanel();
         panel.setPreferredSize(new Dimension(800,500));
         panel.update(_ar);
-
+//        panel.setBackground(Color.GREEN);
         this.add(panel, BorderLayout.CENTER);
 
         pack();
@@ -55,17 +64,15 @@ public class MyFrame extends javax.swing.JFrame {
     public void paint(Graphics g) {
         time = Ex2._game.timeToEnd()/1000;
         super.paint(g);
-        t.repaint();
         Menu.repaint();
     }
 
     @Override
     public void paintComponents(Graphics g) {
         time = Ex2._game.timeToEnd()/1000;
-        super.paintComponents(g);
-        t.revalidate();
-        t.repaint();
+//        super.paintComponents(g);
         Menu.repaint();
+        menuHide.paintComponents(g);
     }
 
     private void otherComponents() {
@@ -124,7 +131,7 @@ public class MyFrame extends javax.swing.JFrame {
         minimizePNL.setLayout(new BorderLayout());
 
         minimizeWindowBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        minimizeWindowBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_minimize_window_18px.png"))); // NOI18N
+        minimizeWindowBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/icons8_minimize_window_18px.png"))); // NOI18N
         minimizeWindowBTN.setPreferredSize(new Dimension(30, 30));
         minimizeWindowBTN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,7 +152,7 @@ public class MyFrame extends javax.swing.JFrame {
         closePNL.setLayout(new BorderLayout());
 
         closeWindowBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        closeWindowBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_close_window_18px.png"))); // NOI18N
+        closeWindowBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/icons8_close_window_18px.png"))); // NOI18N
         closeWindowBTN.setAlignmentY(0.0F);
         closeWindowBTN.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         closeWindowBTN.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -170,7 +177,7 @@ public class MyFrame extends javax.swing.JFrame {
         maximizePNL.setLayout(new BorderLayout());
 
         maxWindowBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        maxWindowBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_full_screen_18px.png"))); // NOI18N
+        maxWindowBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/icons8_full_screen_18px.png"))); // NOI18N
         maxWindowBTN.setPreferredSize(new Dimension(30, 30));
         maxWindowBTN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -221,7 +228,7 @@ public class MyFrame extends javax.swing.JFrame {
         hideMenuPNL.setLayout(new BorderLayout());
 
         hideMenuBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        hideMenuBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/rightArrow.png"))); // NOI18N
+        hideMenuBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/rightArrow.png"))); // NOI18N
         hideMenuBTN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 hideMenuBTNMouseClicked(evt);
@@ -241,7 +248,7 @@ public class MyFrame extends javax.swing.JFrame {
         settingsPNL.setLayout(new BorderLayout());
 
         settingsBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        settingsBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/settings_50px.png"))); // NOI18N
+        settingsBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/settings_50px.png"))); // NOI18N
         settingsBTN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 settingsBTNMouseClicked(evt);
@@ -292,7 +299,7 @@ public class MyFrame extends javax.swing.JFrame {
         helpPNL.setBackground(color_leftMenu);
         helpPNL.setLayout(new BorderLayout());
         helpBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        helpBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/help.png"))); // NOI18N
+        helpBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/help.png"))); // NOI18N
         helpBTN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 helpBTNMouseClicked(evt);
@@ -309,35 +316,55 @@ public class MyFrame extends javax.swing.JFrame {
         menuIcon.add(helpPNL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 50, 50));
         Menu.add(menuIcon, BorderLayout.LINE_START);
         menuHide.setBackground(color_sideMenu);
+//        menuHide.setLayout(new BorderLayout());
         jLabel1.setText("Settings");
         jLabel2.setText("Help");
 
-        javax.swing.GroupLayout menuHideLayout = new javax.swing.GroupLayout(menuHide);
-        menuHide.setLayout(menuHideLayout);
-        menuHideLayout.setHorizontalGroup(
-                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(menuHideLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
-        );
-        menuHideLayout.setVerticalGroup(
-                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(menuHideLayout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(309, Short.MAX_VALUE))
-        );
+//        javax.swing.GroupLayout menuHideLayout = new javax.swing.GroupLayout(menuHide);
+//        menuHide.setLayout(menuHideLayout);
+//        menuHideLayout.setHorizontalGroup(
+//                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(menuHideLayout.createSequentialGroup()
+//                                .addContainerGap()
+//                                .addGroup(menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+//                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
+//        );
+//        menuHideLayout.setVerticalGroup(
+//                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(menuHideLayout.createSequentialGroup()
+//                                .addGap(69, 69, 69)
+//                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                .addGap(18, 18, 18)
+//                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                .addContainerGap(309, Short.MAX_VALUE))
+//        );
+
+
+//        t = new JLabel();
+//        t.setText("ttl: "+ time +"");
+
+//        show_nodes.setSelected(true);
+        t.setPreferredSize(new Dimension(250,100));
+        t.add(info[0]);
+        t.add(info[1]);
+        t.add(info[2]);
+        t.add(info[3]);
+        t.setVisible(true);
+
+        menuHide.add(info[0]);
+        menuHide.add(info[1]);
+        menuHide.add(info[2]);
+        menuHide.add(info[3]);
+
+        menuHide.add(t);
+        menuHide.add(show_nodes);
+        menuHide.add(show_nodes_numbers);
+        menuHide.add(show_edges);
+        menuHide.add(show_pokemons_values);
 
         Menu.add(menuHide, BorderLayout.CENTER);
         getContentPane().add(Menu, BorderLayout.LINE_START);
-
-        t = new JLabel();
-        t.setText("ttl: "+ time +"");
-        Menu.add(t);
     }
     //============================== Header buttons ====================================//
 
@@ -392,12 +419,12 @@ public class MyFrame extends javax.swing.JFrame {
         if(sideMenuOpen){
             Menu.setPreferredSize(new Dimension(50, Menu.getHeight()));
             sideMenuOpen = false;
-            hideMenuBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/rightArrow.png")));
+            hideMenuBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/rightArrow.png")));
         }
         else{
             Menu.setPreferredSize(new Dimension(250, Menu.getHeight()));
             sideMenuOpen = true;
-            hideMenuBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/leftArrow.png")));
+            hideMenuBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/leftArrow.png")));
         }
         SwingUtilities.updateComponentTreeUI(this);
     }
@@ -460,5 +487,5 @@ public class MyFrame extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeWindowBTN;
     private javax.swing.JLabel settingsBTN;
     private JPanel settingsPNL;
-    private JLabel t;
+
 }
