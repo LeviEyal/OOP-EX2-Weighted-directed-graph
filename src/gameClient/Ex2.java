@@ -8,16 +8,20 @@ public class Ex2 implements Runnable{
     public static game_service _game;
     static Arena _ar;
     static MyFrame _gui;
+    private static long id;
+    private static int scenario_num;
 
     public static void main(String[] args) {
+//        id = 203249073;
+//        scenario_num = 23;
+        id = Integer.parseInt(args[0]);
+        scenario_num = Integer.parseInt(args[1]);
         Thread client = new Thread(new Ex2());
         client.start();
     }
 
     @Override
     public void run() {
-        long id = 203249073;
-        int scenario_num = 23;
         _game = Game_Server_Ex2.getServer(scenario_num);
         _game.login(id);
 

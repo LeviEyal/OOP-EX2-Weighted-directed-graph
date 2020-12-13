@@ -66,20 +66,17 @@ public class MyPanel extends JPanel{
         show_edges.setSelected(true);
         show_nodes_numbers.setSelected(true);
         show_pokemons_values.setSelected(true);
+
+        show_nodes.setOpaque(false);
+        show_edges.setOpaque(false);
+        show_nodes_numbers.setOpaque(false);
+        show_pokemons_values.setOpaque(false);
+
         add(show_edges);
         add(show_nodes);
         add(show_nodes_numbers);
         add(show_pokemons_values);
         setOpaque(true);
-
-//        try
-//        {
-//            img = ImageIO.read(new File(""));
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
     }
     public void update(Arena ar) {
         this._ar = ar;
@@ -87,9 +84,9 @@ public class MyPanel extends JPanel{
     }
 
     private void updateFrame() {
-        time = Ex2._game.timeToEnd()/1000;
-        Range rx = new Range(20, this.getWidth()-20);
-        Range ry = new Range(this.getHeight()-15, 50);
+        time = Ex2._game.timeToEnd()/1000.0;
+        Range rx = new Range(50, this.getWidth()-50);
+        Range ry = new Range(this.getHeight()-30, 80);
         Range2D frame = new Range2D(rx,ry);
         directed_weighted_graph g = _ar.getGraph();
         _w2f = Arena.w2f(g, frame);
@@ -102,7 +99,7 @@ public class MyPanel extends JPanel{
         super.paintComponent(g);
         int w = this.getWidth();
         int h = this.getHeight();
-        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background2.jpg"));
+        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background.png"));
         g2.drawImage(img, 0,0, w, h, this);
 
 //        g2.clearRect(0, 0, w-100, h-100);
@@ -111,16 +108,16 @@ public class MyPanel extends JPanel{
         t.setText("Level: "+ level +"   Timer: "+ time+"   Grade: "+grade+"   Moves: "+moves+"     Display:");
 //        MyFrame.t.setText("Level: "+ level +"Timer: "+ time+"   Grade: "+grade+"Moves: "+moves+"     Display:");
 //        MyFrame.t.setLayout(null);
-        MyFrame.info[0].setName("Level: " + level);
-        MyFrame.info[1].setName("Timer: " + time);
-        MyFrame.info[2].setName("Grade: " + grade);
-        MyFrame.info[3].setName("Moves: " + moves);
+//        MyFrame.info[0].setName("Level: " + level);
+//        MyFrame.info[1].setName("Timer: " + time);
+//        MyFrame.info[2].setName("Grade: " + grade);
+//        MyFrame.info[3].setName("Moves: " + moves);
 
         updateFrame();
         drawGraph(g2);
         drawAgents(g2);
         drawPokemons(g2);
-        drawInfo(g2);
+//        drawInfo(g2);
     }
 
     private void fetchData() {

@@ -45,8 +45,9 @@ public class Range {
 	}
 	public double getPortion(double d) {
 		double d1 = d-_min;
-		double ans = d1/get_length();
-		return ans;
+		if(get_length() == 0)
+			return d1;
+		return d1/get_length();
 	}
 	public double fromPortion(double p) {
 		return _min+p* get_length();

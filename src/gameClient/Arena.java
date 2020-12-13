@@ -242,13 +242,12 @@ public class Arena {
 		System.out.println("============= start ==============");
 
 		_pokemons = json2Pokemons(_game.getPokemons());
-
 		findWorthOfAllPokemons(ag);
 
 		Pokemon chosen = null;
-
 		double max = 0;
 		for(Pokemon p : _pokemons){
+			System.out.println("mindist: "+p.getMin_dist()+" worth: "+p.getWorth());
 			if(available(p, ag)){
 				double w = p.getWorth();
 				if (w > max) {
@@ -296,18 +295,19 @@ public class Arena {
 			if(p.getValue() > max_val) max_val = p.getValue();
 			if(p.getValue() < min_val) min_val = p.getValue();
 		}
+		System.out.println("value: "+min_val+" - "+max_val);
+		System.out.println("distance: "+min_dist+" - "+max_dist);
 		Range valuesRange = new Range(min_val, max_val);
 		Range distRange = new Range(min_dist, max_dist);
 
 		for(Pokemon p : _pokemons){
+			System.out.println(valuesRange.getPortion(p.getValue()));
+			System.out.println(distRange.getPortion(p.getMin_dist()));
 			double val = valuesRange.getPortion(p.getValue()) * 100;
 			double dist = 100 - (distRange.getPortion(p.getMin_dist()) * 100);
-			int numOfAreas = _graph.nodeSize()/_agents.size();
-			int area = 0;
-			if(p.getFrom()/numOfAreas == id)
-				area = 100;
-			p.setWorth(1*val + 1*dist + 0*area);
-//			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
+			int area = (p.getFrom()/(_graph.nodeSize()/_agents.size()) == id)? 100 : 0;
+			p.setWorth(1*val + 1*dist);
+			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
 	}
 

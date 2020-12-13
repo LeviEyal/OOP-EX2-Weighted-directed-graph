@@ -2,9 +2,14 @@ package GUI;
 
 import gameClient.Arena;
 import gameClient.Ex2;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -12,24 +17,28 @@ import javax.swing.*;
  */
 public class MyFrame extends javax.swing.JFrame {
 
+    int px, py;
     Arena _ar;
-    double time = -1;
-    public static JPanel t = new JPanel();
-    public static JPanel[] info = new JPanel[]{
-            new JPanel(),
-            new JPanel(),
-            new JPanel(),
-            new JPanel()
+    double time;
+    double grade;
+    double moves;
+    int level;
+    JPanel t = new JPanel();
+    JLabel[] info = new JLabel[]{
+            new JLabel(),
+            new JLabel(),
+            new JLabel(),
+            new JLabel()
     };
     private static boolean sideMenuOpen = true;
-    private static Color color_header = new Color(75, 130, 0);
-    private static Color color_leftMenu = new Color(0, 0, 0);
-    private static Color color_page = new Color(150, 150, 150);
-    private static Color color_hoverHeader = new Color(150, 150, 150);
-    private static Color color_hoverMenu = new Color(150, 150, 150);
-    private static Color color_sideMenu = new Color(177, 255, 159);
-    private static Color color_choosenMenu = color_sideMenu;
-    private static Color color_left_menu_line = new Color(150, 150, 150);
+    private static final Color color_header = new Color(219, 4, 4);
+    private static final Color color_leftMenu = new Color(0, 0, 0);
+    private static final Color color_page = new Color(150, 150, 150);
+    private static final Color color_hoverHeader = new Color(255, 255, 255);
+    private static final Color color_hoverMenu = new Color(255, 0, 0);
+    private static final Color color_sideMenu = new Color(177, 255, 159);
+    private static final Color color_chosenMenu = color_sideMenu;
+    private static final Color color_left_menu_line = new Color(150, 150, 150);
     public static JCheckBox show_edges = new JCheckBox("edges",true);
     public static JCheckBox show_nodes = new JCheckBox("nodes",true);
     public static JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers",true);
@@ -53,28 +62,33 @@ public class MyFrame extends javax.swing.JFrame {
         MyPanel panel = new MyPanel();
         panel.setPreferredSize(new Dimension(800,500));
         panel.update(_ar);
-//        panel.setBackground(Color.GREEN);
         this.add(panel, BorderLayout.CENTER);
 
+        getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
+        ComponentResizer cr = new ComponentResizer();
+        cr.registerComponent(this);
         pack();
         this.setVisible(true);
     }
 
     @Override
-    public void paint(Graphics g) {
-        time = Ex2._game.timeToEnd()/1000;
-        super.paint(g);
-        Menu.repaint();
-    }
-
-    @Override
     public void paintComponents(Graphics g) {
-        time = Ex2._game.timeToEnd()/1000;
-//        super.paintComponents(g);
-        Menu.repaint();
-        menuHide.paintComponents(g);
+        super.paintComponents(g);
+        otherComponents();
     }
 
+    private void fetchData() {
+        try {
+            JSONObject line = new JSONObject(Ex2._game.toString());
+            JSONObject ttt = line.getJSONObject("GameServer");
+            grade = ttt.getDouble("grade");
+            moves = ttt.getDouble("moves");
+            level = ttt.getInt("game_level");
+            time = Ex2._game.timeToEnd() / 1000.0;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     private void otherComponents() {
         Header = new JPanel();
         iconMinMaxclose = new JPanel();
@@ -107,21 +121,32 @@ public class MyFrame extends javax.swing.JFrame {
         jScrollPane2 = new JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
 
-//        setBackground(new java.awt.Color(153, 153, 153));
         setLocationByPlatform(true);
-//        setUndecorated(true);
+        setUndecorated(true);
         setLayout(new BorderLayout());
 
         //================================ HEADER =================================
         Header.setBackground(color_header);
         Header.setMinimumSize(new Dimension(150, 20));
         Header.setPreferredSize(new Dimension(800, 30));
-//        Header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-//            public void mouseDragged(java.awt.event.MouseEvent evt) {
-//                HeaderMouseDragged(evt);
-//            }
-//        });
+
+        Header.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                px = e.getX();
+                py = e.getY();
+            }
+        });
+        Header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent e) {
+                setLocation(e.getXOnScreen()-px, e.getYOnScreen()-py);
+            }
+        });
         Header.setLayout(new BorderLayout());
+        JLabel title = new JLabel("  PokemonCatcher v1.0");
+        title.setFont(new Font("Arial", 2, 15));
+        title.setForeground(Color.white);
+        Header.add(title, BorderLayout.WEST);
 
         iconMinMaxclose.setBackground(color_header);
         iconMinMaxclose.setPreferredSize(new Dimension(150, 50));
@@ -201,8 +226,6 @@ public class MyFrame extends javax.swing.JFrame {
         //================================ SIDE MENU =================================
         Menu.setPreferredSize(new Dimension(250, 450));
         Menu.setLayout(new BorderLayout());
-
-
 
         menuIcon.setBackground(color_leftMenu);
         menuIcon.setPreferredSize(new Dimension(50, 450));
@@ -346,6 +369,14 @@ public class MyFrame extends javax.swing.JFrame {
 
 //        show_nodes.setSelected(true);
         t.setPreferredSize(new Dimension(250,100));
+
+        fetchData();
+
+        info[0].setText("Level: " + level);
+        info[1].setText("Timer: " + time);
+        info[2].setText("Grade: " + grade);
+        info[3].setText("Moves: " + moves);
+
         t.add(info[0]);
         t.add(info[1]);
         t.add(info[2]);
@@ -437,7 +468,7 @@ public class MyFrame extends javax.swing.JFrame {
         lineSettings.setBackground(color_leftMenu);
     }
     private void settingsBTNMouseClicked(java.awt.event.MouseEvent evt) {
-        settingsPNL.setBackground(color_choosenMenu);
+        settingsPNL.setBackground(color_chosenMenu);
         helpPNL.setBackground(color_leftMenu);
     }
 
@@ -449,13 +480,10 @@ public class MyFrame extends javax.swing.JFrame {
         lineHelp.setBackground(color_leftMenu);
     }
     private void helpBTNMouseClicked(java.awt.event.MouseEvent evt) {
-        helpPNL.setBackground(color_choosenMenu);
+        helpPNL.setBackground(color_chosenMenu);
         settingsPNL.setBackground(color_leftMenu);
     }
 
-    private void HeaderMouseDragged(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-    }
     // Variables declaration - do not modify
     private JPanel Header;
     private JPanel Menu;
