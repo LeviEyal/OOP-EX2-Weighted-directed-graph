@@ -17,7 +17,7 @@ public class Ex2 implements Runnable{
         id = Integer.parseInt(args[0]);
         scenario_num = Integer.parseInt(args[1]);
         id = 203249073;
-        scenario_num = 0;
+        scenario_num = 17;
         Thread client = new Thread(new Ex2());
         client.start();
     }
@@ -34,7 +34,7 @@ public class Ex2 implements Runnable{
         while(_game.isRunning()) {
                 _ar.moveAgents();
                 _gui.repaint();
-                dt = isCloseToPokemon()? 10 : 110;
+                dt = isCloseToPokemon()? 50 : 110;
             try {
                 sleep(dt);
             }

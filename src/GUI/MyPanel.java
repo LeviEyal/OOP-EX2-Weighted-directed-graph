@@ -26,10 +26,10 @@ public class MyPanel extends JPanel{
     private JCheckBox show_nodes = new JCheckBox("nodes");
     private JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers");
     private JCheckBox show_pokemons_values = new JCheckBox("pokemons values");
-    double time;
-    double duration = -2;
+    int time;
+    int duration = -2;
     double grade;
-    double moves;
+    int moves;
     int level;
     private Arena _ar;
     static gameClient.util.Range2Range _w2f;
@@ -85,7 +85,7 @@ public class MyPanel extends JPanel{
     }
 
     private void updateFrame() {
-        time = Ex2._game.timeToEnd()/1000.0;
+        time = (int) (Ex2._game.timeToEnd()/1000);
         Range rx = new Range(50, this.getWidth()-50);
         Range ry = new Range(this.getHeight()-30, 80);
         Range2D frame = new Range2D(rx,ry);
@@ -106,7 +106,7 @@ public class MyPanel extends JPanel{
 //        g2.clearRect(0, 0, w-100, h-100);
 
         fetchData();
-        t.setText("Level: "+ level +" Timer: "+ time+" Grade: "+grade+" Moves: "+moves+" Duration: "+duration+" maxMoves: "+duration*10+"     Display:");
+        t.setText("Level: "+ level +" Timer: "+ time+"/"+duration+" Grade: "+grade+" Moves: "+moves+"/"+duration*10+"     Display:");
 //        MyFrame.t.setText("Level: "+ level +"Timer: "+ time+"   Grade: "+grade+"Moves: "+moves+"     Display:");
 //        MyFrame.t.setLayout(null);
 //        MyFrame.info[0].setName("Level: " + level);
@@ -126,11 +126,11 @@ public class MyPanel extends JPanel{
             JSONObject line = new JSONObject(Ex2._game.toString());
             JSONObject ttt = line.getJSONObject("GameServer");
             grade = ttt.getDouble("grade");
-            moves = ttt.getDouble("moves");
+            moves = (int) ttt.getDouble("moves");
             level = ttt.getInt("game_level");
-            time = Ex2._game.timeToEnd() / 1000;
+            time = (int) (Ex2._game.timeToEnd() / 1000);
             if(duration == -2)
-                duration = time;
+                duration = time+1;
         } catch (JSONException e) {
             e.printStackTrace();
         }
