@@ -27,6 +27,7 @@ public class MyPanel extends JPanel{
     private JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers");
     private JCheckBox show_pokemons_values = new JCheckBox("pokemons values");
     double time;
+    double duration = -2;
     double grade;
     double moves;
     int level;
@@ -105,7 +106,7 @@ public class MyPanel extends JPanel{
 //        g2.clearRect(0, 0, w-100, h-100);
 
         fetchData();
-        t.setText("Level: "+ level +"   Timer: "+ time+"   Grade: "+grade+"   Moves: "+moves+"     Display:");
+        t.setText("Level: "+ level +" Timer: "+ time+" Grade: "+grade+" Moves: "+moves+" Duration: "+duration+" maxMoves: "+duration*10+"     Display:");
 //        MyFrame.t.setText("Level: "+ level +"Timer: "+ time+"   Grade: "+grade+"Moves: "+moves+"     Display:");
 //        MyFrame.t.setLayout(null);
 //        MyFrame.info[0].setName("Level: " + level);
@@ -128,6 +129,8 @@ public class MyPanel extends JPanel{
             moves = ttt.getDouble("moves");
             level = ttt.getInt("game_level");
             time = Ex2._game.timeToEnd() / 1000;
+            if(duration == -2)
+                duration = time;
         } catch (JSONException e) {
             e.printStackTrace();
         }

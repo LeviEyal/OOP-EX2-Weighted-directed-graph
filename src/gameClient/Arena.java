@@ -332,6 +332,4 @@ public class Arena {
 		double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
 		return _algo.shortestPathDist(n.getKey(), p.getFrom()) + extra;
 	}
-
-
 }
