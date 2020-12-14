@@ -50,7 +50,7 @@ https://levieyal.github.io/Unweighted-Undirected-Graph/
     }
 The code creates the graph:
 
-![enter image description here](https://media.geeksforgeeks.org/wp-content/uploads/undirectedgraph.png)
+![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/scr1.jpg)
 
 The output of this example program shoud be:
 
