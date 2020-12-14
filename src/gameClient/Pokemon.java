@@ -35,7 +35,6 @@ public class Pokemon {
 		}
 		return ans;
 	}
-
 	public edge_data get_edge() {return _edge;}
 	public void set_edge(edge_data _edge) {this._edge = _edge;}
 	public Point3D getLocation() { return _pos;}
@@ -47,16 +46,14 @@ public class Pokemon {
 	public void setFrom(int from) {this.from = from;}
 	public int getTo() {return to;}
 	public void setTo(int from) {this.to = from;}
-
 	public double getWorth() {
 		return worth;
 	}
-
 	public void setWorth(double worth) {
 		this.worth = worth;
 	}
 
-//	@Override
+	//	@Override
 //	public String toString() {
 //		return "Pokemon{" +
 //				"_edge=" + _edge +

@@ -1,13 +1,19 @@
 package gameClient;
 
-import api.*;
+import api.directed_weighted_graph;
+import api.edge_data;
+import api.geo_location;
+import api.node_data;
 import gameClient.util.Point3D;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Agent {
-
+		public static final double EPS = 0.0001;
+		private static int _count = 0;
+		private static int _seed = 3331;
 		private int _id;
 		private geo_location _pos;
 		private double _speed;
@@ -16,9 +22,9 @@ public class Agent {
 		private directed_weighted_graph _gg;
 		private Pokemon _curr_fruit;
 		private long _sg_dt;
+		private Queue<node_data> queue;
 		private double _value;
-		List<node_data> path = new ArrayList<>();
-
+		
 		
 		public Agent(directed_weighted_graph g, int start_node) {
 			_gg = g;
@@ -27,6 +33,7 @@ public class Agent {
 			_pos = _curr_node.getLocation();
 			_id = -1;
 			setSpeed(0);
+			queue = new LinkedList<>();
 		}
 		public void update(String json) {
 			JSONObject line;
@@ -55,7 +62,6 @@ public class Agent {
 		}
 		//@Override
 		public int getSrcNode() {return this._curr_node.getKey();}
-
 		public String toJSON() {
 			int d = this.getNextNode();
 			String ans = "{\"Agent\":{"
@@ -70,7 +76,6 @@ public class Agent {
 			return ans;	
 		}
 		private void setMoney(double v) {_value = v;}
-	
 		public boolean setNextNode(int dest) {
 			boolean ans = false;
 			int src = this._curr_node.getKey();
@@ -97,18 +102,12 @@ public class Agent {
 		public int getID() {
 			return this._id;
 		}
-	
 		public geo_location getLocation() {
 			return _pos;
 		}
-
-		
 		public double getValue() {
 			return this._value;
 		}
-
-
-
 		public int getNextNode() {
 			int ans = -2;
 			if(this._curr_edge==null) {
@@ -118,11 +117,9 @@ public class Agent {
 			}
 			return ans;
 		}
-
 		public double getSpeed() {
 			return this._speed;
 		}
-
 		public void setSpeed(double v) {
 			this._speed = v;
 		}
@@ -149,7 +146,6 @@ public class Agent {
 			}
 			this.set_sg_dt(ddt);
 		}
-		
 		public edge_data get_curr_edge() {
 			return this._curr_edge;
 		}
@@ -159,13 +155,5 @@ public class Agent {
 		public void set_sg_dt(long _sg_dt) {
 			this._sg_dt = _sg_dt;
 		}
-
-		public List<edge_data> getPathAsEdges(){
-			List<edge_data> edges = new ArrayList<>();
-			for(int i=0 ; i < path.size()-1 ; i++){
-				edge_data e = new EdgeData(path.get(i).getKey(), path.get(i+1).getKey(), 0);
-				edges.add(e);
-			}
-			return edges;
-		}
-}
+		public Queue<node_data> Q(){return queue;}
+	}

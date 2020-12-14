@@ -29,6 +29,7 @@ public class Arena {
 	private List<String> _info;
 	private final dw_graph_algorithms _algo;
 	public static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
+	public static HashMap<Integer, HashMap<Integer, graph_data >> _graphData = new HashMap<>();
 	HashMap<Integer, Pokemon> map = new HashMap<>();
 
 	//========================= CONSTRUCTORS ===========================
@@ -45,7 +46,6 @@ public class Arena {
 
 		_pokemons = json2Pokemons(game.getPokemons());
 		initAgents();
-
 		exportJsonToFile("GameJSON", game.toString());
 		exportJsonToFile("GameGraph", game.getGraph());
 		exportJsonToFile("GameAgents", game.getAgents());
@@ -212,15 +212,12 @@ public class Arena {
 
 	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
 	public void setGraph(directed_weighted_graph g) {this._graph =g;}
-
 	public List<Agent> JsonToAgents() {
 		return _agents;
 	}
 	public List<Pokemon> getPokemons() {return _pokemons;}
 	public directed_weighted_graph getGraph() {return _graph;}
 	public List<String> get_info() { return _info;}
-
-
 	public void moveAgents() {
 		_agents = getAgents(_game.move());
 
@@ -272,7 +269,6 @@ public class Arena {
 		System.out.println("============= end ==============");
 		return paths.get(id).get(1).getKey();
 	}
-
 	private void findWorthOfAllPokemons(Agent ag) {
 		int id = ag.getID();
 		double min_val = 100, min_dist = 100, max_val = -100, max_dist = -100;
@@ -310,7 +306,6 @@ public class Arena {
 			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
 	}
-
 	private boolean available(Pokemon p, Agent a) {
 		for(Agent ag : _agents){
 			if(a.getID()!=ag.getID() && paths.containsKey(ag.getID())) {
@@ -322,7 +317,6 @@ public class Arena {
 		}
 		return true;
 	}
-
 	private double totalDistanceToPokemon(Agent ag, Pokemon p) {
 		double extra1 = ag.getLocation().distance(_graph.getNode(ag.getSrcNode()).getLocation());
 		double extra2 = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
@@ -332,6 +326,5 @@ public class Arena {
 		double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
 		return _algo.shortestPathDist(n.getKey(), p.getFrom()) + extra;
 	}
-
 
 }
