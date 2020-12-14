@@ -29,7 +29,6 @@ public class Arena {
 	private List<String> _info;
 	private final dw_graph_algorithms _algo;
 	public static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
-	public static HashMap<Integer, HashMap<Integer, graph_data >> _graphData = new HashMap<>();
 	HashMap<Integer, Pokemon> map = new HashMap<>();
 
 	//========================= CONSTRUCTORS ===========================

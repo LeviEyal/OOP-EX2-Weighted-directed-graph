@@ -29,7 +29,7 @@ public class Ex2 implements Runnable{
         System.out.println(_game);
         int ind=0, dt=100;
         while(_game.isRunning()) {
-                //_ar.moveAgents();
+                _ar.moveAgents();
             try {
                 if(ind%1==0) {
 //                    _gui.revalidate();
