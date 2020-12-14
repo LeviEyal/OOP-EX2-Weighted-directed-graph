@@ -227,9 +227,7 @@ public class Arena {
 		this.setPokemons(json2Pokemons(_game.getPokemons()));
 
 		for(Agent ag : _agents) {
-			int id = ag.getID();
 			int src = ag.getSrcNode();
-			double v = ag.getValue();
 			if(!ag.isMoving()) {
 				int dest = nextNode(ag, src);
 				_game.chooseNextEdge(ag.getID(), dest);
@@ -267,6 +265,7 @@ public class Arena {
 		}
 		List<node_data> path = _algo.shortestPath(src, chosen.getFrom());
 		path.add(_graph.getNode(chosen.getTo()));
+
 		paths.put(id, new ArrayList<>(path));
 //		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+ag.path);
 		System.out.println("============= end ==============");
@@ -305,6 +304,7 @@ public class Arena {
 			System.out.println(distRange.getPortion(p.getMin_dist()));
 			double val = valuesRange.getPortion(p.getValue()) * 100;
 			double dist = 100 - (distRange.getPortion(p.getMin_dist()) * 100);
+
 			int area = (p.getFrom()/(_graph.nodeSize()/_agents.size()) == id)? 100 : 0;
 			p.setWorth(1*val + 1*dist);
 			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());

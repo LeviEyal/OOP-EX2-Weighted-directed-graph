@@ -208,7 +208,7 @@ public class MyPanel extends JPanel{
         int r = (int)(0.009 * this.getHeight());
         Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/node.png"));
         if(show_nodes.isSelected()) {
-//            g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
+            g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
             g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
             g.fill3DRect((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r, true);
         }
