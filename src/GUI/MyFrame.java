@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -17,6 +19,8 @@ import javax.swing.border.EmptyBorder;
  */
 public class MyFrame extends javax.swing.JFrame {
 
+    int scenario_num = 0;
+    long id = -1;
     int px, py;
     Arena _ar;
     double time;
@@ -43,41 +47,56 @@ public class MyFrame extends javax.swing.JFrame {
     public static JCheckBox show_nodes = new JCheckBox("nodes",true);
     public static JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers",true);
     public static JCheckBox show_pokemons_values = new JCheckBox("pokemons values",false);
+    private JPanel intro = new javax.swing.JPanel();
+    private JLabel selectScLBL = new javax.swing.JLabel();
+    private TextField id_field = new java.awt.TextField();
+    private JComboBox<String> sc_selector = new javax.swing.JComboBox<>();
+    private JButton playBTN = new javax.swing.JButton();
+    private JLabel enter_ID_LBL = new javax.swing.JLabel();
 
     /**
      * Creates new form MainMenu
      */
-    public MyFrame(Arena ar) {
-        _ar = ar;
+    public MyFrame() {
+        super("PokemonCatcher v1.0");
         initComponents();
+    }
+
+    public void initFrame(Arena ar){
+        _ar = ar;
+        MyPanel panel = new MyPanel();
+        panel.update(_ar);
+        this.add(panel, BorderLayout.CENTER);
     }
 
     private void initComponents() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000,700);
+        this.setPreferredSize(new Dimension(1000,500));
         this.setLayout(new BorderLayout());
+        this.setLocationByPlatform(true);
+        this.setUndecorated(true);
+        this.setVisible(true);
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pokeball.png"));
+        this.setIconImage(icon);
 
         otherComponents();
-
-        MyPanel panel = new MyPanel();
-        panel.setPreferredSize(new Dimension(800,500));
-        panel.update(_ar);
-        this.add(panel, BorderLayout.CENTER);
+//        introPanel();
 
         getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
         ComponentResizer cr = new ComponentResizer();
         cr.registerComponent(this);
         pack();
-        this.setVisible(true);
     }
+
 
     @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
-        otherComponents();
+//        otherComponents();
     }
 
     private void fetchData() {
+        if(Ex2._game == null) return;
         try {
             JSONObject line = new JSONObject(Ex2._game.toString());
             JSONObject ttt = line.getJSONObject("GameServer");
@@ -120,10 +139,6 @@ public class MyFrame extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jScrollPane2 = new JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-
-        setLocationByPlatform(true);
-        setUndecorated(true);
-        setLayout(new BorderLayout());
 
         //================================ HEADER =================================
         Header.setBackground(color_header);

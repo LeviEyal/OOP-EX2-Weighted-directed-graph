@@ -22,34 +22,37 @@ import java.util.*;
 public class Arena {
 
 	public static final double EPS1 = 0.001, EPS2=EPS1*EPS1;
-	private final game_service _game;
+	private game_service _game;
 	private directed_weighted_graph _graph;
 	private List<Agent> _agents = new ArrayList<>();
 	private List<Pokemon> _pokemons;
 	private List<String> _info;
-	private final dw_graph_algorithms _algo;
+	private dw_graph_algorithms _algo;
 	public static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
 	HashMap<Integer, Pokemon> map = new HashMap<>();
 
 	//========================= CONSTRUCTORS ===========================
 
 	public Arena(game_service game) {
-		_info = new ArrayList<>();
-		_game = game;
-		_graph = graphJsonToGraph(game.getGraph());
-		System.out.println(_graph);
+		if(game != null){
+			_info = new ArrayList<>();
+			_game = game;
+			_graph = graphJsonToGraph(game.getGraph());
+			System.out.println(_graph);
 
-		_algo = new DWGraph_Algo();
-		_algo.init(_graph);
-		System.out.println("is connected: "+_algo.isConnected());
+			_algo = new DWGraph_Algo();
+			_algo.init(_graph);
+			System.out.println("is connected: "+_algo.isConnected());
 
-		_pokemons = json2Pokemons(game.getPokemons());
-		initAgents();
+			_pokemons = json2Pokemons(game.getPokemons());
+			initAgents();
 
-		exportJsonToFile("GameJSON", game.toString());
-		exportJsonToFile("GameGraph", game.getGraph());
-		exportJsonToFile("GameAgents", game.getAgents());
-		exportJsonToFile("GamePokemons", game.getPokemons());
+			exportJsonToFile("GameJSON", game.toString());
+			exportJsonToFile("GameGraph", game.getGraph());
+			exportJsonToFile("GameAgents", game.getAgents());
+			exportJsonToFile("GamePokemons", game.getPokemons());
+		}
+
 	}
 
 	//========================== JSON CONVERTING ==============================
