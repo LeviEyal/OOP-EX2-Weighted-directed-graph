@@ -16,8 +16,6 @@ import javax.swing.*;
  */
 public class MyFrame extends javax.swing.JFrame {
 
-    int scenario_num = 0;
-    long id = -1;
     int px, py;
     Arena _ar;
     double time;
@@ -31,15 +29,18 @@ public class MyFrame extends javax.swing.JFrame {
             new JLabel(),
             new JLabel()
     };
+    MyPanel gamePanel = new MyPanel();
+    EntrancePanel entrancePanel = new EntrancePanel();
+    JPanel gameOverPanel;
     private static boolean sideMenuOpen = true;
     private static final Color color_header = new Color(219, 4, 4);
     private static final Color color_leftMenu = new Color(0, 0, 0);
     private static final Color color_page = new Color(150, 150, 150);
     private static final Color color_hoverHeader = new Color(255, 255, 255);
     private static final Color color_hoverMenu = new Color(255, 0, 0);
-    private static final Color color_sideMenu = new Color(177, 255, 159);
+    private static final Color color_sideMenu = new Color(255, 255, 255, 106);
     private static final Color color_chosenMenu = color_sideMenu;
-    private static final Color color_left_menu_line = new Color(150, 150, 150);
+    private static final Color color_left_menu_line = new Color(255, 255, 255);
     public static JCheckBox show_edges = new JCheckBox("edges",true);
     public static JCheckBox show_nodes = new JCheckBox("nodes",true);
     public static JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers",true);
@@ -59,11 +60,10 @@ public class MyFrame extends javax.swing.JFrame {
         this.initComponents();
     }
 
-    public void initFrame(Arena ar){
+    public void InitGamePanel(Arena ar){
         _ar = ar;
-        MyPanel panel = new MyPanel();
-        panel.update(_ar);
-        this.add(panel, BorderLayout.CENTER);
+        gamePanel.update(_ar);
+        this.add(gamePanel, BorderLayout.CENTER);
     }
 
     private void initComponents() {
@@ -77,26 +77,39 @@ public class MyFrame extends javax.swing.JFrame {
         this.setIconImage(icon);
 
         this.addOtherComponents();
+//        this.addGameOverPanel();
         this.addEntrancePanel();
 
-        this.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
-        ComponentResizer cr = new ComponentResizer();
-        cr.registerComponent(this);
+        setWindowResizable(true);
         this.pack();
     }
 
-    private void addEntrancePanel() {
-        EntrancePanel panel = new EntrancePanel();
-        this.add(panel, BorderLayout.CENTER);
+    private void addGameOverPanel() {
+        gameOverPanel = new JPanel();
+        gameOverPanel.setVisible(true);
+        gameOverPanel.setPreferredSize(new Dimension(100,100));
+        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background2.png"));
+        gameOverPanel.getGraphics().drawImage(img, 0,0, this);
+        gameOverPanel.setBackground(Color.GREEN);
+        this.add(gameOverPanel, BorderLayout.CENTER);
     }
 
+    private void addEntrancePanel() {
+        this.getContentPane().add(entrancePanel, BorderLayout.CENTER);
+    }
+
+    public void setWindowResizable(boolean b){
+        if(!b) return;
+        this.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
+        ComponentResizer cr = new ComponentResizer();
+        cr.registerComponent(this);
+    }
 
     @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
-        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background.png"));
-        g.drawImage(img, 0,0,null);
-//        otherComponents();
+//        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background.png"));
+//        g.drawImage(img, 0,0,null);
     }
 
     private void fetchData() {
@@ -362,31 +375,6 @@ public class MyFrame extends javax.swing.JFrame {
         jLabel1.setText("Settings");
         jLabel2.setText("Help");
 
-//        javax.swing.GroupLayout menuHideLayout = new javax.swing.GroupLayout(menuHide);
-//        menuHide.setLayout(menuHideLayout);
-//        menuHideLayout.setHorizontalGroup(
-//                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                        .addGroup(menuHideLayout.createSequentialGroup()
-//                                .addContainerGap()
-//                                .addGroup(menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-//                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
-//        );
-//        menuHideLayout.setVerticalGroup(
-//                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                        .addGroup(menuHideLayout.createSequentialGroup()
-//                                .addGap(69, 69, 69)
-//                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                                .addGap(18, 18, 18)
-//                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                                .addContainerGap(309, Short.MAX_VALUE))
-//        );
-
-
-//        t = new JLabel();
-//        t.setText("ttl: "+ time +"");
-
-//        show_nodes.setSelected(true);
         t.setPreferredSize(new Dimension(250,100));
 
         fetchData();
@@ -535,4 +523,23 @@ public class MyFrame extends javax.swing.JFrame {
     private javax.swing.JLabel settingsBTN;
     private JPanel settingsPNL;
 
+    public void showPanel(int p) {
+        switch (p) {
+            case 0 -> {
+                entrancePanel.setVisible(true);
+                gamePanel.setVisible(false);
+//                gameOverPanel.setVisible(false);
+            }
+            case 1 -> {
+                entrancePanel.setVisible(false);
+                gamePanel.setVisible(true);
+//                gameOverPanel.setVisible(false);
+            }
+            case 2 -> {
+                entrancePanel.setVisible(false);
+                gamePanel.setVisible(false);
+//                gameOverPanel.setVisible(true);
+            }
+        }
+    }
 }

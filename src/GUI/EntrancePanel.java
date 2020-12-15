@@ -2,6 +2,7 @@ package GUI;
 
 import api.game_service;
 import gameClient.Arena;
+import gameClient.Ex2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,22 +11,31 @@ import java.awt.event.ActionListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
 
-public class EntrancePanel {
+public class EntrancePanel extends JPanel {
 
-    public static game_service _game;
-    static Arena _ar;
-    static MyFrame _mainFrame;
-    private static long id = -1;
-    private static int level = 0;
-    private JPanel intro = new javax.swing.JPanel();
     private JLabel select_level_LBL = new javax.swing.JLabel();
     private TextField id_field = new java.awt.TextField();
     private JComboBox<String> level_selector = new javax.swing.JComboBox<>();
     private JButton playBTN = new javax.swing.JButton();
     private JLabel enter_ID_LBL = new javax.swing.JLabel();
-    private static boolean isClicked = true;
 
     public EntrancePanel() {
+        super();
+        initComponents();
+        setVisible(true);
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D)g;
+        super.paintComponent(g);
+        int w = this.getWidth();
+        int h = this.getHeight();
+        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background2.png"));
+        g2.drawImage(img, 0,0, w, h, this);
+    }
+
+    public void initComponents(){
         select_level_LBL.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         select_level_LBL.setText("Select level:");
 
@@ -33,7 +43,7 @@ public class EntrancePanel {
             @Override
             public void textValueChanged(TextEvent e) {
                 try {
-                    id  = Long.parseLong(id_field.getText());
+                    Ex2.id  = Long.parseLong(id_field.getText());
                     playBTN.setEnabled(true);
                 }catch (Exception ex){
                     playBTN.setEnabled(false);
@@ -46,8 +56,7 @@ public class EntrancePanel {
         level_selector.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                level = level_selector.getSelectedIndex();
-                System.out.println(level);
+                Ex2.level = level_selector.getSelectedIndex();
             }
         });
 
@@ -56,7 +65,7 @@ public class EntrancePanel {
         playBTN.setEnabled(false);
         playBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                isClicked = true;
+                Ex2.isClicked = true;
                 System.out.println("starting to play!");
             }
         });
@@ -64,8 +73,8 @@ public class EntrancePanel {
         enter_ID_LBL.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         enter_ID_LBL.setText("Enter your ID: ");
 
-        javax.swing.GroupLayout introLayout = new javax.swing.GroupLayout(intro);
-        intro.setLayout(introLayout);
+        javax.swing.GroupLayout introLayout = new javax.swing.GroupLayout(this);
+        this.setLayout(introLayout);
         introLayout.setHorizontalGroup(
                 introLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(introLayout.createSequentialGroup()

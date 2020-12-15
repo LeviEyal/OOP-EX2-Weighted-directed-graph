@@ -103,8 +103,6 @@ public class MyPanel extends JPanel{
         Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background.png"));
         g2.drawImage(img, 0,0, w, h, this);
 
-//        g2.clearRect(0, 0, w-100, h-100);
-
         fetchData();
         t.setText("Level: "+ level +" Timer: "+ time+"/"+duration+" Grade: "+grade+" Moves: "+moves+"/"+duration*10+"     Display:");
 //        MyFrame.t.setText("Level: "+ level +"Timer: "+ time+"   Grade: "+grade+"Moves: "+moves+"     Display:");
@@ -118,7 +116,6 @@ public class MyPanel extends JPanel{
         drawGraph(g2);
         drawAgents(g2);
         drawPokemons(g2);
-//        drawInfo(g2);
     }
 
     private void fetchData() {
@@ -136,14 +133,6 @@ public class MyPanel extends JPanel{
         }
     }
 
-    private void drawInfo(Graphics2D g) {
-        List<String> str = _ar.get_info();
-        String dt = "none";
-        for(int i=0; i<str.size(); i++) {
-            g.drawString(str.get(i)+" dt: "+dt,100,60+i*20);
-        }
-
-    }
     private void drawGraph(Graphics2D g) {
         directed_weighted_graph gg = _ar.getGraph();
         g.setStroke(new BasicStroke(2));
@@ -195,7 +184,7 @@ public class MyPanel extends JPanel{
             int r = (int)(0.03 * this.getHeight());
             if(c!=null) {
                 geo_location fp = _w2f.world2frame(c);
-                Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pokeball.png"));
+                Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/POKEBALL.gif"));
                 g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
                 g.drawString(""+ag.getID(), (int)fp.x()-2*r, (int)fp.y()-2*r);
             }
@@ -224,7 +213,6 @@ public class MyPanel extends JPanel{
         geo_location d0 = _w2f.world2frame(d);
 
         g.drawLine((int)s0.x(), (int)s0.y(), (int)d0.x(), (int)d0.y());
-        //	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
     }
 
 }
