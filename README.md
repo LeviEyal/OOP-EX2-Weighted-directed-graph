@@ -58,6 +58,13 @@ The output of this example program shoud be:
     2
     [#0 , #1 , #2 ]
 
+## Project structure
+![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/Package%20gameClient.png)
+
+## Screeenshots
+![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/scr2.jpg)
+![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/scr3.jpg)
+
 ## Algorithms used:
 For those three mentioned operations i used some variations of the BFS algorithm.
 
