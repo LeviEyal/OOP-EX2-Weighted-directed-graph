@@ -8,10 +8,7 @@ import org.json.JSONObject;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -59,7 +56,7 @@ public class MyFrame extends javax.swing.JFrame {
      */
     public MyFrame() {
         super("PokemonCatcher v1.0");
-        initComponents();
+        this.initComponents();
     }
 
     public void initFrame(Arena ar){
@@ -79,19 +76,26 @@ public class MyFrame extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pokeball.png"));
         this.setIconImage(icon);
 
-        otherComponents();
-//        introPanel();
+        this.addOtherComponents();
+        this.addEntrancePanel();
 
-        getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
+        this.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
         ComponentResizer cr = new ComponentResizer();
         cr.registerComponent(this);
-        pack();
+        this.pack();
+    }
+
+    private void addEntrancePanel() {
+        EntrancePanel panel = new EntrancePanel();
+        this.add(panel, BorderLayout.CENTER);
     }
 
 
     @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
+        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background.png"));
+        g.drawImage(img, 0,0,null);
 //        otherComponents();
     }
 
@@ -108,7 +112,7 @@ public class MyFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    private void otherComponents() {
+    private void addOtherComponents() {
         Header = new JPanel();
         iconMinMaxclose = new JPanel();
         minimizePNL = new JPanel();
