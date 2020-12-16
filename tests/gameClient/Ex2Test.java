@@ -4,12 +4,12 @@ import api.directed_weighted_graph;
 import api.game_service;
 import api.node_data;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 class Ex2Test {
+    private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
     private game_service _game;
     private directed_weighted_graph _graph;
@@ -20,11 +20,11 @@ class Ex2Test {
     private static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
     private HashMap<Integer, Pokemon> map = new HashMap<>();
 
-    private String _pathFolder = "jsonsFiles";
-    private String _fileAgents = "/GameAgents.json";
-    private String __fileGraph = "/GameGraph.json";
-    private String __fileGame = "/GameJSON.json";
-    private String __filePokemons = "/GamePokemons.json";
+    private String _pathFolder = con.PATH_FOLDER;
+    private String _fileAgents = con.Agents;
+    private String __fileGraph = con.GameGraph;
+    private String __fileGame = con.Game;
+    private String __filePokemons = con.Pokemons;
     private String _jsonAgents;
     private String _jsonGraph;
     private String _jsonPokemons;

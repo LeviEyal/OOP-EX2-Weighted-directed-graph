@@ -10,8 +10,7 @@ public class EdgeLocation implements edge_location {
     private double ratio;
     /**
      * Returns the edge on which the location is.
-     *
-     * @return
+     * @return edge - edge data between src and dest.
      */
     @Override
     public edge_data getEdge() {
@@ -20,8 +19,7 @@ public class EdgeLocation implements edge_location {
 
     /**
      * Returns the relative ration [0,1] of the location between src and dest.
-     *
-     * @return
+     * @return ratio
      */
     @Override
     public double getRatio() {

@@ -6,20 +6,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AgentTest {
+    private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
     private String[] _array = _func.getArrayOfScenariosPath();
-    private List<Pokemon> _pokemonsList;
-    private String _fileAgents = "/GameAgents.json";
-    private String __fileGraph = "/GameGraph.json";
-    Pokemon _pokemon ;
+
+    private Pokemon _pokemon ;
     private List<Agent> _agents = new ArrayList<>();
     private directed_weighted_graph _graph;
+
+    private String _fileAgents = con.Agents;
+    private String __fileGraph = con.GameGraph;
+
 
 
     @Test

@@ -8,7 +8,6 @@ import gameClient.util.Point3D;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class FunctionForTests {
+    private Config con = new Config();
     public static HashMap<Integer, HashMap<Integer, graph_data >> _graphData = new HashMap<>();
     private directed_weighted_graph _graph;
     private List<Agent> _agents = new ArrayList<>();

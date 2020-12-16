@@ -1,10 +1,8 @@
 package gameClient;
 
-
 import Server.Game_Server_Ex2;
 import api.*;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArenaTest {
+    private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
     private game_service _game;
     private directed_weighted_graph _graph;
@@ -23,24 +22,25 @@ class ArenaTest {
     private static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
     private HashMap<Integer, Pokemon> map = new HashMap<>();
 
-    private String _pathFolder = "jsonsFiles";
-    private String _fileAgents = "/GameAgents.json";
-    private String __fileGraph = "/GameGraph.json";
-    private String __fileGame = "/GameJSON.json";
-    private String __filePokemons = "/GamePokemons.json";
+    private String _pathFolder = con.PATH_FOLDER;
+    private String _fileAgents = con.Agents;
+    private String _fileGraph = con.GameGraph;
+    private String _fileGame = con.Game;
+    private String _filePokemons = con.Pokemons;
     private String _jsonAgents;
     private String _jsonGraph;
     private String _jsonPokemons;
     private String[] _array = _func.getArrayOfScenariosPath();
 
     private final long id = 1111111111;
+
     @Test
     void constructor() {
         int i = 0;
         for (String str : _array){
              _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-             _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+             _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
             Arena a = new Arena(_game);
@@ -53,9 +53,9 @@ class ArenaTest {
             assertEquals(a.getGraph().toString(),_graph.toString());
             assertEquals(a.getPokemons(),_pokemons);
             assertTrue(new File(_pathFolder + _fileAgents).isFile());
-            assertTrue(new File(_pathFolder + __fileGraph).isFile());
-            assertTrue(new File(_pathFolder + __fileGame).isFile());
-            assertTrue(new File(_pathFolder + __filePokemons).isFile());
+            assertTrue(new File(_pathFolder + _fileGraph).isFile());
+            assertTrue(new File(_pathFolder + _fileGame).isFile());
+            assertTrue(new File(_pathFolder + _filePokemons).isFile());
         }
     }
 
@@ -64,8 +64,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -85,8 +85,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -109,8 +109,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -132,8 +132,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -155,8 +155,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -178,8 +178,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -201,8 +201,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);
@@ -233,8 +233,8 @@ class ArenaTest {
         int i = 0;
         for (String str : _array){
             _jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + __filePokemons);
+            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonPokemons = _func.readJsonFromFileAndGetAsString(str + _filePokemons);
 
             _game = Game_Server_Ex2.getServer(i++);
             _game.login(id);

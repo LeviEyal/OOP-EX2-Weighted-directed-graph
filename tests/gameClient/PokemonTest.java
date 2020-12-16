@@ -1,18 +1,20 @@
 package gameClient;
+
 import api.*;
 import gameClient.util.Point3D;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PokemonTest {
+
+    private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
     private String[] _array = _func.getArrayOfScenariosPath();
     private List<Pokemon> _pokemonsList;
-    private String _fileName = "/GamePokemons.json";
-    Pokemon _pokemon ;
+    private String _fileName = con.Pokemons;
+    private Pokemon _pokemon ;
 
     @Test
     void constructor() {
