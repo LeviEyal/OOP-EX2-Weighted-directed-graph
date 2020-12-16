@@ -2,12 +2,14 @@ package gameClient;
 
 import api.*;
 import gameClient.util.Point3D;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AgentTest {
     private FunctionForTests _func = new FunctionForTests();
@@ -400,23 +402,87 @@ class AgentTest {
 
     @Test
     void update() {
+        for (String str : _array){
+            String jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
+            String jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
+            _graph = _func.graphJsonToGraph(jsonGraph);
+            //_agents = _func.getAgents(jsonAgents,_graph);
+            try {
+                JSONObject ttt = new JSONObject(jsonAgents);
+                JSONArray ags = ttt.getJSONArray("Agents");
+                for(int i = 0; i < ags.length(); i++) {
+                    Agent c = new Agent(_graph ,0);
+                    String ans = "{\"Agent\":{"
+                            + "\"id\":"+0+","
+                            + "\"value\":"+0.0+","
+                            + "\"src\":"+9+","
+                            + "\"dest\":"+-1+","
+                            + "\"speed\":"+1.0+","
+                            + "\"pos\":\"35.19597880064568,32.10154696638656,0.0\""
+                            + "}"
+                            + "}";
+                    c.update(ans);
+                    assertEquals(c.toString(),ans);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
     }
-/*
-    @Test
-    void toJSON() {
-    }
+
 
     @Test
     void isMoving() {
+        for (String str : _array){
+            String jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
+            String jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
+            _graph = _func.graphJsonToGraph(jsonGraph);
+            try {
+                JSONObject ttt = new JSONObject(jsonAgents);
+                JSONArray ags = ttt.getJSONArray("Agents");
+                for(int i = 0; i < ags.length(); i++) {
+                    Agent c = new Agent(_graph ,0);
+                    assertFalse(c.isMoving());
+                    //assertFalse(c.isMoving());
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    @Test
-    void testToString() {
-    }
 
     @Test
     void toString1() {
+        for (String str : _array){
+            String jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
+            String jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
+            _graph = _func.graphJsonToGraph(jsonGraph);
+            //_agents = _func.getAgents(jsonAgents,_graph);
+            try {
+                JSONObject ttt = new JSONObject(jsonAgents);
+                JSONArray ags = ttt.getJSONArray("Agents");
+                for(int i = 0; i < ags.length(); i++) {
+                    Agent c = new Agent(_graph ,0);
+                    String ans = "{\"Agent\":{"
+                            + "\"id\":"+0+","
+                            + "\"value\":"+0.0+","
+                            + "\"src\":"+9+","
+                            + "\"dest\":"+-1+","
+                            + "\"speed\":"+1.0+","
+                            + "\"pos\":\"35.19597880064568,32.10154696638656,0.0\""
+                            + "}"
+                            + "}";
+                    c.update(ans);
+                    assertEquals(c.toString(),ans);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-     */
 }

@@ -53,7 +53,8 @@ public class Agent {
 		public int getNextNode() {
 			int ans = -2;
 			if(this._curr_edge==null) {
-				ans = -1;}
+				ans = -1;
+			}
 			else {
 				ans = this._curr_edge.getDest();
 			}
@@ -137,7 +138,7 @@ public class Agent {
 				line = new JSONObject(json);
 				JSONObject ttt = line.getJSONObject("Agent");
 				int id = ttt.getInt("id");
-				if(id==this.getID() || this.getID() == -1) {
+				if(id == this.getID() || this.getID() == -1) {
 					if(this.getID() == -1) {_id = id;}
 					double speed = ttt.getDouble("speed");
 					String p = ttt.getString("pos");

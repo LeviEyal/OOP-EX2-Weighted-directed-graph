@@ -169,6 +169,31 @@ public class FunctionForTests {
         return ga.getGraph();
     }
 
-
-
+    private ArrayList<Pokemon> json2Pokemons2(String json) {
+        ArrayList<Pokemon> ans = new ArrayList<>();
+        try {
+            JSONObject ttt = new JSONObject(json);
+            JSONArray ags = ttt.getJSONArray("Pokemons");
+            for(int i=0; i<ags.length(); i++) {
+                JSONObject pp = ags.getJSONObject(i);
+                JSONObject pk = pp.getJSONObject("Pokemon");
+                int t = pk.getInt("type");
+                double v = pk.getDouble("value");
+                String p = pk.getString("pos");
+                Pokemon f = new Pokemon(new Point3D(p), t, v, 0, null);
+                ans.add(f);
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ans.sort((o1, o2) -> {
+            if(o1.getValue() > o2.getValue())
+                return 1;
+            else if(o1.getValue() < o2.getValue())
+                return -1;
+            else return 0;
+        });
+        return ans;
+    }
 }

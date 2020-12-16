@@ -37,11 +37,11 @@ public class Arena {
 		_info = new ArrayList<>();
 		_game = game;
 		_graph = graphJsonToGraph(game.getGraph());
-		System.out.println(_graph);
+		//System.out.println(_graph);
 
 		_algo = new DWGraph_Algo();
 		_algo.init(_graph);
-		System.out.println("is connected: "+_algo.isConnected());
+		//System.out.println("is connected: "+_algo.isConnected());
 
 		_pokemons = json2Pokemons(game.getPokemons());
 		initAgents();
@@ -80,13 +80,12 @@ public class Arena {
 		}
 		catch (JSONException e) {e.printStackTrace();}
 	}
-
 	public List<Agent> getAgents(String aa) {
 		ArrayList<Agent> ans = new ArrayList<>();
 		try {
 			JSONObject ttt = new JSONObject(aa);
 			JSONArray ags = ttt.getJSONArray("Agents");
-			for(int i=0;i<ags.length();i++) {
+			for(int i = 0; i < ags.length(); i++) {
 				Agent c = new Agent(_graph ,0);
 				c.update(ags.get(i).toString());
 				ans.add(c);
@@ -130,7 +129,6 @@ public class Arena {
 		});
 		return ans;
 	}
-
 	private void exportJsonToFile(String path, String json) {
 		try {
 			String j = (new JSONObject(json)).toString(4);
@@ -155,7 +153,6 @@ public class Arena {
 			}
 		}
 	}
-
 	private static boolean isOnEdge(geo_location p, geo_location src, geo_location dest ) {
 		boolean ans = false;
 		double dist = src.distance(dest);
@@ -208,14 +205,26 @@ public class Arena {
 
 	//=========================== GETTERS & SETTERS ================================
 
-	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
-	public void setGraph(directed_weighted_graph g) {this._graph =g;}
 	public List<Agent> JsonToAgents() {
 		return _agents;
 	}
+	public void JsonToAgents(List<Agent> _agents) {
+		this._agents = _agents;
+	}
+
 	public List<Pokemon> getPokemons() {return _pokemons;}
+	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
+
 	public directed_weighted_graph getGraph() {return _graph;}
+	public void setGraph(directed_weighted_graph g) {this._graph =g;}
+
 	public List<String> get_info() { return _info;}
+	public void set_info(List<String> _info) {
+		this._info = _info;
+	}
+
+	//=========================== GETTERS & SETTERS ================================
+
 	public void moveAgents() {
 		_agents = getAgents(_game.move());
 
@@ -324,5 +333,4 @@ public class Arena {
 		double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
 		return _algo.shortestPathDist(n.getKey(), p.getFrom()) + extra;
 	}
-
 }
