@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -30,54 +29,91 @@ public class MyFrame extends javax.swing.JFrame {
             new JLabel(),
             new JLabel()
     };
+    MyPanel gamePanel = new MyPanel();
+    EntrancePanel entrancePanel = new EntrancePanel();
+    JPanel gameOverPanel;
     private static boolean sideMenuOpen = true;
     private static final Color color_header = new Color(219, 4, 4);
     private static final Color color_leftMenu = new Color(0, 0, 0);
     private static final Color color_page = new Color(150, 150, 150);
     private static final Color color_hoverHeader = new Color(255, 255, 255);
     private static final Color color_hoverMenu = new Color(255, 0, 0);
-    private static final Color color_sideMenu = new Color(177, 255, 159);
+    private static final Color color_sideMenu = new Color(255, 255, 255, 106);
     private static final Color color_chosenMenu = color_sideMenu;
-    private static final Color color_left_menu_line = new Color(150, 150, 150);
+    private static final Color color_left_menu_line = new Color(255, 255, 255);
     public static JCheckBox show_edges = new JCheckBox("edges",true);
     public static JCheckBox show_nodes = new JCheckBox("nodes",true);
     public static JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers",true);
     public static JCheckBox show_pokemons_values = new JCheckBox("pokemons values",false);
+    private JPanel intro = new javax.swing.JPanel();
+    private JLabel selectScLBL = new javax.swing.JLabel();
+    private TextField id_field = new java.awt.TextField();
+    private JComboBox<String> sc_selector = new javax.swing.JComboBox<>();
+    private JButton playBTN = new javax.swing.JButton();
+    private JLabel enter_ID_LBL = new javax.swing.JLabel();
 
     /**
      * Creates new form MainMenu
      */
-    public MyFrame(Arena ar) {
+    public MyFrame() {
+        super("PokemonCatcher v1.0");
+        this.initComponents();
+    }
+
+    public void InitGamePanel(Arena ar){
         _ar = ar;
-        initComponents();
+        gamePanel.update(_ar);
+        this.add(gamePanel, BorderLayout.CENTER);
     }
 
     private void initComponents() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000,700);
+        this.setPreferredSize(new Dimension(1000,500));
         this.setLayout(new BorderLayout());
+        this.setLocationByPlatform(true);
+        this.setUndecorated(true);
+        this.setVisible(true);
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pokeball.png"));
+        this.setIconImage(icon);
 
-        otherComponents();
+        this.addOtherComponents();
+//        this.addGameOverPanel();
+        this.addEntrancePanel();
 
-        MyPanel panel = new MyPanel();
-        panel.setPreferredSize(new Dimension(800,500));
-        panel.update(_ar);
-        this.add(panel, BorderLayout.CENTER);
+        setWindowResizable(true);
+        this.pack();
+    }
 
-        getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
+    private void addGameOverPanel() {
+        gameOverPanel = new JPanel();
+        gameOverPanel.setVisible(true);
+        gameOverPanel.setPreferredSize(new Dimension(100,100));
+        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background2.png"));
+        gameOverPanel.getGraphics().drawImage(img, 0,0, this);
+        gameOverPanel.setBackground(Color.GREEN);
+        this.add(gameOverPanel, BorderLayout.CENTER);
+    }
+
+    private void addEntrancePanel() {
+        this.getContentPane().add(entrancePanel, BorderLayout.CENTER);
+    }
+
+    public void setWindowResizable(boolean b){
+        if(!b) return;
+        this.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
         ComponentResizer cr = new ComponentResizer();
         cr.registerComponent(this);
-        pack();
-        this.setVisible(true);
     }
 
     @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
-        otherComponents();
+//        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/background.png"));
+//        g.drawImage(img, 0,0,null);
     }
 
     private void fetchData() {
+        if(Ex2._game == null) return;
         try {
             JSONObject line = new JSONObject(Ex2._game.toString());
             JSONObject ttt = line.getJSONObject("GameServer");
@@ -89,7 +125,7 @@ public class MyFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    private void otherComponents() {
+    private void addOtherComponents() {
         Header = new JPanel();
         iconMinMaxclose = new JPanel();
         minimizePNL = new JPanel();
@@ -120,10 +156,6 @@ public class MyFrame extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jScrollPane2 = new JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-
-        setLocationByPlatform(true);
-        setUndecorated(true);
-        setLayout(new BorderLayout());
 
         //================================ HEADER =================================
         Header.setBackground(color_header);
@@ -343,31 +375,6 @@ public class MyFrame extends javax.swing.JFrame {
         jLabel1.setText("Settings");
         jLabel2.setText("Help");
 
-//        javax.swing.GroupLayout menuHideLayout = new javax.swing.GroupLayout(menuHide);
-//        menuHide.setLayout(menuHideLayout);
-//        menuHideLayout.setHorizontalGroup(
-//                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                        .addGroup(menuHideLayout.createSequentialGroup()
-//                                .addContainerGap()
-//                                .addGroup(menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-//                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
-//        );
-//        menuHideLayout.setVerticalGroup(
-//                menuHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                        .addGroup(menuHideLayout.createSequentialGroup()
-//                                .addGap(69, 69, 69)
-//                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                                .addGap(18, 18, 18)
-//                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                                .addContainerGap(309, Short.MAX_VALUE))
-//        );
-
-
-//        t = new JLabel();
-//        t.setText("ttl: "+ time +"");
-
-//        show_nodes.setSelected(true);
         t.setPreferredSize(new Dimension(250,100));
 
         fetchData();
@@ -516,4 +523,23 @@ public class MyFrame extends javax.swing.JFrame {
     private javax.swing.JLabel settingsBTN;
     private JPanel settingsPNL;
 
+    public void showPanel(int p) {
+        switch (p) {
+            case 0 -> {
+                entrancePanel.setVisible(true);
+                gamePanel.setVisible(false);
+//                gameOverPanel.setVisible(false);
+            }
+            case 1 -> {
+                entrancePanel.setVisible(false);
+                gamePanel.setVisible(true);
+//                gameOverPanel.setVisible(false);
+            }
+            case 2 -> {
+                entrancePanel.setVisible(false);
+                gamePanel.setVisible(false);
+//                gameOverPanel.setVisible(true);
+            }
+        }
+    }
 }

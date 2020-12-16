@@ -17,7 +17,7 @@ public class Ex2 implements Runnable{
     @Override
     public void run() {
         long id = 1000;
-        int scenario_num = 22;
+        int scenario_num = 11;
         _game = Game_Server_Ex2.getServer(scenario_num);
         _game.login(id);
 

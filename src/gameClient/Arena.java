@@ -41,7 +41,7 @@ public class Arena {
 
 		_algo = new DWGraph_Algo();
 		_algo.init(_graph);
-		//System.out.println("is connected: "+_algo.isConnected());
+		System.out.println("is connected: "+_algo.isConnected());
 
 		_pokemons = json2Pokemons(game.getPokemons());
 		initAgents();
