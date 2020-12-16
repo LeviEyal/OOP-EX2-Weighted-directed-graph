@@ -22,12 +22,12 @@ import java.util.*;
 public class Arena {
 
 	public static final double EPS1 = 0.001, EPS2=EPS1*EPS1;
-	private final game_service _game;
+	private game_service _game;
 	private directed_weighted_graph _graph;
 	private List<Agent> _agents = new ArrayList<>();
 	private List<Pokemon> _pokemons;
 	private List<String> _info;
-	private final dw_graph_algorithms _algo;
+	private dw_graph_algorithms _algo;
 	public static HashMap<Integer, ArrayList<node_data>> paths = new HashMap<>();
 	HashMap<Integer, Pokemon> map = new HashMap<>();
 
@@ -41,7 +41,7 @@ public class Arena {
 
 		_algo = new DWGraph_Algo();
 		_algo.init(_graph);
-		System.out.println("is connected: "+_algo.isConnected());
+		//System.out.println("is connected: "+_algo.isConnected());
 
 		_pokemons = json2Pokemons(game.getPokemons());
 		initAgents();
@@ -49,6 +49,25 @@ public class Arena {
 		exportJsonToFile("GameGraph", game.getGraph());
 		exportJsonToFile("GameAgents", game.getAgents());
 		exportJsonToFile("GamePokemons", game.getPokemons());
+		if(game != null){
+			_info = new ArrayList<>();
+			_game = game;
+			_graph = graphJsonToGraph(game.getGraph());
+			//System.out.println(_graph);
+
+			_algo = new DWGraph_Algo();
+			_algo.init(_graph);
+			//System.out.println("is connected: "+_algo.isConnected());
+
+			_pokemons = json2Pokemons(game.getPokemons());
+			initAgents();
+
+			exportJsonToFile("GameJSON", game.toString());
+			exportJsonToFile("GameGraph", game.getGraph());
+			exportJsonToFile("GameAgents", game.getAgents());
+			exportJsonToFile("GamePokemons", game.getPokemons());
+		}
+
 	}
 
 	//========================== JSON CONVERTING ==============================
@@ -143,7 +162,7 @@ public class Arena {
 
 	//================================ EDGES ====================================
 
-	public static void updateEdge(Pokemon fr, directed_weighted_graph g) {
+	private static void updateEdge(Pokemon fr, directed_weighted_graph g) {
 		for (node_data v : g.getV()) {
 			for (edge_data e : g.getE(v.getKey())) {
 				boolean f = isOnEdge(fr.getLocation(), e, fr.getType(), g);
@@ -231,9 +250,7 @@ public class Arena {
 		this.setPokemons(json2Pokemons(_game.getPokemons()));
 
 		for(Agent ag : _agents) {
-			int id = ag.getID();
 			int src = ag.getSrcNode();
-			double v = ag.getValue();
 			if(!ag.isMoving()) {
 				int dest = nextNode(ag, src);
 				_game.chooseNextEdge(ag.getID(), dest);
@@ -271,6 +288,7 @@ public class Arena {
 		}
 		List<node_data> path = _algo.shortestPath(src, chosen.getFrom());
 		path.add(_graph.getNode(chosen.getTo()));
+
 		paths.put(id, new ArrayList<>(path));
 //		System.out.println("agent:"+ag.getID()+" chose:"+chosen.get_edge()+" path: "+ag.path);
 		System.out.println("============= end ==============");
@@ -308,6 +326,7 @@ public class Arena {
 			System.out.println(distRange.getPortion(p.getMin_dist()));
 			double val = valuesRange.getPortion(p.getValue()) * 100;
 			double dist = 100 - (distRange.getPortion(p.getMin_dist()) * 100);
+
 			int area = (p.getFrom()/(_graph.nodeSize()/_agents.size()) == id)? 100 : 0;
 			p.setWorth(1*val + 1*dist);
 			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());

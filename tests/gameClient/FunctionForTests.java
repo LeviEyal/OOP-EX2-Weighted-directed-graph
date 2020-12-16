@@ -168,7 +168,6 @@ public class FunctionForTests {
         ga.load("jsonsFiles/graph.json");
         return ga.getGraph();
     }
-
     private ArrayList<Pokemon> json2Pokemons2(String json) {
         ArrayList<Pokemon> ans = new ArrayList<>();
         try {
