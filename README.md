@@ -1,69 +1,55 @@
-![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/pokemon-logo.png)
 
-**wolcome to EX0!**
+![enter image description here](https://i.ibb.co/pnTVKDV/pokemon-logo.png)
 
 This is the first assignment in the course OOP at the Ariel University to year 2020.
 
-> Made by Eyal Levi
->
-> GitHub page: [github.com/LeviEyal](github.com/LeviEyal)
+## made by:
+
+> Eyal Levi - GitHub page: [github.com/LeviEyal](github.com/LeviEyal)
+> Moti Dahari - GitHub page: [github.com/motidahari](github.com/motidahari)
 
 
 ## Subject: Unweighted - undirected graph
 
-The project contains classes represents an  unweighted - undirected graph and its vertices. it also contains the class Graph_Algo that holds methods that perform some operations on a given garph.
-
-For full documentation visit:
-https://levieyal.github.io/Unweighted-Undirected-Graph/
 
 ## The operations:
 
- - isConnected: check if the given graph is connected, means that for any vertex their is a path to every other vertex.
- - shortestPathDist: for some two given vertices, compute the size of the shortest path from one to another.
-- shortestPath: for some two given vertices, return a list holds the vertices of the shortest path from one to another.
 
 ## How to use?
+clone the project to your computer and run the file Ex2.jar by the command `java -jar Ex2` on the same folder as Ex2.jar is on.
+the main window of the game will sow up:
+![enter image description here](https://i.paste.pics/8d6a502dc74bf155be1503eed6825784.png)
+Enter your ID and select the level you will to play and click the "play!" button.
 
- Create some Test class in the package ex0 and run the code below (**for example**):
- 
-
-    public static void main(String[] args) {  
-  
-	    graph graph = new Graph_DS();  
-	    for (int i = 0; i <= 4; i++) {  
-	        node_data node = new NodeData();  
-	        graph.addNode(node);  
-	    }  
-	    graph.connect(4, 1);  
-	    graph.connect(1, 3);  
-	    graph.connect(2, 3);  
-	    graph.connect(4, 3);  
-	    graph.connect(0, 4);  
-	    graph.connect(0, 1);  
-	    graph.connect(1, 2);  
-	    Graph_Algo ga = new Graph_Algo();  
-	    ga.init(graph);  
-  
-	    System.out.println(ga.isConnected());  
-	    System.out.println(ga.shortestPathDist(0, 2));  
-	    System.out.println(ga.shortestPath(0, 2));  
-    }
-The code creates the graph:
-
-![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/scr1.jpg)
-
-The output of this example program shoud be:
-
-    true
-    2
-    [#0 , #1 , #2 ]
-
+Another way to login to the game is by the command `java -jar Ex2.jar 123456789 7` where 123456789 is your id and 7 is the level you want to play. 
 ## Project structure
-![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/Package%20gameClient.png)
+
+**package api**
+this package contains all the implementation of the graph.
+it represent the graph as adjacency list using hash maps.
+ the package files list:
+
+![img](https://i.paste.pics/5f95e39de017ccee8c03ba3cd987aef1.png)
+package diagram:
+![enter image description here](https://i.paste.pics/a8d3d2e83353cacd8c4e194380f84700.png)
+**package gameClient**
+this package contains all the implementation of the graph.
+it represent the graph as adjacency list using hash maps.
+ the package files list:
+
+![img](https://i.paste.pics/55a1ddffc1ba282d8a18dd8a31683f2f.png)
+**package GUI**
+this package contains all the implementation of the graph.
+it represent the graph as adjacency list using hash maps.
+ the package files list:
+
+![img](https://i.paste.pics/3aa139a8e89a9512d4f70cb083f083b1.png)
+package diagram:
+![enter image description here](https://i.paste.pics/128b76d9b16269bd03d89e0b686b9c72.png)
 
 ## Screeenshots
-![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/scr2.jpg)
-![enter image description here](https://github.com/LeviEyal/OOP-EX2-Weighted-directed-graph/blob/master/screenshots/scr3.jpg)
+![enter image description here](https://i.paste.pics/8c4d6603dc096cc880bdcb3f72a546db.png)
+![enter image description here](https://i.paste.pics/409c154b914c8923b082081188273f73.png)
 
 ## Algorithms used:
 For those three mentioned operations i used some variations of the BFS algorithm.
