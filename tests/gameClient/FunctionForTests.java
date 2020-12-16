@@ -1,6 +1,9 @@
 package gameClient;
 
-import api.*;
+import api.DWGraph_Algo;
+import api.directed_weighted_graph;
+import api.dw_graph_algorithms;
+import api.node_data;
 import gameClient.util.Point3D;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -143,5 +146,29 @@ public class FunctionForTests {
         }
         return array;
     }
+    public List<Agent> getAgents(String json, directed_weighted_graph g){
+        ArrayList<Agent> ans = new ArrayList<>();
+        try {
+            JSONObject ttt = new JSONObject(json);
+            JSONArray ags = ttt.getJSONArray("Agents");
+            for(int i=0;i<ags.length();i++) {
+                Random r = new Random();
+                r.nextInt(g.nodeSize());
+                //System.out.println(r.nextInt(g.nodeSize()));
+                Agent c = new Agent(g ,r.nextInt(g.nodeSize()));
+                ans.add(c);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return ans;
+    }
+    public directed_weighted_graph graphJsonToGraph(String json){
+        dw_graph_algorithms ga = new DWGraph_Algo();
+        ga.load("jsonsFiles/graph.json");
+        return ga.getGraph();
+    }
+
+
 
 }

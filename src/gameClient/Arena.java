@@ -96,7 +96,12 @@ public class Arena {
 		}
 		return ans;
 	}
-
+	private directed_weighted_graph graphJsonToGraph(String json){
+		dw_graph_algorithms ga = new DWGraph_Algo();
+		exportJsonToFile("graph",_game.getGraph());
+		ga.load("jsonsFiles/graph.json");
+		return ga.getGraph();
+	}
 	private ArrayList<Pokemon> json2Pokemons(String json) {
 		ArrayList<Pokemon> ans = new ArrayList<>();
 		try {
@@ -126,12 +131,6 @@ public class Arena {
 		return ans;
 	}
 
-	private directed_weighted_graph graphJsonToGraph(String json){
-		dw_graph_algorithms ga = new DWGraph_Algo();
-		exportJsonToFile("graph",_game.getGraph());
-		ga.load("jsonsFiles/graph.json");
-		return ga.getGraph();
-	}
 	private void exportJsonToFile(String path, String json) {
 		try {
 			String j = (new JSONObject(json)).toString(4);

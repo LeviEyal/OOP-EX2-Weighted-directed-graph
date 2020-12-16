@@ -1,6 +1,5 @@
 package gameClient;
 import api.*;
-//import api.edge_data;
 import gameClient.util.Point3D;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,6 @@ class PokemonTest {
     private List<Pokemon> _pokemonsList;
     private String _fileName = "/GamePokemons.json";
     Pokemon _pokemon ;
-
 
     @Test
     void constructor() {
@@ -120,9 +118,10 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
+                double Min_dist = p.getMin_dist();
                 p.setMin_dist(Integer.MIN_VALUE);
                 assertEquals(p.getMin_dist(), Integer.MIN_VALUE);
-                assertNotEquals(p.getMin_dist(), Integer.MAX_VALUE);
+                assertNotEquals(p.getMin_dist(), Min_dist);
 
             }
         }
@@ -147,8 +146,9 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
+                int from = p.getFrom();
                 p.setType(Integer.MAX_VALUE);
-                assertNotEquals(p.getType(), -100);
+                assertNotEquals(p.getType(), from);
                 assertEquals(p.getType(), Integer.MAX_VALUE);
             }
         }
@@ -173,9 +173,10 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
+                int to = p.getTo();
                 p.setTo(Integer.MAX_VALUE);
                 assertEquals(p.getTo(), Integer.MAX_VALUE);
-                assertNotEquals(p.getTo(), Integer.MIN_VALUE);
+                assertNotEquals(p.getTo(), to);
             }
         }
     }
@@ -198,8 +199,9 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
+                double worth = p.getWorth();
                 p.setWorth(Integer.MAX_VALUE);
-                assertNotEquals(p.getWorth(), Integer.MIN_VALUE);
+                assertNotEquals(p.getWorth(), worth);
                 assertEquals(p.getWorth(), Integer.MAX_VALUE);
             }
         }
