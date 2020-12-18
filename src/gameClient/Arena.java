@@ -34,15 +34,30 @@ public class Arena {
 	//========================= CONSTRUCTORS ===========================
 
 	public Arena(game_service game) {
+		_info = new ArrayList<>();
+		_game = game;
+		_graph = graphJsonToGraph(game.getGraph());
+		//System.out.println(_graph);
+
+		_algo = new DWGraph_Algo();
+		_algo.init(_graph);
+		//System.out.println("is connected: "+_algo.isConnected());
+
+		_pokemons = json2Pokemons(game.getPokemons());
+		initAgents();
+		exportJsonToFile("GameJSON", game.toString());
+		exportJsonToFile("GameGraph", game.getGraph());
+		exportJsonToFile("GameAgents", game.getAgents());
+		exportJsonToFile("GamePokemons", game.getPokemons());
 		if(game != null){
 			_info = new ArrayList<>();
 			_game = game;
 			_graph = graphJsonToGraph(game.getGraph());
-			System.out.println(_graph);
+			//System.out.println(_graph);
 
 			_algo = new DWGraph_Algo();
 			_algo.init(_graph);
-			System.out.println("is connected: "+_algo.isConnected());
+			//System.out.println("is connected: "+_algo.isConnected());
 
 			_pokemons = json2Pokemons(game.getPokemons());
 			initAgents();
@@ -84,13 +99,12 @@ public class Arena {
 		}
 		catch (JSONException e) {e.printStackTrace();}
 	}
-
 	public List<Agent> getAgents(String aa) {
 		ArrayList<Agent> ans = new ArrayList<>();
 		try {
 			JSONObject ttt = new JSONObject(aa);
 			JSONArray ags = ttt.getJSONArray("Agents");
-			for(int i=0;i<ags.length();i++) {
+			for(int i = 0; i < ags.length(); i++) {
 				Agent c = new Agent(_graph ,0);
 				c.update(ags.get(i).toString());
 				ans.add(c);
@@ -100,7 +114,12 @@ public class Arena {
 		}
 		return ans;
 	}
-
+	private directed_weighted_graph graphJsonToGraph(String json){
+		dw_graph_algorithms ga = new DWGraph_Algo();
+		exportJsonToFile("graph",_game.getGraph());
+		ga.load("jsonsFiles/graph.json");
+		return ga.getGraph();
+	}
 	private ArrayList<Pokemon> json2Pokemons(String json) {
 		ArrayList<Pokemon> ans = new ArrayList<>();
 		try {
@@ -129,13 +148,6 @@ public class Arena {
 		});
 		return ans;
 	}
-
-	private directed_weighted_graph graphJsonToGraph(String json){
-		dw_graph_algorithms ga = new DWGraph_Algo();
-		exportJsonToFile("graph",_game.getGraph());
-		ga.load("jsonsFiles/graph.json");
-		return ga.getGraph();
-	}
 	private void exportJsonToFile(String path, String json) {
 		try {
 			String j = (new JSONObject(json)).toString(4);
@@ -150,7 +162,7 @@ public class Arena {
 
 	//================================ EDGES ====================================
 
-	public static void updateEdge(Pokemon fr, directed_weighted_graph g) {
+	private static void updateEdge(Pokemon fr, directed_weighted_graph g) {
 		for (node_data v : g.getV()) {
 			for (edge_data e : g.getE(v.getKey())) {
 				boolean f = isOnEdge(fr.getLocation(), e, fr.getType(), g);
@@ -160,7 +172,6 @@ public class Arena {
 			}
 		}
 	}
-
 	private static boolean isOnEdge(geo_location p, geo_location src, geo_location dest ) {
 		boolean ans = false;
 		double dist = src.distance(dest);
@@ -213,16 +224,25 @@ public class Arena {
 
 	//=========================== GETTERS & SETTERS ================================
 
-	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
-	public void setGraph(directed_weighted_graph g) {this._graph =g;}
-
 	public List<Agent> JsonToAgents() {
 		return _agents;
 	}
-	public List<Pokemon> getPokemons() {return _pokemons;}
-	public directed_weighted_graph getGraph() {return _graph;}
-	public List<String> get_info() { return _info;}
+	public void JsonToAgents(List<Agent> _agents) {
+		this._agents = _agents;
+	}
 
+	public List<Pokemon> getPokemons() {return _pokemons;}
+	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
+
+	public directed_weighted_graph getGraph() {return _graph;}
+	public void setGraph(directed_weighted_graph g) {this._graph =g;}
+
+	public List<String> get_info() { return _info;}
+	public void set_info(List<String> _info) {
+		this._info = _info;
+	}
+
+	//=========================== GETTERS & SETTERS ================================
 
 	public void moveAgents() {
 		_agents = getAgents(_game.move());
@@ -274,7 +294,6 @@ public class Arena {
 		System.out.println("============= end ==============");
 		return paths.get(id).get(1).getKey();
 	}
-
 	private void findWorthOfAllPokemons(Agent ag) {
 		int id = ag.getID();
 		double min_val = 100, min_dist = 100, max_val = -100, max_dist = -100;
@@ -307,24 +326,23 @@ public class Arena {
 			System.out.println(distRange.getPortion(p.getMin_dist()));
 			double val = valuesRange.getPortion(p.getValue()) * 100;
 			double dist = 100 - (distRange.getPortion(p.getMin_dist()) * 100);
+
 			int area = (p.getFrom()/(_graph.nodeSize()/_agents.size()) == id)? 100 : 0;
-			p.setWorth(0.3*val + 0.7*dist);
+			p.setWorth(1*val + 1*dist);
 			System.out.println("Candidate distance: " + p.getMin_dist() + ", "+p.getValue()+ ", "+p.getWorth());
 		}
 	}
-
 	private boolean available(Pokemon p, Agent a) {
 		for(Agent ag : _agents){
 			if(a.getID()!=ag.getID() && paths.containsKey(ag.getID())) {
 				for(node_data n : paths.get(ag.getID())){
-					if(nodeToPokemonDistance(n, p) < totalDistanceToPokemon(a, p)-3)
+					if(nodeToPokemonDistance(n, p) < totalDistanceToPokemon(a, p))
 						return false;
 				}
 			}
 		}
 		return true;
 	}
-
 	private double totalDistanceToPokemon(Agent ag, Pokemon p) {
 		double extra1 = ag.getLocation().distance(_graph.getNode(ag.getSrcNode()).getLocation());
 		double extra2 = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
