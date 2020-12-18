@@ -89,6 +89,6 @@ public class EdgeData implements edge_data {
 
     @Override
     public String toString() {
-        return "("+getSrc()+"->"+getDest()+")"+"w="+getWeight()+" ";
+        return "("+getSrc()+"->"+getDest()+")"+"w="+getWeight();
     }
 }
