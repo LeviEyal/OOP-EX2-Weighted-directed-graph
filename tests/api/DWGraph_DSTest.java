@@ -5,7 +5,7 @@ import gameClient.FunctionForTests;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+//FDGFDFGDG
 class DWGraph_DSTest {
     private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
