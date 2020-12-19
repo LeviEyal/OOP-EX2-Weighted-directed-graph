@@ -99,7 +99,7 @@ class ArenaTest {
             _pokemons = _func.json2Pokemons(_jsonPokemons);
 
             a.getAgents(_jsonAgents);
-            a.JsonToAgents(_agents);
+
             assertEquals(_agents,a.JsonToAgents());
         }
     }

@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 class NodeDataTest {
     node_data[] arrayNodes;
+
     @Test
     void constructor() {
         arrayNodes = new NodeData[100];

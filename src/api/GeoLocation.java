@@ -50,4 +50,9 @@ public class GeoLocation implements geo_location {
         double t3 = Math.pow(p.z() - g.z(),2);
         return Math.sqrt(t1 +t2 +t3);
     }
+
+    @Override
+    public String toString() {
+        return "GeoLocation{p="+ p.x() +"," + p.y() +"," + p.z() +"}";
+    }
 }
