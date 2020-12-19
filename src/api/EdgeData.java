@@ -8,7 +8,10 @@ public class EdgeData implements edge_data {
     private double weight;
     private String info;
     private int tag;
-
+    /**
+     * constructor for EdgeData to create a new Edge
+     * @return none
+     */
     public EdgeData(int src, int dst, double weight) {
         this.src = src;
         this.dst = dst;
@@ -19,7 +22,6 @@ public class EdgeData implements edge_data {
 
     /**
      * The id of the source node of this edge.
-     *
      * @return src
      */
     @Override
@@ -29,7 +31,6 @@ public class EdgeData implements edge_data {
 
     /**
      * The id of the destination node of this edge
-     *
      * @return dst
      */
     @Override
@@ -47,7 +48,6 @@ public class EdgeData implements edge_data {
 
     /**
      * Returns the remark (meta data) associated with this edge.
-     *
      * @return info
      */
     @Override
@@ -57,7 +57,6 @@ public class EdgeData implements edge_data {
 
     /**
      * Allows changing the remark (meta data) associated with this edge.
-     *
      * @param s String
      */
     @Override
@@ -68,7 +67,6 @@ public class EdgeData implements edge_data {
     /**
      * Temporal data (aka color: e,g, white, gray, black)
      * which can be used be algorithms
-     *
      * @return tag
      */
     @Override
@@ -79,14 +77,16 @@ public class EdgeData implements edge_data {
     /**
      * This method allows setting the "tag" value for temporal marking an edge - common
      * practice for marking by algorithms.
-     *
      * @param t - the new value of the tag
      */
     @Override
     public void setTag(int t) {
         tag = t;
     }
-
+    /**
+     * Returns a string representation of this edge
+     * @return A string representation of this edge
+     */
     @Override
     public String toString() {
         return "("+getSrc()+"->"+getDest()+")"+"w="+getWeight();

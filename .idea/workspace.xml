@@ -5,6 +5,24 @@
       <artifact name="EX2:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated />
   </component>
@@ -14,14 +32,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="Manual merging Moti's changes to master">
-      <change afterPath="$PROJECT_DIR$/src/GUI/EntrancePanel.java" afterDir="false" />
+    <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="del">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jsonsFiles/GameAgents.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GameAgents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameGraph.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GameGraph.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jsonsFiles/GameJSON.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GameJSON.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GamePokemons.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GamePokemons.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/graph.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/DWGraph_Algo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/DWGraph_Algo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/EdgeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/EdgeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Arena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/DWGraph_DSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/DWGraph_DSTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/EdgeLocationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/FunctionForTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/NodeDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/NodeDataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/ArenaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/ArenaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/Ex2Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/FunctionForTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/graph_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/graph_data.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +92,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="cf.first.check.clang-format" value="false" />
@@ -74,25 +102,29 @@
     <property name="create.test.in.the.same.root" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="ReaderModeSettings">
     <option name="enabled" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
+    <key name="CreateTestDialog.RecentsKey">
       <recent name="api" />
+      <recent name="tests" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\happy\IdeaProjects\EX2" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\tests" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\libs" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\src\gameClient" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\data" />
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="api" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -102,36 +134,26 @@
       <recent name="C:\Users\happy\IdeaProjects\EX2\src\gameClient" />
       <recent name="C:\Users\happy\IdeaProjects\EX2" />
     </key>
-    <key name="MoveInnerDialog.RECENTS_KEY">
-      <recent name="api" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="api" />
       <recent name="" />
     </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="api" />
-      <recent name="tests" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\happy\IdeaProjects\EX2" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\tests" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\libs" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\src\gameClient" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\data" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="GUI" />
       <recent name="javaapplication1" />
     </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="api" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Ex2">
-    <configuration name="Ex2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="gameClient.Ex2" />
-      <module name="EX2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="gameClient.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.DWGraph_DSTest.constructor">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -143,18 +165,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AgentTest.constructor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AgentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="EX2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gameClient.*" />
+          <option name="PATTERN" value="api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="gameClient" />
       <option name="MAIN_CLASS_NAME" value="gameClient.AgentTest" />
-      <option name="METHOD_NAME" value="constructor" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -163,7 +184,7 @@
       <module name="EX2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gameClient.*" />
+          <option name="PATTERN" value="api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -174,11 +195,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DWGraph_DSTest.constructor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EX2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="api" />
+      <option name="MAIN_CLASS_NAME" value="api.DWGraph_DSTest" />
+      <option name="METHOD_NAME" value="constructor" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Ex2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="EX2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gameClient.*" />
+          <option name="PATTERN" value="api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -275,21 +312,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Ex2" />
       <item itemvalue="JAR Application.Ex2_Server_v0.12.jar" />
       <item itemvalue="JUnit.api in EX2" />
-      <item itemvalue="JUnit.AgentTest.constructor" />
+      <item itemvalue="JUnit.AgentTest" />
       <item itemvalue="JUnit.ArenaTest" />
       <item itemvalue="JUnit.Ex2Test" />
       <item itemvalue="JUnit.PokemonTest" />
+      <item itemvalue="JUnit.DWGraph_DSTest.constructor" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Ex2" />
+        <item itemvalue="JUnit.DWGraph_DSTest.constructor" />
+        <item itemvalue="JUnit.AgentTest" />
+        <item itemvalue="JUnit.ArenaTest" />
         <item itemvalue="JUnit.PokemonTest" />
         <item itemvalue="JUnit.Ex2Test" />
-        <item itemvalue="JUnit.ArenaTest" />
-        <item itemvalue="JUnit.AgentTest.constructor" />
       </list>
     </recent_temporary>
   </component>
@@ -333,6 +370,7 @@
       <workItem from="1608050875938" duration="283000" />
       <workItem from="1608051219579" duration="16437000" />
       <workItem from="1608277478968" duration="6711000" />
+      <workItem from="1608373338817" duration="2791000" />
     </task>
     <task id="LOCAL‎00001" summary=".">
       <created>1606722293476</created>
@@ -562,7 +600,13 @@
       <option name="presentableId" value="LOCAL‎00038" />
       <updated>1608276937330</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL‎00039" summary="del">
+      <created>1608373530734</created>
+      <option name="number" value="LOCAL‎00039" />
+      <option name="presentableId" value="LOCAL‎00039" />
+      <updated>1608373530734</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +661,38 @@
     <MESSAGE value="added entrance screen before game and some improvements" />
     <MESSAGE value="updating images" />
     <MESSAGE value="Eyal's last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Eyal's last commit" />
+    <MESSAGE value="del" />
+    <option name="LAST_COMMIT_MESSAGE" value="del" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2663" y="395" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608375221641">
+      <screen x="1920" y="6" width="1920" height="1040" />
+    </state>
+    <state x="2663" y="395" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608375221641" />
+    <state width="1877" height="94" key="GridCell.Tab.0.bottom" timestamp="1608376093406">
+      <screen x="1920" y="6" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="94" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093406" />
+    <state width="1877" height="94" key="GridCell.Tab.0.center" timestamp="1608376093406">
+      <screen x="1920" y="6" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="94" key="GridCell.Tab.0.center/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093406" />
+    <state width="1877" height="94" key="GridCell.Tab.0.left" timestamp="1608376093405">
+      <screen x="1920" y="6" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="94" key="GridCell.Tab.0.left/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093405" />
+    <state width="1877" height="94" key="GridCell.Tab.0.right" timestamp="1608376093406">
+      <screen x="1920" y="6" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="94" key="GridCell.Tab.0.right/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093406" />
+    <state x="2472" y="259" key="Vcs.Push.Dialog.v2" timestamp="1608373532902">
+      <screen x="1920" y="6" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="259" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608373532902" />
+    <state x="202" y="0" width="1595" height="794" maximized="true" key="dock-window-1" timestamp="1608374984763">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="202" y="0" width="1595" height="794" maximized="true" key="dock-window-1/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608374984763" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EX2$DWGraph_AlgoTest_shortestPathDist.ic" NAME="DWGraph_AlgoTest.shortestPathDist Coverage Results" MODIFIED="1606731629799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -8,6 +8,7 @@ import gameClient.util.Point3D;
 import org.json.JSONObject;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 public class Agent {
@@ -38,18 +39,17 @@ public class Agent {
 	}
 
 	//=========================== GETTERS & SETTERS ================================
+
 	public int getSrcNode() {return this._curr_node.getKey();}
 	public void setCurrNode(int src) {
 		this._curr_node = _gg.getNode(src);
 	}
-
 	public int getID() {
 		return this._id;
 	}
 	public void setID(int id) {
 		this._id = id;
 	}
-
 	public int getNextNode() {
 		int ans = -2;
 		if(this._curr_edge==null) {
@@ -69,40 +69,34 @@ public class Agent {
 		else {_curr_edge = null;}
 		return ans;
 	}
-
 	public double getSpeed() {
 		return this._speed;
 	}
 	public void setSpeed(double v) {
 		this._speed = v;
 	}
-
 	public double getValue() {
 		return this._value;
 	}
 	public void setMoney(double v) {_value = v;}
-
 	public Pokemon get_curr_fruit() {
 		return _curr_fruit;
 	}
 	public void set_curr_fruit(Pokemon curr_fruit) {
 		this._curr_fruit = curr_fruit;
 	}
-
 	public geo_location getLocation() {
 		return _pos;
 	}
 	public void setLocation(geo_location geo) {
 		this._pos = geo;
 	}
-
 	public edge_data get_curr_edge() {
 		return this._curr_edge;
 	}
 	public void set_curr_edge(edge_data _curr_edge) {
 		this._curr_edge = _curr_edge;
 	}
-
 	public long get_sg_dt() {
 		return _sg_dt;
 	}
@@ -126,11 +120,8 @@ public class Agent {
 		}
 		this.set_sg_dt(ddt);
 	}
-
 	public Queue<node_data> getQ(){return queue;}
 	public void setQ(Queue<node_data> queue){ this.queue = queue;}
-
-
 	public void update(String json) {
 		JSONObject line;
 		try {
@@ -181,5 +172,25 @@ public class Agent {
 		return ans;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Agent agent = (Agent) o;
+		return _id == agent._id &&
+				Double.compare(agent._speed, _speed) == 0 &&
+				_sg_dt == agent._sg_dt &&
+				Double.compare(agent._value, _value) == 0 &&
+				Objects.equals(_pos, agent._pos) &&
+				Objects.equals(_curr_edge, agent._curr_edge) &&
+				Objects.equals(_curr_node, agent._curr_node) &&
+				Objects.equals(_gg, agent._gg) &&
+				Objects.equals(_curr_fruit, agent._curr_fruit) &&
+				Objects.equals(queue, agent.queue);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(_id, _pos, _speed, _curr_edge, _curr_node, _gg, _curr_fruit, _sg_dt, queue, _value);
+	}
 }

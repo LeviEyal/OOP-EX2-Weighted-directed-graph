@@ -92,15 +92,8 @@ class ArenaTest {
             _game.login(id);
 
             Arena a = new Arena(_game);
-
-            _graph = _func.graphJsonToGraph(_jsonGraph);
-            _agents = _func.getAgents(_jsonAgents,_graph);
-            _pokemons = _func.json2Pokemons(_game.getPokemons());
-            _pokemons = _func.json2Pokemons(_jsonPokemons);
-
-            a.getAgents(_jsonAgents);
-
-            assertEquals(_agents,a.JsonToAgents());
+            List<Agent> a1 = a.getAgents(_jsonAgents);
+            assertEquals(a1,a.getAgents(_jsonAgents));
         }
     }
 

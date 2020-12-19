@@ -38,11 +38,9 @@ public class Arena {
 			_info = new ArrayList<>();
 			_game = game;
 			_graph = graphJsonToGraph(game.getGraph());
-			System.out.println(_graph);
 
 			_algo = new DWGraph_Algo();
 			_algo.init(_graph);
-			System.out.println("is connected: "+_algo.isConnected());
 
 			_pokemons = json2Pokemons(game.getPokemons());
 			initAgents();
@@ -336,4 +334,6 @@ public class Arena {
 		double extra = p.getLocation().distance(_graph.getNode(p.getFrom()).getLocation());
 		return _algo.shortestPathDist(n.getKey(), p.getFrom()) + extra;
 	}
+
+
 }

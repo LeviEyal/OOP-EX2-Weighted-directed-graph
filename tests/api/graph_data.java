@@ -1,4 +1,4 @@
-package gameClient;
+package api;
 
 import api.*;
 

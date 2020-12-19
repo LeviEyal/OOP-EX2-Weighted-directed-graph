@@ -119,9 +119,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * from source node to the destination node
      * @param src  - start node
      * @param dest - end (target) node
-     * @return double of the weights by the path from src to dest if there is no path from src to dest return -1
-     * @param src  - start node
-     * @param dest - end (target) node
      * @return t - the length of the path
      */
     @Override
@@ -217,7 +214,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 jsonArrEdges.add(je);
             }
         }
-       // System.out.println("json = " + json);
         try {
             Gson g = new Gson();
             File file = new File(file_name);

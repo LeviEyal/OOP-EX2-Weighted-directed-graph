@@ -20,7 +20,7 @@ class NodeDataTest {
 
     @Test
     void getKey() {
-
+        arrayNodes = new NodeData[100];
         for (int i = 0; i < 100; i++) {
             arrayNodes[i] = new NodeData(i);
             assertTrue(arrayNodes[i].getKey() == i);
@@ -86,7 +86,7 @@ class NodeDataTest {
             String str = "Boaz the egg and the brain fuck";
             arrayNodes[i].setInfo(str);
             assertFalse(arrayNodes[i].getInfo().equals(""));
-            assertFalse(arrayNodes[i].getInfo().equals(str));
+            assertTrue(arrayNodes[i].getInfo().equals(str));
 
         }
     }

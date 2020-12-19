@@ -2,7 +2,6 @@ package api;
 
 import gameClient.Agent;
 import gameClient.Pokemon;
-import gameClient.graph_data;
 import gameClient.util.Point3D;
 import org.json.JSONArray;
 import org.json.JSONException;

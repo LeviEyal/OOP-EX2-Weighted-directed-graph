@@ -1,9 +1,6 @@
 package gameClient;
 
-import api.DWGraph_Algo;
-import api.directed_weighted_graph;
-import api.dw_graph_algorithms;
-import api.node_data;
+import api.*;
 import gameClient.util.Point3D;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,14 +13,8 @@ import java.util.*;
 
 public class FunctionForTests {
     private Config con = new Config();
-    public static HashMap<Integer, HashMap<Integer, graph_data >> _graphData = new HashMap<>();
-    private directed_weighted_graph _graph;
-    private List<Agent> _agents = new ArrayList<>();
-    private List<Pokemon> _pokemons;
-    private List<String> _info;
-    private final dw_graph_algorithms _algo = new DWGraph_Algo();
+    public static HashMap<Integer, HashMap<Integer, graph_data>> _graphData = new HashMap<>();
     private String[] arrayOfScenariosPath = getArrayOfAllScenariosPath();
-
 
     //========================= CONSTRUCTORS ===========================
 
@@ -31,27 +22,10 @@ public class FunctionForTests {
         arrayOfScenariosPath = getArrayOfAllScenariosPath();
     }
 
-
     //=========================== GETTERS & SETTERS ================================
-
 
     public static HashMap<Integer, HashMap<Integer, graph_data>> get_graphData() {
         return _graphData;
-    }
-    public directed_weighted_graph get_graph() {
-        return _graph;
-    }
-    public List<Agent> get_agents() {
-        return _agents;
-    }
-    public List<Pokemon> get_pokemons() {
-        return _pokemons;
-    }
-    public List<String> get_info() {
-        return _info;
-    }
-    public dw_graph_algorithms get_algo() {
-        return _algo;
     }
     public String[] getArrayOfScenariosPath() {
         return arrayOfScenariosPath;
@@ -59,39 +33,6 @@ public class FunctionForTests {
 
     //=========================== GETTERS & SETTERS ================================
 
-    public boolean createNewTextFileFromString(String str, String nameFile) {
-        try {
-            FileWriter myWriter = new FileWriter(nameFile + ".txt");
-            myWriter.write(str);
-            myWriter.close();
-            System.out.println("Successfully wrote to the file "+ nameFile + ".txt" );
-            return true;
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public String getAllDataByTheGraph(directed_weighted_graph g) {
-        for (node_data v : g.getV()){
-            _graphData.put(v.getKey(),new HashMap<>());
-        }
-        for (node_data v : g.getV()){
-            for (node_data ni : g.getV()){
-                graph_data data = new graph_data(g, v.getKey(),ni.getKey());
-                _graphData.get(v.getKey()).put(ni.getKey(), data);
-            }
-        }
-        String str = "";
-        for (node_data v : g.getV()){
-            for (node_data ni : g.getV()){
-                str += v.getKey() + " --> " + ni.getKey() + "\n";
-                str += _graphData.get(v.getKey()).get(ni.getKey()).get_list() + "\n";
-                str += _graphData.get(v.getKey()).get(ni.getKey()).get_path() + "\n\n";
-            }
-        }
-        return str;
-    }
     public ArrayList<Pokemon> json2Pokemons(String json) {
         ArrayList<Pokemon> ans = new ArrayList<>();
         try {
@@ -167,32 +108,5 @@ public class FunctionForTests {
         dw_graph_algorithms ga = new DWGraph_Algo();
         ga.load("jsonsFiles/graph.json");
         return ga.getGraph();
-    }
-    private ArrayList<Pokemon> json2Pokemons2(String json) {
-        ArrayList<Pokemon> ans = new ArrayList<>();
-        try {
-            JSONObject ttt = new JSONObject(json);
-            JSONArray ags = ttt.getJSONArray("Pokemons");
-            for(int i=0; i<ags.length(); i++) {
-                JSONObject pp = ags.getJSONObject(i);
-                JSONObject pk = pp.getJSONObject("Pokemon");
-                int t = pk.getInt("type");
-                double v = pk.getDouble("value");
-                String p = pk.getString("pos");
-                Pokemon f = new Pokemon(new Point3D(p), t, v, 0, null);
-                ans.add(f);
-            }
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-        ans.sort((o1, o2) -> {
-            if(o1.getValue() > o2.getValue())
-                return 1;
-            else if(o1.getValue() < o2.getValue())
-                return -1;
-            else return 0;
-        });
-        return ans;
     }
 }
