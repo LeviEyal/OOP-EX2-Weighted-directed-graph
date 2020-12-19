@@ -15,11 +15,17 @@ class DWGraph_AlgoTest {
     static directed_weighted_graph g4 = new DWGraph_DS();
     static directed_weighted_graph g5 = new DWGraph_DS();
 
+    /**
+     * This functions create new graph with number of vertex by the parameter size
+     * */
     static void createG(int size, directed_weighted_graph g) {
         for(int i = 1; i <= size; i++){
             g.addNode(new NodeData(i));
         }
     }
+    /**
+     * This functions set Up new graphs with number of vertex by the parameter size
+     * */
     @BeforeAll
     static void setUp() {
         createG(10,g1);
@@ -80,7 +86,10 @@ class DWGraph_AlgoTest {
         g5.connect(3,1,5);
 
     }
-
+    /**
+     * We are tests all the graph in this class.
+     * This functions tests the isConnected function for the class DWGraph_DS
+     * */
     @Test
     void isConnected() {
         ga.init(g1);
@@ -100,7 +109,10 @@ class DWGraph_AlgoTest {
         System.out.println("g5 = " + ga.isConnected());
         assertTrue(ga.isConnected());
     }
-
+    /**
+     * We are tests all the graph in this class.
+     * This functions tests the shortestPathDistGraph1 function for the class DWGraph_DS
+     * */
     @Test
     void shortestPathDistGraph1() {
         ga.init(g1);
@@ -113,6 +125,10 @@ class DWGraph_AlgoTest {
         assertEquals(-1.0,ga.shortestPathDist(20,20));
         assertEquals(-1.0,ga.shortestPathDist(1,20));
     }
+    /**
+     * We are tests all the graph in this class.
+     * This functions tests the shortestPathDistGraph2 function for the class DWGraph_DS
+     * */
     @Test
     void shortestPathDistGraph2() {
         ga.init(g2);
@@ -129,7 +145,10 @@ class DWGraph_AlgoTest {
         assertEquals(5.0,ga.shortestPathDist(3,4));
         assertEquals(30.0,ga.shortestPathDist(10,6));
     }
-
+    /**
+     * We are tests all the graph in this class.
+     * This functions tests the shortestPathGraph1 function for the class DWGraph_DS
+     * */
     @Test
     void shortestPathGraph1() {
         ga.init(g1);
@@ -144,6 +163,11 @@ class DWGraph_AlgoTest {
         assertNull(ga.shortestPath(8,4));
         assertNull(ga.shortestPath(7,1));
     }
+
+    /**
+     * We are tests all the graph in this class.
+     * This functions tests the shortestPathGraph2 function for the class DWGraph_DS
+     * */
     @Test
     void shortestPathGraph2() {
         ga.init(g2);
@@ -161,7 +185,10 @@ class DWGraph_AlgoTest {
         assertNull(ga.shortestPath(6,4));
         assertNull(ga.shortestPath(6,5));
     }
-
+    /**
+     * We are tests all the graph in this class.
+     * This functions tests the save_Load function for the class DWGraph_DS
+     * */
     @Test
     void save_Load(){
         ga.init(g1);
@@ -177,13 +204,4 @@ class DWGraph_AlgoTest {
         }
     }
 
-    @Test
-    void t1(){
-        ga.load("data/A2");
-        System.out.println(ga.getGraph());
-        System.out.println("28 -> 29 : "+ga.shortestPath(28,29));
-        System.out.println("29 -> 28 : "+ga.shortestPath(29,28));
-        System.out.println("5 -> 29 : "+ga.shortestPath(5,29));
-//        System.out.println(ga.shortestPathDist(28,29));
-    }
 }

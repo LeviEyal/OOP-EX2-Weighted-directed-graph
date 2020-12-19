@@ -1,7 +1,6 @@
 package api;
 
-import gameClient.Agent;
-import gameClient.Pokemon;
+
 import gameClient.util.Point3D;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,107 +16,47 @@ public class FunctionForTests {
     private Config con = new Config();
     public static HashMap<Integer, HashMap<Integer, graph_data>> _graphData = new HashMap<>();
     private directed_weighted_graph _graph;
-    private List<Agent> _agents = new ArrayList<>();
-    private List<Pokemon> _pokemons;
-    private List<String> _info;
     private final dw_graph_algorithms _algo = new DWGraph_Algo();
     private String[] arrayOfScenariosPath = getArrayOfAllScenariosPath();
+    private HashMap<Integer,HashMap<Integer,graph_data>> graphData = new HashMap<Integer, HashMap<Integer, graph_data>>();
 
 
     //========================= CONSTRUCTORS ===========================
-
+    /**
+     * constructor function
+     * */
     public FunctionForTests(){
         arrayOfScenariosPath = getArrayOfAllScenariosPath();
     }
 
-
     //=========================== GETTERS & SETTERS ================================
-
-
-    public static HashMap<Integer, HashMap<Integer, graph_data>> get_graphData() {
-        return _graphData;
-    }
-    public directed_weighted_graph get_graph() {
-        return _graph;
-    }
-    public List<Agent> get_agents() {
-        return _agents;
-    }
-    public List<Pokemon> get_pokemons() {
-        return _pokemons;
-    }
-    public List<String> get_info() {
-        return _info;
-    }
-    public dw_graph_algorithms get_algo() {
-        return _algo;
-    }
+    /**
+     * This function return the array of the paths
+     * */
     public String[] getArrayOfScenariosPath() {
         return arrayOfScenariosPath;
     }
 
     //=========================== GETTERS & SETTERS ================================
-
+    /**
+     * This function receives a string that represents the content of the file that we want to export,
+     * and it receives the name of the file.
+     * The function creates a new file with the string
+     * */
     public boolean createNewTextFileFromString(String str, String nameFile) {
         try {
             FileWriter myWriter = new FileWriter(nameFile + ".txt");
             myWriter.write(str);
             myWriter.close();
-            System.out.println("Successfully wrote to the file "+ nameFile + ".txt" );
             return true;
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
             return false;
         }
     }
-    public String getAllDataByTheGraph(directed_weighted_graph g) {
-        for (node_data v : g.getV()){
-            _graphData.put(v.getKey(),new HashMap<>());
-        }
-        for (node_data v : g.getV()){
-            for (node_data ni : g.getV()){
-                graph_data data = new graph_data(g, v.getKey(),ni.getKey());
-                _graphData.get(v.getKey()).put(ni.getKey(), data);
-            }
-        }
-        String str = "";
-        for (node_data v : g.getV()){
-            for (node_data ni : g.getV()){
-                str += v.getKey() + " --> " + ni.getKey() + "\n";
-                str += _graphData.get(v.getKey()).get(ni.getKey()).get_list() + "\n";
-                str += _graphData.get(v.getKey()).get(ni.getKey()).get_path() + "\n\n";
-            }
-        }
-        return str;
-    }
-    public ArrayList<Pokemon> json2Pokemons(String json) {
-        ArrayList<Pokemon> ans = new ArrayList<>();
-        try {
-            JSONObject jsonOb = new JSONObject(json);
-            JSONArray ags = jsonOb.getJSONArray("Pokemons");
-            for(int i=0; i<ags.length(); i++) {
-                JSONObject pp = ags.getJSONObject(i);
-                JSONObject pk = pp.getJSONObject("Pokemon");
-                int t = pk.getInt("type");
-                double v = pk.getDouble("value");
-                String p = pk.getString("pos");
-                Pokemon f = new Pokemon(new Point3D(p), t, v, 0, null);
-                ans.add(f);
-            }
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-        ans.sort((o1, o2) -> {
-            if(o1.getValue() > o2.getValue())
-                return 1;
-            else if(o1.getValue() < o2.getValue())
-                return -1;
-            else return 0;
-        });
-        return ans;
-    }
+    /**
+     * This function receives a path of Json file and creates a string of the Json
+     * */
     public static String readJsonFromFileAndGetAsString(String path) {
         String str = "";
         try {
@@ -134,9 +73,15 @@ public class FunctionForTests {
         }
         return str;
     }
+    /**
+     * This function return path of a level
+     * */
     public String getPathAllScenario(int scenario) {
         return System.getProperty("user.dir") + "/tests/gameClient/scenarios/"+ scenario;
     }
+    /**
+     * This function return the array of the paths of the levels
+     * */
     public String[] getArrayOfAllScenariosPath() {
         String [] array = new String[0];
         for (int i = 0; i < 24; i++) {
@@ -145,53 +90,54 @@ public class FunctionForTests {
         }
         return array;
     }
-    public List<Agent> getAgents(String json, directed_weighted_graph g){
-        ArrayList<Agent> ans = new ArrayList<>();
-        try {
-            JSONObject ttt = new JSONObject(json);
-            JSONArray ags = ttt.getJSONArray("Agents");
-            for(int i=0;i<ags.length();i++) {
-                Random r = new Random();
-                r.nextInt(g.nodeSize());
-                //System.out.println(r.nextInt(g.nodeSize()));
-                Agent c = new Agent(g ,r.nextInt(g.nodeSize()));
-                ans.add(c);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return ans;
-    }
+    /**
+     * This function receives a string of Json and creates a graph from it
+     * */
     public directed_weighted_graph graphJsonToGraph(String json){
         dw_graph_algorithms ga = new DWGraph_Algo();
         ga.load("jsonsFiles/graph.json");
         return ga.getGraph();
     }
-    private ArrayList<Pokemon> json2Pokemons2(String json) {
-        ArrayList<Pokemon> ans = new ArrayList<>();
-        try {
-            JSONObject ttt = new JSONObject(json);
-            JSONArray ags = ttt.getJSONArray("Pokemons");
-            for(int i=0; i<ags.length(); i++) {
-                JSONObject pp = ags.getJSONObject(i);
-                JSONObject pk = pp.getJSONObject("Pokemon");
-                int t = pk.getInt("type");
-                double v = pk.getDouble("value");
-                String p = pk.getString("pos");
-                Pokemon f = new Pokemon(new Point3D(p), t, v, 0, null);
-                ans.add(f);
+    /**
+     * This function receives a graph and it returns all the information regarding the paths on the graph in HashMap
+     * */
+    public HashMap<Integer,HashMap<Integer,graph_data>> getGraphData(directed_weighted_graph g){
+        this._graph = g;
+        for (node_data v : g.getV()){
+            node_data newNode = new NodeData(v);
+            this.graphData.put(newNode.getKey(),new HashMap<>());
+        }
+        for (node_data v : g.getV()){
+            for (node_data ni : g.getV()){
+                graph_data GD = new graph_data(g,v.getKey(),ni.getKey());
+                graphData.get(v.getKey()).put(ni.getKey(),GD);
             }
         }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-        ans.sort((o1, o2) -> {
-            if(o1.getValue() > o2.getValue())
-                return 1;
-            else if(o1.getValue() < o2.getValue())
-                return -1;
-            else return 0;
-        });
-        return ans;
+        this.graphData = graphData;
+        return graphData;
     }
+    /**
+     * This function receives a graphData and print all the data
+     * */
+    public void PrintToString(HashMap<Integer,HashMap<Integer,graph_data>> graphData){
+        for (node_data v : _graph.getV()){
+            for (node_data ni : _graph.getV()){
+                System.out.println( graphData.get(v.getKey()).get(ni.getKey()).toString());
+            }
+        }
+    }
+    /**
+     * This function receives a graphData and returns string str the represent all the data by the graph
+     * */
+    public String getToString(HashMap<Integer,HashMap<Integer,graph_data>> graphData){
+        String str = "";
+        for (node_data v : _graph.getV()){
+            for (node_data ni : _graph.getV()){
+                str +=  graphData.get(v.getKey()).get(ni.getKey()).toString();
+            }
+        }
+        return str;
+    }
+
+
 }

@@ -17,7 +17,9 @@ public class FunctionForTests {
     private String[] arrayOfScenariosPath = getArrayOfAllScenariosPath();
 
     //========================= CONSTRUCTORS ===========================
-
+    /**
+     * constructor function
+     * */
     public FunctionForTests(){
         arrayOfScenariosPath = getArrayOfAllScenariosPath();
     }
@@ -27,12 +29,17 @@ public class FunctionForTests {
     public static HashMap<Integer, HashMap<Integer, graph_data>> get_graphData() {
         return _graphData;
     }
+    /**
+     * This function return the array of the paths
+     * */
     public String[] getArrayOfScenariosPath() {
         return arrayOfScenariosPath;
     }
 
     //=========================== GETTERS & SETTERS ================================
-
+    /**
+     * This function receives a string of Json and creates a list of pokemon
+     * */
     public ArrayList<Pokemon> json2Pokemons(String json) {
         ArrayList<Pokemon> ans = new ArrayList<>();
         try {
@@ -60,6 +67,9 @@ public class FunctionForTests {
         });
         return ans;
     }
+    /**
+     * This function receives a path of Json file and creates a string of the Json
+     * */
     public static String readJsonFromFileAndGetAsString(String path) {
         String str = "";
         try {
@@ -76,9 +86,15 @@ public class FunctionForTests {
         }
         return str;
     }
+    /**
+     * This function return the array of the paths of the levels
+     * */
     public String getPathAllScenario(int scenario) {
         return System.getProperty("user.dir") + "/tests/gameClient/scenarios/"+ scenario;
     }
+    /**
+     * This function receives a string of Json and creates a list of pokemon
+     * */
     public String[] getArrayOfAllScenariosPath() {
         String [] array = new String[0];
         for (int i = 0; i < 24; i++) {
@@ -87,6 +103,9 @@ public class FunctionForTests {
         }
         return array;
     }
+    /**
+     * This function receives a string of Json and creates a list of Agent
+     * */
     public List<Agent> getAgents(String json, directed_weighted_graph g){
         ArrayList<Agent> ans = new ArrayList<>();
         try {
@@ -104,9 +123,13 @@ public class FunctionForTests {
         }
         return ans;
     }
+    /**
+     * This function receives a string of Json and creates a graph from it
+     * */
     public directed_weighted_graph graphJsonToGraph(String json){
         dw_graph_algorithms ga = new DWGraph_Algo();
         ga.load("jsonsFiles/graph.json");
         return ga.getGraph();
     }
+
 }
