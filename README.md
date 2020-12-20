@@ -1,5 +1,5 @@
 
-![enter image description here](https://i.ibb.co/pnTVKDV/pokemon-logo.png)
+![enter image description here](https://projectpokemon.org/home/uploads/monthly_2018_05/large.5af2a8b1c6a92_ProjectPokemonGif.gif.3a629d6ffb0ae861e6c9410130191472.gif)
 
 This is the first assignment in the course OOP at the Ariel University to year 2020.
 
