@@ -32,32 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="MyFrame cleaned">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EntrancePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EntrancePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MyFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/DWGraph_Algo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/DWGraph_Algo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/DWGraph_DS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/DWGraph_DS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/EdgeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/EdgeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/EdgeLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/EdgeLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/GeoLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/GeoLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/NodeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/NodeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/directed_weighted_graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/directed_weighted_graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/dw_graph_algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/dw_graph_algorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/edge_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/edge_data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/edge_location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/edge_location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/game_service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/game_service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/geo_location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/geo_location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/node_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/node_data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Ex2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/util/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/util/Point3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/util/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/util/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/util/Range2Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/util/Range2Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/api/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/FunctionForTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="final version" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +57,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/libs/Ex2_Server_v0.13.jar!/Server/Game_Server.class" root0="FORCE_HIGHLIGHTING" />
@@ -314,13 +290,13 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Ex2" />
       <item itemvalue="JAR Application.Ex2_Server_v0.12.jar" />
       <item itemvalue="JUnit.api in EX2" />
       <item itemvalue="JUnit.All in EX2" />
       <item itemvalue="JUnit.DWGraph_DSTest.constructor" />
       <item itemvalue="JUnit.DWGraph_DSTest.getNode" />
       <item itemvalue="JUnit.gameClient in EX2" />
-      <item itemvalue="Application.Ex2" />
     </list>
     <recent_temporary>
       <list>
@@ -614,7 +590,13 @@
       <option name="presentableId" value="LOCAL‎00040" />
       <updated>1608484724826</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL‎00041" summary="final version">
+      <created>1608496227612</created>
+      <option name="number" value="LOCAL‎00041" />
+      <option name="presentableId" value="LOCAL‎00041" />
+      <updated>1608496227612</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +627,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="edited shortestPathDist" />
     <MESSAGE value="shortestPath list" />
     <MESSAGE value="start Ex2" />
     <MESSAGE value="small changes" />
@@ -670,7 +651,8 @@
     <MESSAGE value="Eyal's last commit" />
     <MESSAGE value="del" />
     <MESSAGE value="MyFrame cleaned" />
-    <option name="LAST_COMMIT_MESSAGE" value="MyFrame cleaned" />
+    <MESSAGE value="final version" />
+    <option name="LAST_COMMIT_MESSAGE" value="final version" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EX2$DWGraph_AlgoTest_shortestPathDist.ic" NAME="DWGraph_AlgoTest.shortestPathDist Coverage Results" MODIFIED="1606731629799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
