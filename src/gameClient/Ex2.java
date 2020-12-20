@@ -5,6 +5,9 @@ import api.*;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * This is the engine class of the game.
+ */
 public class Ex2 implements Runnable{
 
     public static game_service _game;
@@ -12,7 +15,7 @@ public class Ex2 implements Runnable{
     static MyFrame _mainFrame;
     public static long id = -1;
     public static int level = 0;
-    public static boolean isClicked = true;
+    public static boolean playButton = true;
 
     public static void main(String[] args) {
         try {
@@ -22,7 +25,7 @@ public class Ex2 implements Runnable{
         catch(Exception e) {
             id = -1;
             level = 0;
-            isClicked = false;
+            playButton = false;
         }
         Thread client = new Thread(new Ex2());
         client.start();
@@ -30,11 +33,12 @@ public class Ex2 implements Runnable{
 
     @Override
     public void run() {
+
         _mainFrame = new MyFrame();
         _mainFrame.showPanel(0);
         _mainFrame.pack();
 
-        while (!isClicked) {
+        while (!playButton) {
             Thread.onSpinWait();
         }
 
@@ -42,16 +46,14 @@ public class Ex2 implements Runnable{
         _ar = new Arena(_game);
         _mainFrame.InitGamePanel(_ar);
         _mainFrame.showPanel(1);
-//        ent.setVisible(false);
         _mainFrame.pack();
-
         _game.login(id);
         _game.startGame();
         int dt;
         while(_game.isRunning()) {
                 _ar.moveAgents();
                 _mainFrame.repaint();
-                dt = isCloseToPokemon()? 10 : 130;
+                dt = isCloseToPokemon()? 20 : 120;
             try {
                 sleep(dt);
             }
@@ -59,8 +61,15 @@ public class Ex2 implements Runnable{
                 e.printStackTrace();
             }
         }
+        System.out.println(_game.toString());
     }
 
+    /**
+     * Checks if one of the agents is closed to some pokemon,
+     * if so, than we want to increase the amount of movements in order
+     * to make sure that this agent wont miss the pokemon.
+     * @return if one of the agents is near a pokemon
+     */
     private boolean isCloseToPokemon() {
         for(Agent ag : _ar.JsonToAgents()){
             for(Pokemon p : _ar.getPokemons()) {

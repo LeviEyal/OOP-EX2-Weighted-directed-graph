@@ -9,22 +9,22 @@ package api;
 public interface node_data {
 	/**
 	 * Returns the key (id) associated with this node.
-	 * @return
+	 * @return key - the Location of the node
 	 */
 	public int getKey();
-	/** Returns the location of this node, if
-	 * none return null.
-	 * 
-	 * @return
+	/**
+	 * Returns the location of this node, if
+	 * @return location - the location of the node
 	 */
 	public geo_location getLocation();
-	/** Allows changing this node's location.
-	 * @param p - new new location  (position) of this node.
+	/**
+	 * Allows changing this node's location.
+	 * @param p - new location (position) of this node.
 	 */
 	public void setLocation(geo_location p);
 	/**
 	 * Returns the weight associated with this node.
-	 * @return
+	 * @return weight - the Weight of the node
 	 */
 	public double getWeight();
 	/**
@@ -34,21 +34,21 @@ public interface node_data {
 	public void setWeight(double w);
 	/**
 	 * Returns the remark (meta data) associated with this node.
-	 * @return
+	 * @return info - of the node.
 	 */
 	public String getInfo();
 	/**
 	 * Allows changing the remark (meta data) associated with this node.
-	 * @param s
+	 * @param s - the info of the node
 	 */
 	public void setInfo(String s);
 	/**
-	 * Temporal data (aka color: e,g, white, gray, black) 
-	 * which can be used be algorithms 
-	 * @return
+	 * Temporal data (aka color: e,g, white, gray, black)
+	 * which can be used be algorithms
+	 * @return tag - the tag of the node
 	 */
 	public int getTag();
-	/** 
+	/**
 	 * Allows setting the "tag" value for temporal marking an node - common
 	 * practice for marking by algorithms.
 	 * @param t - the new value of the tag

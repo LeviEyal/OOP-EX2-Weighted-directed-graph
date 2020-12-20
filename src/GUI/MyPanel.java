@@ -1,15 +1,8 @@
 package GUI;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
 import java.util.List;
-
 import api.*;
 import gameClient.*;
 import gameClient.util.Point3D;
@@ -18,22 +11,20 @@ import gameClient.util.Range2D;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ *This class represents the main panel containing the game
+ */
 public class MyPanel extends JPanel{
 
-//    private BufferedImage img;
     JLabel t = new JLabel();
-    private JCheckBox show_edges = new JCheckBox("edges");
-    private JCheckBox show_nodes = new JCheckBox("nodes");
-    private JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers");
-    private JCheckBox show_pokemons_values = new JCheckBox("pokemons values");
-    int time;
-    int duration = -2;
-    double grade;
-    int moves;
-    int level;
-    private Arena _ar;
+    private final JCheckBox show_edges = new JCheckBox("edges");
+    private final JCheckBox show_nodes = new JCheckBox("nodes");
+    private final JCheckBox show_nodes_numbers = new JCheckBox("nodes numbers");
+    private final JCheckBox show_pokemons_values = new JCheckBox("pokemons values");
+    int time, duration = -1, grade, moves, level;
+    private Arena _arena;
     static gameClient.util.Range2Range _w2f;
-    private Color[] _agents_colors = new Color[]{
+    private final Color[] _agents_colors = new Color[]{
             new Color(255, 0, 221),
             new Color(27, 255, 0),
             new Color(0, 255, 247),
@@ -41,22 +32,11 @@ public class MyPanel extends JPanel{
             new Color(23,4,68),
             new Color(23,4,68)
     };
-    private Image[] _pokemons_images = new Image[]{
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pika.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pika.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pika.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pika.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pika.png")),
+    private final Image[] _pokemons_images = new Image[]{
             Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pika.png")),
             Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke1.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke1.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke2.png")),
             Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke2.png")),
             Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke3.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke4.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke4.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke4.png")),
-            Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke4.png")),
             Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/poke4.png"))
     };
 
@@ -80,7 +60,7 @@ public class MyPanel extends JPanel{
         setOpaque(true);
     }
     public void update(Arena ar) {
-        this._ar = ar;
+        this._arena = ar;
         updateFrame();
     }
 
@@ -89,7 +69,7 @@ public class MyPanel extends JPanel{
         Range rx = new Range(50, this.getWidth()-50);
         Range ry = new Range(this.getHeight()-30, 80);
         Range2D frame = new Range2D(rx,ry);
-        directed_weighted_graph g = _ar.getGraph();
+        directed_weighted_graph g = _arena.getGraph();
         _w2f = Arena.w2f(g, frame);
     }
 
@@ -105,12 +85,6 @@ public class MyPanel extends JPanel{
 
         fetchData();
         t.setText("Level: "+ level +" Timer: "+ time+"/"+duration+" Grade: "+grade+" Moves: "+moves+"/"+duration*10+"     Display:");
-//        MyFrame.t.setText("Level: "+ level +"Timer: "+ time+"   Grade: "+grade+"Moves: "+moves+"     Display:");
-//        MyFrame.t.setLayout(null);
-//        MyFrame.info[0].setName("Level: " + level);
-//        MyFrame.info[1].setName("Timer: " + time);
-//        MyFrame.info[2].setName("Grade: " + grade);
-//        MyFrame.info[3].setName("Moves: " + moves);
 
         updateFrame();
         drawGraph(g2);
@@ -118,23 +92,29 @@ public class MyPanel extends JPanel{
         drawPokemons(g2);
     }
 
+    /**
+     * Fetching all the necessary information about the game from a json string from the server
+     */
     private void fetchData() {
         try {
             JSONObject line = new JSONObject(Ex2._game.toString());
             JSONObject ttt = line.getJSONObject("GameServer");
-            grade = ttt.getDouble("grade");
+            grade = (int) ttt.getDouble("grade");
             moves = (int) ttt.getDouble("moves");
             level = ttt.getInt("game_level");
             time = (int) (Ex2._game.timeToEnd() / 1000);
-            if(duration == -2)
+            if(duration == -1)
                 duration = time+1;
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Draws all the graph's nodes and edges.
+     */
     private void drawGraph(Graphics2D g) {
-        directed_weighted_graph gg = _ar.getGraph();
+        directed_weighted_graph gg = _arena.getGraph();
         g.setStroke(new BasicStroke(2));
         if(show_edges.isSelected()) {
             for (node_data n : gg.getV()) {
@@ -149,11 +129,14 @@ public class MyPanel extends JPanel{
             drawNode(n, g);
         }
     }
+
+    /**
+     *Draws all the pokemons on the screen
+     */
     private void drawPokemons(Graphics2D g) {
-        List<Pokemon> fs = _ar.getPokemons();
-        if(fs != null) {
-            int i=0;
-            for (Pokemon f : fs) {
+        List<Pokemon> pokemons = _arena.getPokemons();
+        if(pokemons != null) {
+            for (Pokemon f : pokemons) {
                 int val = (int)f.getValue();
                 Point3D c = f.getLocation();
                 int r = (int) (0.03 * this.getHeight());
@@ -161,8 +144,7 @@ public class MyPanel extends JPanel{
                 g.setFont(new Font("Arial", Font.BOLD, 16));
                 if (c != null) {
                     geo_location fp = _w2f.world2frame(c);
-
-                    Image img1 = _pokemons_images[val%_pokemons_images.length];
+                    Image img1 = getPokemonIconByValue(f.getValue());
                     g.drawImage(img1, (int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r, this);
                     if(show_pokemons_values.isSelected())
                         g.drawString(""+val, (int)fp.x()-2*r, (int)fp.y()-2*r);
@@ -170,8 +152,20 @@ public class MyPanel extends JPanel{
             }
         }
     }
+
+    private Image getPokemonIconByValue(double value) {
+        if(value <= 5)  return _pokemons_images[0];
+        if(value <= 10) return _pokemons_images[1];
+        if(value <= 12) return _pokemons_images[2];
+        if(value <= 14) return _pokemons_images[3];
+        else            return _pokemons_images[4];
+    }
+
+    /**
+     *Draws all the agents on the screen
+     */
     private void drawAgents(Graphics2D g) {
-        List<Agent> rs = _ar.JsonToAgents();
+        List<Agent> rs = _arena.JsonToAgents();
         g.setStroke(new BasicStroke(3));
         for(Agent ag: rs){
             g.setColor(_agents_colors[ag.getID()]);
@@ -195,9 +189,7 @@ public class MyPanel extends JPanel{
         geo_location pos = n.getLocation();
         geo_location fp = _w2f.world2frame(pos);
         int r = (int)(0.009 * this.getHeight());
-        Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/node.png"));
         if(show_nodes.isSelected()) {
-//            g.drawImage(img1, (int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r,this);
             g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
             g.fill3DRect((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r, true);
         }
@@ -206,7 +198,7 @@ public class MyPanel extends JPanel{
     }
 
     private void drawEdge(edge_data e, Graphics2D g) {
-        directed_weighted_graph gg = _ar.getGraph();
+        directed_weighted_graph gg = _arena.getGraph();
         geo_location s = gg.getNode(e.getSrc()).getLocation();
         geo_location d = gg.getNode(e.getDest()).getLocation();
         geo_location s0 = _w2f.world2frame(s);

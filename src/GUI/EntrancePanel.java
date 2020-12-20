@@ -1,7 +1,5 @@
 package GUI;
 
-import api.game_service;
-import gameClient.Arena;
 import gameClient.Ex2;
 
 import javax.swing.*;
@@ -65,7 +63,7 @@ public class EntrancePanel extends JPanel {
         playBTN.setEnabled(false);
         playBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                Ex2.isClicked = true;
+                Ex2.playButton = true;
                 System.out.println("starting to play!");
             }
         });

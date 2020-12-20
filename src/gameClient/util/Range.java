@@ -13,12 +13,7 @@ public class Range {
 	public Range(Range x) {
 		this(x._min, x._max);
 	}
-	
-	public boolean isIn(double d) {
-		boolean inSide = false;
-		if(d>=this.get_min() && d<=this.get_max()) {inSide=true;}
-		return inSide;
-	}
+
 	public String toString() {
 		String ans = "["+this.get_min()+","+this.get_max()+"]";
 		if(this.isEmpty()) {ans = "Empty Range";}

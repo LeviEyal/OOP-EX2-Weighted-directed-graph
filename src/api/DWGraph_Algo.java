@@ -17,7 +17,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Init the graph on which this set of algorithms operates on.
-     * @param g  - other graph to initialize
+     * @param g  - other graph to initialize.
      */
     @Override
     public void init(directed_weighted_graph g) {
@@ -27,7 +27,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Return the underlying graph of which this class works.
-     * @return g - the graph
+     * @return g - the graph in the class.
      */
     @Override
     public directed_weighted_graph getGraph() {
@@ -36,7 +36,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Compute a deep copy of this weighted graph.
-     * @return g - deep copy of the graph
+     * @return g - deep copy of the graph.
      */
     @Override
     public directed_weighted_graph copy() {
@@ -49,12 +49,11 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * is connected : in a given graph if the size of vertexes is equal to 0/1 that means
      * there is an edge between each and every vertex to another
      * (in case size=1 the vertex is connected to itself by definition).
-     * otherwise the Dijkstra's algorithmWe created an inverted graph and tested it on both types of graphs from the same vertex
-     * after that we run by all the vertex and if we get that the tag is equals to 0 return false
+     * otherwise the Dijkstra's algorithm We created an inverted graph and tested it on both types of graphs from the same vertex
+     * after that we run by all the vertex and if we get that the tag equals to 0 return false
      * else return true
-     * we use uxiliary function
+     * we use auxiliary function
      * @return true - if there is a valid path from each node to each other node, false if isn't
-     *@return true if there is a valid path from EVREY node to each' false if isn't
      */
     @Override
     public boolean isConnected() {
@@ -66,8 +65,10 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Returns true if and only if (iff) there is a valid path from each node to each other node.
-     * Auxiliary function used with bfs
-     * @return true - if there is a valid path from each node to each other node, false if isn't
+     * auxiliary function used with bfs
+     * @param g - the graph.
+     * @param v - some node from the graph.
+     * @return true - if is connected, false if isn't.
      */
     private boolean isConnected(directed_weighted_graph g, node_data v) {
         setAllTags(NOT_VISITED);
@@ -82,8 +83,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Returns true if and only if (iff) there is a valid path from each node to each other node.
-     * Auxiliary function used with bfs
-     * @return true - if there is a valid path from each node to each other node, false if isn't
+     * auxiliary function used with bfs
+     * @param g - the graph.
+     * @param node - some node from the graph.
      */
     private void BFS(node_data node,directed_weighted_graph g) {
         node_data v = node;
@@ -104,7 +106,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     /**
      * Sets al nodes' tags value to a given integer number t
-     * @param t  - some int
+     * @param t  - some int to initialize all the tags in the graph.
      */
     private void setAllTags(double t) {
         for (node_data n : g.getV())
@@ -117,9 +119,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * else we check if the two nodes exist in the graph
      * in case they exist in the graph we run by Dijkstra's and update the tag in the length of the path
      * from source node to the destination node
-     * @param src  - start node
-     * @param dest - end (target) node
-     * @return t - the length of the path
+     * @param src - start node.
+     * @param dest - end (target) node.
+     * @return w - the sum of the Weight by the path from src to dest.
      */
     @Override
     public double shortestPathDist(int src, int dest) {
@@ -162,9 +164,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * we check if the two nodes exist in the graph,
      * in case they exist we explore the graph by Dijkstra's and update the tag in the length of the path
      * from source node to the destination node
-     * @param src  - start node
-     * @param dest - end (target) node
-     *@return list - list of the vertex in the graph, null - if error
+     * @param src - start node.
+     * @param dest - end (target) node.
+     * @return list - the list of the vertex from src to dest.
      */
     @Override
     public List<node_data> shortestPath(int src, int dest) {
@@ -192,7 +194,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Saves this weighted (directed) graph to the given
      * file name - in JSON format
      * @param file_name - the file name (may include a relative path).
-     * @return true - iff the file was successfully saved
+     * @return true - iff the file was successfully saved, false if isn't/
      */
     @Override
     public boolean save(String file_name) {
@@ -232,14 +234,13 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * if the file was successfully loaded - the underlying graph
      * of this class will be changed (to the loaded one), in case the
      * graph was not loaded the original graph should remain "as is".
-     * @param file - file name of JSON file
-     * @return true - iff the graph was successfully loaded.
+     * @param file file name of JSON file
+     * @return true iff the graph was successfully loaded, false if isn't/
      */
     @Override
     public boolean load(String file) {
         try {
             //create a Gson object
-            Gson g = new Gson();
             directed_weighted_graph newG = new DWGraph_DS();
             //read from file as JsonObject
             JsonObject json = new JsonParser().parse(new FileReader(file)).getAsJsonObject();
@@ -287,7 +288,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Comparator - return 1 if the tag of node1 small then the tag of node2,
      * return -1 if the tag of node1 big then the tag of node2
      * return 0 if the tag of node1 equal to tag of node2
-     * @return 1,0,-1 - to order the vertex
      */
     class NodesComparator implements Comparator<node_data>{
         @Override

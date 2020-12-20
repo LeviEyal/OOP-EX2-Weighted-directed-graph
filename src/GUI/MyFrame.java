@@ -8,17 +8,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 /**
- *
- * @author happy
+ *This class represents the main window of the game
  */
-public class MyFrame extends javax.swing.JFrame {
+public class MyFrame extends JFrame {
 
     int px, py;
     Arena _ar;
     MyPanel gamePanel = new MyPanel();
     EntrancePanel entrancePanel = new EntrancePanel();
     private static final Color color_header = new Color(219, 4, 4);
-    private static final Color color_hoverHeader = new Color(0, 165, 5);
+    private static final Color color_hoverHeader = new Color(42, 196, 176, 255);
     private final JPanel Header = new JPanel();
     private final JPanel closePNL = new JPanel();
     private final JLabel closeWindowBTN = new JLabel();
@@ -43,29 +42,14 @@ public class MyFrame extends javax.swing.JFrame {
     private void initComponents() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(900,500));
-        this.setLayout(new BorderLayout());
         this.setLocationByPlatform(true);
         this.setUndecorated(true);
         this.setVisible(true);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/Icons/pokeball.png")));
-
+        this.setLayout(new BorderLayout());
         this.addOtherComponents();
-        this.addEntrancePanel();
-
-        setWindowResizable(true);
-        this.pack();
-    }
-
-
-    private void addEntrancePanel() {
         this.getContentPane().add(entrancePanel, BorderLayout.CENTER);
-    }
-
-    public void setWindowResizable(boolean b){
-        if(!b) return;
-        this.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
-        ComponentResizer cr = new ComponentResizer();
-        cr.registerComponent(this);
+        this.pack();
     }
 
     @Override
@@ -74,7 +58,6 @@ public class MyFrame extends javax.swing.JFrame {
     }
 
     private void addOtherComponents() {
-
         Header.setBackground(color_header);
         Header.setMinimumSize(new Dimension(150, 20));
         Header.setPreferredSize(new Dimension(800, 30));
@@ -162,11 +145,20 @@ public class MyFrame extends javax.swing.JFrame {
             case 0 -> {
                 entrancePanel.setVisible(true);
                 gamePanel.setVisible(false);
+                this.setWindowResizable(false);
             }
             case 1 -> {
                 entrancePanel.setVisible(false);
                 gamePanel.setVisible(true);
+                this.setWindowResizable(true);
             }
         }
+    }
+
+    public void setWindowResizable(boolean b){
+        if(!b) return;
+        this.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 4, 4, color_header));
+        ComponentResizer cr = new ComponentResizer();
+        cr.registerComponent(this);
     }
 }

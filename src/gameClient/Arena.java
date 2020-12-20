@@ -8,7 +8,6 @@ import gameClient.util.Range2Range;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +15,12 @@ import java.util.*;
 
 /**
  * This class represents a multi Agents Arena which move on a graph
- * grabs Pokemons and earn points
+ * grabs Pokemons and earn points.
+ * This is where all the game is happening:
+ * 		the communication with the server,
+ * 		the agent and pokemons updating,
+ * 		the algorithms performs to manipulate the agents.
+ * 		etc.
  */
 public class Arena {
 
@@ -41,10 +45,8 @@ public class Arena {
 			_info = new ArrayList<>();
 			_game = game;
 			_graph = graphJsonToGraph(game.getGraph());
-
 			_algo = new DWGraph_Algo();
 			_algo.init(_graph);
-
 			_pokemons = json2Pokemons(game.getPokemons());
 			initAgents();
 
@@ -53,7 +55,6 @@ public class Arena {
 			exportJsonToFile("GameAgents", game.getAgents());
 			exportJsonToFile("GamePokemons", game.getPokemons());
 		}
-
 	}
 
 	//========================== JSON CONVERTING ==============================
@@ -256,20 +257,18 @@ public class Arena {
 	}
 	public static Range2Range w2f(directed_weighted_graph g, Range2D frame) {
 		Range2D world = GraphRange(g);
-		Range2Range ans = new Range2Range(world, frame);
-		return ans;
+		return new Range2Range(world, frame);
 	}
 
 	//=========================== GETTERS & SETTERS ================================
 
-	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
-	public void setGraph(directed_weighted_graph g) {this._graph =g;}
 	public List<Agent> JsonToAgents() {return _agents; }
-	public List<Pokemon> getPokemons() {return _pokemons;}
 	public directed_weighted_graph getGraph() {return _graph;}
+	public void setGraph(directed_weighted_graph g) {this._graph =g;}
+	public List<Pokemon> getPokemons() {return _pokemons;}
+	public void setPokemons(List<Pokemon> f) {this._pokemons = f;}
 	public List<String> get_info() { return _info;}
 	public void set_info(List<String> info) { this._info = info;}
-
 
     /**
      * Updates the agents and move each one to its chosen node.
@@ -284,6 +283,7 @@ public class Arena {
 			int src = ag.getSrcNode();
 			if(!ag.isMoving()) {
 				int dest = nextNode(ag, src);
+				System.out.println("Agent " + ag.getID() + " next node: "+ dest);
 				_game.chooseNextEdge(ag.getID(), dest);
 				ag.setNextNode(dest);
 			}
@@ -291,10 +291,19 @@ public class Arena {
 	}
 
     /**
-     *
-     * @param ag
-     * @param src
-     * @return
+     * Gets an agent and assign it to a new destination.
+	 * 	1. import an updated list of the pokemons
+	 * 	2. find the total worth of each pokemon - see findWorthOfAllPokemons() method.
+	 *	3. for this current agent choose the pokemon that has the maximum worth.
+	 *	4. if we didnt find any appropriate pokemon to assign to this agent:
+	 *		send this agent to his area on the graph.
+	 *	5. find the shortest path to the chosen pokemon as a list.
+	 *	6. add the node in the edge that the pokemon is on, that is not in the path.
+	 *	7. return the second node in the path (the first is where the agent is currently on).
+	 *
+     * @param ag the agent that needs next node.
+     * @param src where this agent is coming from.
+     * @return the next node to move.
      */
 	private int nextNode(Agent ag, int src) {
 		int id = ag.getID();
@@ -328,8 +337,20 @@ public class Arena {
 		return paths.get(id).get(1).getKey();
 	}
 
+	/**
+	 * Finds the total worth of all the pokemon regards to a given agent.
+	 * The total worth of a pokemon regard to an agent is based on:
+	 * 		1. the minimum distance between the agent and the pokemon.
+	 * 		2. the pokemon's value.
+	 *
+	 * 1. iterate the pokemons and find the maximum and the minimum value.
+	 * 	  and the maximum and the minimum min_dist.
+	 * 2. create range of values 0-100 based of the minimum and the maximum we found.
+	 * 3. create range of min_dist 0-100 based of the minimum and the maximum we found.
+	 * 4. set each pokemon's worth based on their min_dist and values.
+	 * @param ag the agent
+	 */
 	private void findWorthOfAllPokemons(Agent ag) {
-		int id = ag.getID();
 		double min_val = 100, min_dist = 100, max_val = -100, max_dist = -100;
 		for(Pokemon p : _pokemons){
 			int type = p.getType();
@@ -357,17 +378,23 @@ public class Arena {
 		for(Pokemon p : _pokemons){
 			double val = valuesRange.getPortion(p.getValue()) * 100;
 			double dist = 100 - (distRange.getPortion(p.get_min_dist()) * 100);
-
 			p.set_worth(1*val + 1*dist);
-			System.out.println("Candidate distance: " + p.get_min_dist() + ", "+p.getValue()+ ", "+p.get_worth());
 		}
 	}
 
+	/**
+	 * @param p a pokemon
+	 * @param a an agent
+	 * @return true if a given pokemon is "available" for a given agent.
+	 * A pokemon is consider "available" to an agent if their is no other agent assign to this
+	 * pokemon, or not around the pokemon.
+	 */
 	private boolean available(Pokemon p, Agent a) {
+		int eps = 4;
 		for(Agent ag : _agents){
 			if(a.getID()!=ag.getID() && paths.containsKey(ag.getID())) {
 				for(node_data n : paths.get(ag.getID())){
-					if(nodeToPokemonDistance(n, p) < totalDistanceToPokemon(a, p))
+					if(nodeToPokemonDistance(n, p) < totalDistanceToPokemon(a, p)-eps)
 						return false;
 				}
 			}
@@ -375,11 +402,21 @@ public class Arena {
 		return true;
 	}
 
+	/**
+	 * @param ag an agent
+	 * @param p a pokemon
+	 * @return the total distance from a given pokemon to a given agent.
+	 */
 	private double totalDistanceToPokemon(Agent ag, Pokemon p) {
 		double extra1 = ag.getLocation().distance(_graph.getNode(ag.getSrcNode()).getLocation());
 		double extra2 = p.getLocation().distance(_graph.getNode(p.get_from()).getLocation());
 		return _algo.shortestPathDist(ag.getSrcNode(), p.get_from()) + extra2 - extra1;
 	}
+	/**
+	 * @param n some node
+	 * @param p a pokemon
+	 * @return the total distance from a given node to a given agent.
+	 */
 	private double nodeToPokemonDistance(node_data n, Pokemon p) {
 		double extra = p.getLocation().distance(_graph.getNode(p.get_from()).getLocation());
 		return _algo.shortestPathDist(n.getKey(), p.get_from()) + extra;

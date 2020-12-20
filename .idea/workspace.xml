@@ -32,27 +32,31 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="del">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="MyFrame cleaned">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Ex2_v0.13.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameAgents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameGraph.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameJSON.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GamePokemons.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/graph.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EntrancePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EntrancePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MyFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MyPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/DWGraph_Algo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/DWGraph_Algo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/DWGraph_DS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/DWGraph_DS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/EdgeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/EdgeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/EdgeLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/EdgeLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/GeoLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/GeoLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/NodeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/NodeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/directed_weighted_graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/directed_weighted_graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/dw_graph_algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/dw_graph_algorithms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/edge_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/edge_data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/edge_location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/edge_location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/game_service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/game_service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/geo_location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/geo_location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/node_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/node_data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameClient/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Arena.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameClient/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Ex2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/api/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/api/DWGraph_DSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/DWGraph_DSTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/util/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/util/Point3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/util/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/util/Range.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/util/Range2Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/util/Range2Range.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/api/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/FunctionForTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/gameClient/AgentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/AgentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/gameClient/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/gameClient/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/FunctionForTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/gameClient/PokemonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/PokemonTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -604,7 +608,13 @@
       <option name="presentableId" value="LOCAL‎00039" />
       <updated>1608373530734</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL‎00040" summary="MyFrame cleaned">
+      <created>1608484724826</created>
+      <option name="number" value="LOCAL‎00040" />
+      <option name="presentableId" value="LOCAL‎00040" />
+      <updated>1608484724826</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +645,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added shortestPathDist" />
     <MESSAGE value="edited shortestPathDist" />
     <MESSAGE value="shortestPath list" />
     <MESSAGE value="start Ex2" />
@@ -660,7 +669,8 @@
     <MESSAGE value="updating images" />
     <MESSAGE value="Eyal's last commit" />
     <MESSAGE value="del" />
-    <option name="LAST_COMMIT_MESSAGE" value="del" />
+    <MESSAGE value="MyFrame cleaned" />
+    <option name="LAST_COMMIT_MESSAGE" value="MyFrame cleaned" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EX2$DWGraph_AlgoTest_shortestPathDist.ic" NAME="DWGraph_AlgoTest.shortestPathDist Coverage Results" MODIFIED="1606731629799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

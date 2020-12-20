@@ -15,7 +15,6 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * constructor for WGraph_DS to create new empty hashMap(Vertex) for the graph
-     * @return none return
      */
     public DWGraph_DS() {
         V = new HashMap<>();
@@ -29,7 +28,7 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
      * Compute a deep copy of this weighted graph.
      * we run first to add the Vertex from the graph
      * then we run by the the graph and the list of the Neighbors to connect the nodes
-     * @param: other - object of the graph
+     * @param other - object of the graph
      */
     public DWGraph_DS(directed_weighted_graph other){
         for (node_data v : other.getV()){
@@ -50,7 +49,7 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * returns the node_data by the node_id,
-     * @param key - the node_id
+     * @param key - the node_id.
      * @return the node_data by the node_id, null if none.
      */
     @Override
@@ -61,7 +60,7 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * return true iff (if and only if) there is an edge between node1 and node2
-     * Note: this method should run in O(1) time.
+     * Note: this method run in O(1) time.
      * check if has two Vertex in the graph by src && dest
      * check if has two Vertex in the edge by src && dest
      * if the two nodes are exist we check if to src has neighbor to dest && to dest has neighbor src
@@ -84,10 +83,10 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
     }
     /**
      * returns the data of the edge (src,dest), null if none.
-     * Note: this method should run in O(1) time.
-     * @param src
-     * @param dest
-     * @return
+     * this method runs in O(1) time.
+     * @param src - start node.
+     * @param dest - end node.
+     * @return e - return the edge between src to dest.
      */
     @Override
     public edge_data getEdge(int src, int dest) {
@@ -96,8 +95,8 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * adds a new node to the graph with the given node_data.
-     * Note: this method should run in O(1) time.
-     * @param n - node data
+     * this method runs in O(1) time.
+     * @param n - new node.
      */
     @Override
     public void addNode(node_data n) {
@@ -112,10 +111,10 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * Connects an edge with weight w between node src to node dest.
-     * * Note: this method should run in O(1) time.
-     * @param src  - the source of the edge.
+     * this method runs in O(1) time.
+     * @param src - the source of the edge.
      * @param dest - the destination of the edge.
-     * @param w    - positive weight representing the cost (aka time, price, etc) between src-->dest.
+     * @param w - positive weight representing the cost (aka time, price, etc) between src-->dest.
      */
     @Override
     public void connect(int src, int dest, double w) {
@@ -130,8 +129,8 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
     /**
      * This method returns a pointer (shallow copy) for the
      * collection representing all the nodes in the graph.
-     * Note: this method should run in O(1) time.
-     * @return Collection<node_data>
+     * this method runs in O(1) time.
+     * @return Collection<node_data> - all the vertex in the graph.
      */
     @Override
     public Collection<node_data> getV() {
@@ -139,31 +138,25 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
     }
 
 
-    public Collection<node_data> getVByKey(int key) {
-        return N.get(key).values();
-    }
-
-
-
     /**
      * This method returns a pointer (shallow copy) for the
      * collection representing all the edges getting out of
      * the given node (all the edges starting (source) at the given node).
-     * Note: this method should run in O(k) time, k being the collection size.
-     * @param src
-     * @return Collection<edge_data>
+     * this method runs in O(k) time, k being the collection size.
+     * @param node_id - id of the node.
+     * @return Collection<edge_data> - all the Neighbors by node id.
      */
     @Override
-    public Collection<edge_data> getE(int src) {
-        return E.get(src).values();
+    public Collection<edge_data> getE(int node_id) {
+        return E.get(node_id).values();
     }
 
     /**
      * Deletes the node (with the given ID) from the graph -
      * and removes all edges which starts or ends at this node.
-     * This method should run in O(k), V.degree=k, as all the edges should be removed.
-     * @param key
-     * @return the data of the removed node (null if none).
+     * This method run in O(k), V.degree=k, as all the edges be removed.
+     * @param key - of the node.
+     * @return node - the data of the removed node (null if none).
      */
     @Override
     public node_data removeNode(int key) {
@@ -182,8 +175,8 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
     /**
      * Deletes the edge from the graph,
      * Note: this method run in O(1) time.
-     * @param src
-     * @param dest
+     * @param src - id of src node.
+     * @param dest - id of dest node.
      * @return the data of the removed edge (null if none).
      */
     @Override
@@ -200,7 +193,7 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
     /**
      * Returns the number of vertices (nodes) in the graph.
      * Note: this method run in O(1) time.
-     * @return nodeSize - the number of the vertex in the graph
+     * @return nodeSize - the number of the vertex in the graph.
      */
     @Override
     public int nodeSize() {
@@ -210,7 +203,7 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
     /**
      * Returns the number of edges (assume directional graph).
      * Note: this method run in O(1) time.
-     * @return edgeSize  - the number of the vertex in the graph
+     * @return edgeSize - the number of the edges in the graph.
      */
     @Override
     public int edgeSize() {
@@ -219,7 +212,7 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * Returns the Mode Count - for testing changes in the graph.s
-     * @return mc - number changes in the graph
+     * @return mc - The amount of changes in the graph.
      */
     @Override
     public int getMC() {
@@ -228,18 +221,18 @@ public class DWGraph_DS implements directed_weighted_graph , Serializable {
 
     /**
      * Returns a string representation of this graph as an adjacency list.
-     * @return A string representation of this graph
+     * @return s - a string representation this graph
      */
     @Override
     public String toString() {
-        String s = "Vertices: " + nodeSize() + " Edges: " + edgeSize() + " MC: " + getMC() + "\n";
+        StringBuilder s = new StringBuilder("Vertices: " + nodeSize() + " Edges: " + edgeSize() + " MC: " + getMC() + "\n");
         for (int key : V.keySet()) {
-            s += key + ": ";
+            s.append(key).append(": ");
             for (edge_data e : getE(key)) {
-                s += e;
+                s.append(e);
             }
-            s += "\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 }
