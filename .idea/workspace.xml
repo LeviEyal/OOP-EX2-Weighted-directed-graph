@@ -33,14 +33,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43a3c328-e331-449e-8c09-8531bc82a99c" name="Default Changelist" comment="del">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_12_2020_00_49__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_12_2020_00_49__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameAgents.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GameAgents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameGraph.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GameGraph.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameJSON.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GameJSON.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/GamePokemons.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/GamePokemons.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsonsFiles/graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsonsFiles/graph.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Ex2_v0.13.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameAgents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameGraph.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsonsFiles/GameJSON.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsonsFiles/GamePokemons.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsonsFiles/graph.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MyFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Arena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/api/DWGraph_DSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/DWGraph_DSTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/FunctionForTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/AgentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/AgentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/FunctionForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/FunctionForTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/gameClient/PokemonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/gameClient/PokemonTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,12 +73,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="MotiDahari" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/libs/Ex2_Server_v0.13.jar!/Server/Game_Server.class" root0="FORCE_HIGHLIGHTING" />
@@ -113,12 +124,15 @@
     <option name="enabled" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
+    <key name="CreateClassDialog.RecentsKey">
       <recent name="api" />
-      <recent name="tests" />
     </key>
-    <key name="MoveInnerDialog.RECENTS_KEY">
-      <recent name="api" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\happy\IdeaProjects\EX2" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\tests" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\libs" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\src\gameClient" />
+      <recent name="C:\Users\happy\IdeaProjects\EX2\data" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -128,23 +142,20 @@
       <recent name="C:\Users\happy\IdeaProjects\EX2\src\gameClient" />
       <recent name="C:\Users\happy\IdeaProjects\EX2" />
     </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="api" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="api" />
       <recent name="" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\happy\IdeaProjects\EX2" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\tests" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\libs" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\src\gameClient" />
-      <recent name="C:\Users\happy\IdeaProjects\EX2\data" />
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="api" />
+      <recent name="tests" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="GUI" />
       <recent name="javaapplication1" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="api" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Ex2">
@@ -161,43 +172,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AgentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in EX2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="EX2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="gameClient" />
-      <option name="MAIN_CLASS_NAME" value="gameClient.AgentTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArenaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="EX2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="gameClient" />
-      <option name="MAIN_CLASS_NAME" value="gameClient.ArenaTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -218,17 +209,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PokemonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DWGraph_DSTest.getNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="EX2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gameClient.*" />
+          <option name="PATTERN" value="api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="gameClient" />
-      <option name="MAIN_CLASS_NAME" value="gameClient.PokemonTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="api" />
+      <option name="MAIN_CLASS_NAME" value="api.DWGraph_DSTest" />
+      <option name="METHOD_NAME" value="getNode" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -247,6 +239,20 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gameClient in EX2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EX2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gameClient.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="gameClient" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -306,19 +312,19 @@
     <list>
       <item itemvalue="JAR Application.Ex2_Server_v0.12.jar" />
       <item itemvalue="JUnit.api in EX2" />
-      <item itemvalue="JUnit.AgentTest" />
-      <item itemvalue="JUnit.ArenaTest" />
-      <item itemvalue="JUnit.PokemonTest" />
+      <item itemvalue="JUnit.All in EX2" />
       <item itemvalue="JUnit.DWGraph_DSTest.constructor" />
+      <item itemvalue="JUnit.DWGraph_DSTest.getNode" />
+      <item itemvalue="JUnit.gameClient in EX2" />
       <item itemvalue="Application.Ex2" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Ex2" />
+        <item itemvalue="JUnit.gameClient in EX2" />
+        <item itemvalue="JUnit.DWGraph_DSTest.getNode" />
         <item itemvalue="JUnit.DWGraph_DSTest.constructor" />
-        <item itemvalue="JUnit.AgentTest" />
-        <item itemvalue="JUnit.ArenaTest" />
-        <item itemvalue="JUnit.PokemonTest" />
+        <item itemvalue="JUnit.All in EX2" />
       </list>
     </recent_temporary>
   </component>
@@ -655,36 +661,6 @@
     <MESSAGE value="Eyal's last commit" />
     <MESSAGE value="del" />
     <option name="LAST_COMMIT_MESSAGE" value="del" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2663" y="395" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608375221641">
-      <screen x="1920" y="6" width="1920" height="1040" />
-    </state>
-    <state x="2663" y="395" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608375221641" />
-    <state width="1877" height="94" key="GridCell.Tab.0.bottom" timestamp="1608376093406">
-      <screen x="1920" y="6" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093406" />
-    <state width="1877" height="94" key="GridCell.Tab.0.center" timestamp="1608376093406">
-      <screen x="1920" y="6" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.center/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093406" />
-    <state width="1877" height="94" key="GridCell.Tab.0.left" timestamp="1608376093405">
-      <screen x="1920" y="6" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.left/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093405" />
-    <state width="1877" height="94" key="GridCell.Tab.0.right" timestamp="1608376093406">
-      <screen x="1920" y="6" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.right/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608376093406" />
-    <state x="2472" y="259" key="Vcs.Push.Dialog.v2" timestamp="1608373532902">
-      <screen x="1920" y="6" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="259" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608373532902" />
-    <state x="202" y="0" width="1595" height="794" maximized="true" key="dock-window-1" timestamp="1608374984763">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="202" y="0" width="1595" height="794" maximized="true" key="dock-window-1/0.0.1920.1040/1920.6.1920.1040@1920.6.1920.1040" timestamp="1608374984763" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EX2$DWGraph_AlgoTest_shortestPathDist.ic" NAME="DWGraph_AlgoTest.shortestPathDist Coverage Results" MODIFIED="1606731629799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

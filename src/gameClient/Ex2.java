@@ -51,7 +51,7 @@ public class Ex2 implements Runnable{
         while(_game.isRunning()) {
                 _ar.moveAgents();
                 _mainFrame.repaint();
-                dt = isCloseToPokemon()? 50 : 110;
+                dt = isCloseToPokemon()? 10 : 130;
             try {
                 sleep(dt);
             }
@@ -64,7 +64,6 @@ public class Ex2 implements Runnable{
     private boolean isCloseToPokemon() {
         for(Agent ag : _ar.JsonToAgents()){
             for(Pokemon p : _ar.getPokemons()) {
-                System.out.println(ag.getSpeed());
                 if (ag.get_curr_edge() == p.get_edge() &&
                         ag.getLocation().distance(p.getLocation()) < 0.001 * ag.getSpeed())
                     return true;

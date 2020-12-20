@@ -11,18 +11,20 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
+/**
+ * This Class represents Agent - a pokemon catcher.
+ * it has the following properties:
+ * position, id, speed, current edge, current pokemon, value.
+ */
 public class Agent {
-	public static final double EPS = 0.0001;
-	private static int _count = 0;
-	private static int _seed = 3331;
+
 	private int _id;
 	private geo_location _pos;
 	private double _speed;
 	private edge_data _curr_edge;
 	private node_data _curr_node;
 	private directed_weighted_graph _gg;
-	private Pokemon _curr_fruit;
-	private long _sg_dt;
+	private Pokemon _curr_pokemon;
 	private Queue<node_data> queue;
 	private double _value;
 
@@ -30,7 +32,7 @@ public class Agent {
 
 	public Agent(directed_weighted_graph g, int start_node) {
 		_gg = g;
-		setMoney(0);
+		setValue(0);
 		this._curr_node = _gg.getNode(start_node);
 		_pos = _curr_node.getLocation();
 		_id = -1;
@@ -44,12 +46,24 @@ public class Agent {
 	public void setCurrNode(int src) {
 		this._curr_node = _gg.getNode(src);
 	}
+
+	/**
+	 * @return ID of this agent
+	 */
 	public int getID() {
 		return this._id;
 	}
+
+	/**
+	 * @param id to set to this agent
+	 */
 	public void setID(int id) {
 		this._id = id;
 	}
+
+	/**
+	 * @return the next node this agent is going to
+	 */
 	public int getNextNode() {
 		int ans = -2;
 		if(this._curr_edge==null) {
@@ -59,6 +73,11 @@ public class Agent {
 		}
 		return ans;
 	}
+
+	/**
+	 * @param dest the next node this agent goes to
+	 * @return if succeeded
+	 */
 	public boolean setNextNode(int dest) {
 		boolean ans = false;
 		int src = this._curr_node.getKey();
@@ -69,59 +88,72 @@ public class Agent {
 		else {_curr_edge = null;}
 		return ans;
 	}
-	public double getSpeed() {
-		return this._speed;
-	}
-	public void setSpeed(double v) {
-		this._speed = v;
-	}
-	public double getValue() {
-		return this._value;
-	}
-	public void setMoney(double v) {_value = v;}
-	public Pokemon get_curr_fruit() {
-		return _curr_fruit;
-	}
-	public void set_curr_fruit(Pokemon curr_fruit) {
-		this._curr_fruit = curr_fruit;
-	}
+
+	/**
+	 * @return the speen of this agent
+	 */
+	public double getSpeed() { return this._speed; }
+
+	/**
+	 * @param s the speed to set to this agent
+	 */
+	public void setSpeed(double s) { this._speed = s; }
+
+	/**
+	 * @return this agent value
+	 */
+	public double getValue() { return this._value; }
+
+	/**
+	 * @param v the value to set to this agent
+	 */
+	public void setValue(double v) { _value = v; }
+
+	/**
+	 * @return the current pokemon targeted by this agent
+	 */
+	public Pokemon get_curr_pokemon() { return _curr_pokemon; }
+
+	/**
+	 * @param curr_pokemon set target pokemon to this agent
+	 */
+	public void set_curr_pokemon(Pokemon curr_pokemon) {this._curr_pokemon = curr_pokemon; }
+
+	/**
+	 * @return this agent's location
+	 */
 	public geo_location getLocation() {
 		return _pos;
 	}
+
+	/**
+	 * @param geo set this agent's location to
+	 */
 	public void setLocation(geo_location geo) {
 		this._pos = geo;
 	}
+
+	/**
+	 * @return on what edge this agent is
+	 */
 	public edge_data get_curr_edge() {
 		return this._curr_edge;
 	}
+
+	/**
+	 * @param _curr_edge set this pokemon's place on that edge
+	 */
 	public void set_curr_edge(edge_data _curr_edge) {
 		this._curr_edge = _curr_edge;
 	}
-	public long get_sg_dt() {
-		return _sg_dt;
-	}
-	public void set_sg_dt(long _sg_dt) {
-		this._sg_dt = _sg_dt;
-	}
-	public void set_SDT(long ddtt) {
-		long ddt = ddtt;
-		if(this._curr_edge!=null) {
-			double w = get_curr_edge().getWeight();
-			geo_location dest = _gg.getNode(get_curr_edge().getDest()).getLocation();
-			geo_location src = _gg.getNode(get_curr_edge().getSrc()).getLocation();
-			double de = src.distance(dest);
-			double dist = _pos.distance(dest);
-			if(this.get_curr_fruit().get_edge()==this.get_curr_edge()) {
-				dist = _curr_fruit.getLocation().distance(this._pos);
-			}
-			double norm = dist/de;
-			double dt = w*norm / this.getSpeed();
-			ddt = (long)(1000.0*dt);
-		}
-		this.set_sg_dt(ddt);
-	}
+
 	public Queue<node_data> getQ(){return queue;}
 	public void setQ(Queue<node_data> queue){ this.queue = queue;}
+
+	/**
+	 * updates this agent from a json string
+	 * @param json a string holds an agent's information
+	 */
 	public void update(String json) {
 		JSONObject line;
 		try {
@@ -140,13 +172,18 @@ public class Agent {
 				this.setCurrNode(src);
 				this.setSpeed(speed);
 				this.setNextNode(dest);
-				this.setMoney(value);
+				this.setValue(value);
 			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 *
+	 * @return a string representation of this agent
+	 */
 	//@Override
 	public String toJSON() {
 		int d = this.getNextNode();
@@ -161,17 +198,27 @@ public class Agent {
 				+ "}";
 		return ans;
 	}
+
+	/**
+	 * @return true if this agent is moving, false otherwise
+	 */
 	public boolean isMoving() {
 		return this._curr_edge!=null;
 	}
+
+	//======================== toString & equals methods =========================
+	/**
+	 * @return a string representation of this agent
+	 */
 	public String toString() {
 		return toJSON();
 	}
-	public String toString1() {
-		String ans=""+this.getID()+","+_pos+", "+isMoving()+","+this.getValue();
-		return ans;
-	}
 
+	/**
+	 * checks if a given agent is equals to this agent
+	 * @param o the other agent to compare to
+	 * @return if the two agents are equals
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -179,18 +226,17 @@ public class Agent {
 		Agent agent = (Agent) o;
 		return _id == agent._id &&
 				Double.compare(agent._speed, _speed) == 0 &&
-				_sg_dt == agent._sg_dt &&
 				Double.compare(agent._value, _value) == 0 &&
 				Objects.equals(_pos, agent._pos) &&
 				Objects.equals(_curr_edge, agent._curr_edge) &&
 				Objects.equals(_curr_node, agent._curr_node) &&
 				Objects.equals(_gg, agent._gg) &&
-				Objects.equals(_curr_fruit, agent._curr_fruit) &&
+				Objects.equals(_curr_pokemon, agent._curr_pokemon) &&
 				Objects.equals(queue, agent.queue);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(_id, _pos, _speed, _curr_edge, _curr_node, _gg, _curr_fruit, _sg_dt, queue, _value);
+		return Objects.hash(_id, _pos, _speed, _curr_edge, _curr_node, _gg, _curr_pokemon, queue, _value);
 	}
 }

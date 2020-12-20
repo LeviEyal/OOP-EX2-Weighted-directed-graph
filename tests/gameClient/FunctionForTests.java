@@ -51,7 +51,7 @@ public class FunctionForTests {
                 int t = pk.getInt("type");
                 double v = pk.getDouble("value");
                 String p = pk.getString("pos");
-                Pokemon f = new Pokemon(new Point3D(p), t, v, 0, null);
+                Pokemon f = new Pokemon(new Point3D(p), t, v, null);
                 ans.add(f);
             }
         }
@@ -128,7 +128,7 @@ public class FunctionForTests {
      * */
     public directed_weighted_graph graphJsonToGraph(String json){
         dw_graph_algorithms ga = new DWGraph_Algo();
-        ga.load("jsonsFiles/graph.json");
+        ga.load("files/graph.json");
         return ga.getGraph();
     }
 

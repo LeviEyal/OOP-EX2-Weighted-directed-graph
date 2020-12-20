@@ -45,10 +45,9 @@ class AgentTest {
                 assertEquals(a.getNextNode(), newA.getNextNode());
                 assertEquals(a.getSpeed(), newA.getSpeed());
                 assertEquals(a.getValue(), newA.getValue());
-                assertEquals(a.get_curr_fruit(), newA.get_curr_fruit());
+                assertEquals(a.get_curr_pokemon(), newA.get_curr_pokemon());
                 assertEquals(a.getLocation(), newA.getLocation());
                 assertEquals(a.get_curr_edge(), newA.get_curr_edge());
-                assertEquals(a.get_sg_dt(), newA.get_sg_dt());
                 assertEquals(a.getQ(), newA.getQ());
             }
         }
@@ -237,7 +236,7 @@ class AgentTest {
             _agents = _func.getAgents(jsonAgents,_graph);
             for(Agent a : _agents) {
                 double value = a.getValue();
-                a.setMoney(Double.MAX_VALUE);
+                a.setValue(Double.MAX_VALUE);
                 assertEquals(a.getValue(), Double.MAX_VALUE);
                 assertNotEquals(a.getValue(),value);
             }
@@ -259,7 +258,7 @@ class AgentTest {
                 Random r = new Random();
                 double value = a.getValue();
                 double newValue = r.nextDouble();
-                a.setMoney(newValue);
+                a.setValue(newValue);
                 assertEquals(a.getValue(), newValue);
                 assertNotEquals(a.getValue(),value);
             }
@@ -278,12 +277,12 @@ class AgentTest {
             _graph = _func.graphJsonToGraph(jsonGraph);
             _agents = _func.getAgents(jsonAgents,_graph);
             for(Agent a : _agents) {
-                Pokemon p = a.get_curr_fruit();
+                Pokemon p = a.get_curr_pokemon();
                 Point3D point = new Point3D(Integer.MAX_VALUE,Integer.MIN_VALUE,Integer.MAX_VALUE);
-                _pokemon = new Pokemon(point,100,Integer.MIN_VALUE,Integer.MIN_VALUE,new EdgeData(-10,-10,0.0));
-                a.set_curr_fruit(_pokemon);
-                assertEquals(a.get_curr_fruit(), _pokemon);
-                assertNotEquals(a.get_curr_fruit(),p);
+                _pokemon = new Pokemon(point,100,Integer.MIN_VALUE,new EdgeData(-10,-10,0.0));
+                a.set_curr_pokemon(_pokemon);
+                assertEquals(a.get_curr_pokemon(), _pokemon);
+                assertNotEquals(a.get_curr_pokemon(),p);
             }
         }
     }
@@ -300,12 +299,12 @@ class AgentTest {
             _graph = _func.graphJsonToGraph(jsonGraph);
             _agents = _func.getAgents(jsonAgents,_graph);
             for(Agent a : _agents) {
-                Pokemon p = a.get_curr_fruit();
+                Pokemon p = a.get_curr_pokemon();
                 Point3D point = new Point3D(Integer.MAX_VALUE,Integer.MIN_VALUE,Integer.MAX_VALUE);
-                _pokemon = new Pokemon(point,100,Integer.MIN_VALUE,Integer.MIN_VALUE,new EdgeData(-10,-10,0.0));
-                a.set_curr_fruit(_pokemon);
-                assertEquals(a.get_curr_fruit(), _pokemon);
-                assertNotEquals(a.get_curr_fruit(),p);
+                _pokemon = new Pokemon(point,100,Integer.MIN_VALUE,new EdgeData(-10,-10,0.0));
+                a.set_curr_pokemon(_pokemon);
+                assertEquals(a.get_curr_pokemon(), _pokemon);
+                assertNotEquals(a.get_curr_pokemon(),p);
             }
         }
     }

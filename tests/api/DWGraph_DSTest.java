@@ -27,12 +27,10 @@ class DWGraph_DSTest {
      * */
     @Test
     void constructor() {
-        for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
-            _graph = _func.graphJsonToGraph(_jsonGraph);
-            assertNotNull(_graph);
-            graphData =_func.getGraphData(_graph);
-        }
+        _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(_array[0] + _fileGraph);
+        _graph = _func.graphJsonToGraph(_jsonGraph);
+        assertNotNull(_graph);
+        graphData =_func.getGraphData(_graph);
     }
     /**
      * We are running by array, this array contains paths for all levels.
@@ -40,9 +38,8 @@ class DWGraph_DSTest {
      * */
     @Test
     void getNode() {
-        int i = 0;
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             for (node_data n : _graph.getV()){
@@ -59,7 +56,7 @@ class DWGraph_DSTest {
     @Test
     void getEdge() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -84,7 +81,7 @@ class DWGraph_DSTest {
     @Test
     void addNode() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -104,7 +101,7 @@ class DWGraph_DSTest {
     @Test
     void connect() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -137,7 +134,7 @@ class DWGraph_DSTest {
     @Test
     void getV() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -158,7 +155,7 @@ class DWGraph_DSTest {
     @Test
     void getE() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -189,7 +186,7 @@ class DWGraph_DSTest {
     @Test
     void removeNode() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -212,7 +209,7 @@ class DWGraph_DSTest {
     @Test
     void removeEdge() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -234,7 +231,7 @@ class DWGraph_DSTest {
                     }
                 }
             }
-            assertTrue(newG.edgeSize() == 0);
+            assertEquals(newG.edgeSize(), 0);
         }
     }
     /**
@@ -244,7 +241,7 @@ class DWGraph_DSTest {
     @Test
     void nodeSize() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -262,7 +259,7 @@ class DWGraph_DSTest {
     @Test
     void edgeSize() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -287,7 +284,7 @@ class DWGraph_DSTest {
     @Test
     void getMC() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
@@ -312,7 +309,7 @@ class DWGraph_DSTest {
     @Test
     void testToString() {
         for (String str : _array) {
-            _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
+            _jsonGraph = FunctionForTests.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             graphData =_func.getGraphData(_graph);
             _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");

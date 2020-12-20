@@ -95,7 +95,7 @@ public class FunctionForTests {
      * */
     public directed_weighted_graph graphJsonToGraph(String json){
         dw_graph_algorithms ga = new DWGraph_Algo();
-        ga.load("jsonsFiles/graph.json");
+        ga.load("files/graph.json");
         return ga.getGraph();
     }
     /**

@@ -31,7 +31,7 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for(Pokemon p : _pokemonsList){
-                Pokemon _pokemon = new Pokemon(p.getLocation(),p.getType(),p.getValue(),0 , p.get_edge());
+                Pokemon _pokemon = new Pokemon(p.getLocation(),p.getType(),p.getValue() , p.get_edge());
                 assertEquals(_pokemon.getType() , p.getType());
                 assertEquals(_pokemon.getValue() , p.getValue());
                 assertEquals(_pokemon.get_edge() , p.get_edge());
@@ -50,7 +50,7 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for(Pokemon p : _pokemonsList){
-                Pokemon _pokemon = new Pokemon(p.getLocation(),p.getType(),p.getValue(),0 , p.get_edge());
+                Pokemon _pokemon = new Pokemon(p.getLocation(),p.getType(),p.getValue(), p.get_edge());
                 assertEquals(_pokemon.get_edge() , p.get_edge());
                 EdgeData e = new EdgeData(Integer.MIN_VALUE,Integer.MIN_VALUE,Integer.MIN_VALUE);
                 assertNotEquals(p.get_edge(), e);
@@ -140,9 +140,9 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                p.setMin_dist(Integer.MAX_VALUE);
-                assertEquals(p.getMin_dist(), Integer.MAX_VALUE);
-                assertNotEquals(p.getMin_dist(), Integer.MIN_VALUE);
+                p.set_min_dist(Integer.MAX_VALUE);
+                assertEquals(p.get_min_dist(), Integer.MAX_VALUE);
+                assertNotEquals(p.get_min_dist(), Integer.MIN_VALUE);
             }
         }
     }
@@ -157,10 +157,10 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                double Min_dist = p.getMin_dist();
-                p.setMin_dist(Integer.MIN_VALUE);
-                assertEquals(p.getMin_dist(), Integer.MIN_VALUE);
-                assertNotEquals(p.getMin_dist(), Min_dist);
+                double Min_dist = p.get_min_dist();
+                p.set_min_dist(Integer.MIN_VALUE);
+                assertEquals(p.get_min_dist(), Integer.MIN_VALUE);
+                assertNotEquals(p.get_min_dist(), Min_dist);
 
             }
         }
@@ -176,9 +176,9 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                p.setFrom(Integer.MAX_VALUE);
-                assertEquals(p.getFrom(), Integer.MAX_VALUE);
-                assertNotEquals(p.getFrom(), Integer.MIN_VALUE);
+                p.set_from(Integer.MAX_VALUE);
+                assertEquals(p.get_from(), Integer.MAX_VALUE);
+                assertNotEquals(p.get_from(), Integer.MIN_VALUE);
             }
         }
     }
@@ -193,7 +193,7 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                int from = p.getFrom();
+                int from = p.get_from();
                 p.setType(Integer.MAX_VALUE);
                 assertNotEquals(p.getType(), from);
                 assertEquals(p.getType(), Integer.MAX_VALUE);
@@ -211,9 +211,9 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                p.setTo(Integer.MAX_VALUE);
-                assertEquals(p.getTo(), Integer.MAX_VALUE);
-                assertNotEquals(p.getTo(), Integer.MIN_VALUE);
+                p.set_to(Integer.MAX_VALUE);
+                assertEquals(p.get_to(), Integer.MAX_VALUE);
+                assertNotEquals(p.get_to(), Integer.MIN_VALUE);
             }
         }
     }
@@ -228,10 +228,10 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                int to = p.getTo();
-                p.setTo(Integer.MAX_VALUE);
-                assertEquals(p.getTo(), Integer.MAX_VALUE);
-                assertNotEquals(p.getTo(), to);
+                int to = p.get_to();
+                p.set_to(Integer.MAX_VALUE);
+                assertEquals(p.get_to(), Integer.MAX_VALUE);
+                assertNotEquals(p.get_to(), to);
             }
         }
     }
@@ -246,8 +246,8 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                p.setWorth(Integer.MAX_VALUE);
-                assertEquals(p.getWorth(), Integer.MAX_VALUE);
+                p.set_worth(Integer.MAX_VALUE);
+                assertEquals(p.get_worth(), Integer.MAX_VALUE);
             }
         }
     }
@@ -262,10 +262,10 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             for (Pokemon p : _pokemonsList) {
-                double worth = p.getWorth();
-                p.setWorth(Integer.MAX_VALUE);
-                assertNotEquals(p.getWorth(), worth);
-                assertEquals(p.getWorth(), Integer.MAX_VALUE);
+                double worth = p.get_worth();
+                p.set_worth(Integer.MAX_VALUE);
+                assertNotEquals(p.get_worth(), worth);
+                assertEquals(p.get_worth(), Integer.MAX_VALUE);
             }
         }
     }
@@ -285,8 +285,8 @@ class PokemonTest {
                         ", _value=" + p.getValue() +
                         ", _type=" + p.getType() +
                         ", _pos=" + p.getLocation() +
-                        ", min_dist=" + p.getMin_dist() +
-                        ", min_ro=" + p.getFrom() +
+                        ", min_dist=" + p.get_min_dist() +
+                        ", min_ro=" + p.get_from() +
                         '}';
                 ;
                 assertEquals(p.toString(), str);
@@ -305,9 +305,9 @@ class PokemonTest {
             String json = _func.readJsonFromFileAndGetAsString(str + _fileName);
             _pokemonsList = _func.json2Pokemons(json);
             Point3D point = new Point3D(Integer.MAX_VALUE,Integer.MIN_VALUE,Integer.MAX_VALUE);
-            _pokemon = new Pokemon(point,100,Integer.MIN_VALUE,Integer.MIN_VALUE,new EdgeData(-10,-10,0.0));
+            _pokemon = new Pokemon(point,100,Integer.MIN_VALUE,new EdgeData(-10,-10,0.0));
             for (Pokemon p : _pokemonsList) {
-                Pokemon p2 = new Pokemon(p.getLocation(),p.getType(),p.getValue(),0.0,p.get_edge());
+                Pokemon p2 = new Pokemon(p.getLocation(),p.getType(),p.getValue(),p.get_edge());
                 assertTrue(p.equals(p2));
                 assertFalse(p.equals(_pokemon));
             }
