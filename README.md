@@ -21,7 +21,7 @@ Enter your ID and select the level you will to play and click the "play!" button
 Another way to login to the game is by the command `java -jar Ex2.jar 123456789 7` where 123456789 is your id and 7 is the level you want to play. 
 ## Project structure
 
-**package api**
+## package api
 This package contains all the implementation of the graph.
 it represent the graph as adjacency list using hash maps.
  the package files list:
@@ -30,7 +30,7 @@ it represent the graph as adjacency list using hash maps.
 package diagram:
 ![enter image description here](https://i.paste.pics/a8d3d2e83353cacd8c4e194380f84700.png)
 
-**package gameClient**
+## The package gameClient
 The class Agent - a pokemon catcher. it has the following properties: position, id, speed, current edge, current pokemon, value.
 
 The class Pokemon - Every pokemon has the following properties: edge (on which the pokemon on), value, type (if the type is -1 so the pokemon lies in a slope), position (3d point), minimum distance (every agent set this to mark the distances to all pokemons), from (the node on this pokemon's edge that "behind" the pokemon), to (the node on this pokemon's edge that "in front" of the pokemon), worth (based on the minimum distance + value)
@@ -41,7 +41,7 @@ The class Ex2 - This is the engine class of the game.
 
 ![img](https://i.paste.pics/55a1ddffc1ba282d8a18dd8a31683f2f.png)
 
-**package GUI**
+## The package GUI
 The class MyFrame - This class represents the main window of the game
 
 The class MyPanel - This class represents the main panel containing the game
