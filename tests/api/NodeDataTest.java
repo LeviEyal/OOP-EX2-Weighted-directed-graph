@@ -4,10 +4,16 @@ package api;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
-
+/**
+ * This class tests the class of NodeData
+ * */
 class NodeDataTest {
     node_data[] arrayNodes;
 
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the constructor function for the class NodeData
+     * */
     @Test
     void constructor() {
         arrayNodes = new NodeData[100];
@@ -17,7 +23,10 @@ class NodeDataTest {
         assertTrue(arrayNodes.length == 100 && arrayNodes[99] != null);
     }
 
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the getKey function for the class NodeData
+     * */
     @Test
     void getKey() {
         arrayNodes = new NodeData[100];
@@ -26,7 +35,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getKey() == i);
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the getLocation function for the class NodeData
+     * */
     @Test
     void getLocation() {
         arrayNodes = new NodeData[100];
@@ -37,7 +49,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getLocation() == g);
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the setLocation function for the class NodeData
+     * */
     @Test
     void setLocation() {
         arrayNodes = new NodeData[100];
@@ -50,7 +65,10 @@ class NodeDataTest {
             assertNotEquals(arrayNodes[i].getLocation(),g);
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the getWeight function for the class NodeData
+     * */
     @Test
     void getWeight() {
         arrayNodes = new NodeData[100];
@@ -64,7 +82,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getWeight() != getW);
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the setWeight function for the class NodeData
+     * */
     @Test
     void setWeight() {
         arrayNodes = new NodeData[100];
@@ -77,7 +98,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getWeight() != getW);
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the getInfo function for the class NodeData
+     * */
     @Test
     void getInfo() {
         arrayNodes = new NodeData[100];
@@ -90,7 +114,10 @@ class NodeDataTest {
 
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the setInfo function for the class NodeData
+     * */
     @Test
     void setInfo() {
         arrayNodes = new NodeData[100];
@@ -102,7 +129,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getInfo().equals(str));
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the getTag function for the class NodeData
+     * */
     @Test
     void getTag() {
         arrayNodes = new NodeData[100];
@@ -114,7 +144,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getTag() == num );
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the setTag function for the class NodeData
+     * */
     @Test
     void setTag() {
         arrayNodes = new NodeData[100];
@@ -126,7 +159,10 @@ class NodeDataTest {
             assertTrue(arrayNodes[i].getTag() == num );
         }
     }
-
+    /**
+     * We are running 100 times, and creating a new Node(vertex) each run
+     * This functions tests the testToString function for the class NodeData
+     * */
     @Test
     void testToString() {
         arrayNodes = new NodeData[100];

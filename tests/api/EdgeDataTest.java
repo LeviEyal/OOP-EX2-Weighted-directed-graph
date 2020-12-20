@@ -4,10 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
+
+/**
+ * This class tests the class of EdgeData
+ * */
+
 class EdgeDataTest {
     edge_data[] arrayEdges = new edge_data[1000];
 
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the constructor function for the class EdgeData
+     * */
     @Test
     void constructor() {
 
@@ -16,6 +24,10 @@ class EdgeDataTest {
             assertNotNull(arrayEdges[i]);
         }
     }
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the src vertex in the edge
+     * */
     @Test
     void getSrc() {
         for (int i = 0; i < 1000; i++) {
@@ -24,7 +36,10 @@ class EdgeDataTest {
             assertFalse(arrayEdges[i].getSrc() == (i+1));
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the dest vertex in the edge
+     * */
     @Test
     void getDest() {
         for (int i = 0; i < 1000; i++) {
@@ -33,7 +48,10 @@ class EdgeDataTest {
             assertFalse(arrayEdges[i].getDest() == i);
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the Weight of the edge
+     * */
     @Test
     void getWeight() {
         for (int i = 0; i < 1000; i++) {
@@ -44,7 +62,10 @@ class EdgeDataTest {
             assertFalse(arrayEdges[i].getWeight() == i+1);
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the info of the edge
+     * */
     @Test
     void getInfo() {
         for (int i = 0; i < 1000; i++) {
@@ -53,7 +74,10 @@ class EdgeDataTest {
             assertTrue(arrayEdges[i].getInfo().equals("Boaz the egg and the brain fuck"));
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the setInfo of the edge
+     * */
     @Test
     void setInfo() {
         for (int i = 0; i < 1000; i++) {
@@ -65,7 +89,10 @@ class EdgeDataTest {
             assertFalse(arrayEdges[i].getInfo().equals(str));
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the getTag of the edge
+     * */
     @Test
     void getTag() {
         for (int i = 0; i < 1000; i++) {
@@ -77,7 +104,10 @@ class EdgeDataTest {
             assertFalse(arrayEdges[i].getTag() == get);
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the setTag of the edge
+     * */
     @Test
     void setTag() {
         for (int i = 0; i < 1000; i++) {
@@ -89,7 +119,10 @@ class EdgeDataTest {
             assertFalse(arrayEdges[i].getTag() == get);
         }
     }
-
+    /**
+     * We are running 1000 times, and creating a new edge each run
+     * This functions tests the toString of the edge between two vertex
+     * */
     @Test
     void testToString() {
         for (int i = 0; i < 1000; i++) {

@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class tests the class of Arena
+ * */
 class ArenaTest {
     private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
@@ -33,7 +35,11 @@ class ArenaTest {
     private String[] _array = _func.getArrayOfScenariosPath();
 
     private final long id = 1111111111;
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the constructor function for the class Arena
+     * */
     @Test
     void constructor() {
         int i = 0;
@@ -58,7 +64,11 @@ class ArenaTest {
             assertTrue(new File(_pathFolder + _filePokemons).isFile());
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getAgents function for the class Arena
+     * */
     @Test
     void getAgents() {
         int i = 0;
@@ -79,7 +89,11 @@ class ArenaTest {
             assertTrue(a.getAgents(_jsonAgents).size() > 0);
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the jsonToAgents function for the class Arena
+     * */
     @Test
     void jsonToAgents() {
         int i = 0;
@@ -96,7 +110,11 @@ class ArenaTest {
             assertEquals(a1,a.getAgents(_jsonAgents));
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getPokemons function for the class Arena
+     * */
     @Test
     void getPokemons() {
         int i = 0;
@@ -119,7 +137,11 @@ class ArenaTest {
             assertEquals(_pokemons,a.getPokemons());
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setPokemons function for the class Arena
+     * */
     @Test
     void setPokemons() {
         int i = 0;
@@ -142,7 +164,11 @@ class ArenaTest {
             assertEquals(a.getPokemons(),_pokemons);
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getGraph function for the class Arena
+     * */
     @Test
     void getGraph() {
         int i = 0;
@@ -165,7 +191,11 @@ class ArenaTest {
             assertEquals(a.getGraph(),_graph);
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setGraph function for the class Arena
+     * */
     @Test
     void setGraph() {
         int i = 0;
@@ -188,7 +218,11 @@ class ArenaTest {
             assertEquals(a.getGraph(),_graph);
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the get_info function for the class Arena
+     * */
     @Test
     void get_info() {
         int i = 0;
@@ -220,7 +254,11 @@ class ArenaTest {
             assertNotEquals(a.get_info(),list);
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the set_info function for the class Arena
+     * */
     @Test
     void set_info() {
         int i = 0;
