@@ -6,31 +6,42 @@
 This is the third assignment in the course opject oriented programming, ariel univerisy.
 The project is about implementing a directed weithted graph and exploring some graph algorithms.
 In the game we place several agent on a graph and their goal is to earn points by catching the random pokemons.
-Each pokemon has its value.
+Each pokemon has its value.  
+For more information, visit the project's wiki tab.
 
 ## made by:
 > Eyal Levi - GitHub page: [github.com/LeviEyal](github.com/LeviEyal)  
 > Moti Dahari - GitHub page: [github.com/motidahari](github.com/motidahari)
 
 ## How to use?
-clone the project to your computer and run the file Ex2.jar by the command `java -jar Ex2` on the same folder as Ex2.jar is on.
-the main window of the game will sow up:
-![enter image description here](https://i.paste.pics/8d6a502dc74bf155be1503eed6825784.png)
-Enter your ID and select the level you will to play and click the "play!" button.
+clone the project to your computer and run the file Ex2.jar by the command:  
+`java -jar Ex2`  
+on the same folder as Ex2.jar is on.  
+the main window of the game will sow up:  
+![enter image description here](https://i.paste.pics/8d6a502dc74bf155be1503eed6825784.png)  
+Enter your ID and select the level you will to play and click the "play!" button.  
 
-Another way to login to the game is by the command `java -jar Ex2.jar 123456789 7` where 123456789 is your id and 7 is the level you want to play. 
-## Project structure
+Another way to login to the game is by the command:  
+`java -jar Ex2.jar 123456789 7`  
+where 123456789 is your id and 7 is the level you want to play.  
 
-## package api
-This package contains all the implementation of the graph.
-it represent the graph as adjacency list using hash maps.
- the package files list:
+## The package api
+This package contains all the implementation of the graph.   
+it represent the graph as adjacency list using hash maps.  
+The class DWGraph_DS - Represent the graph implemented as adejency list.  
+The class DWGraph_Algo - Contaions several algorithms that can be operate on a given graph.  
+The class EdgeData - Represnts an edge in a graph.  
+The class NodeData - Represnts a node in a graph.  
+The class EdgeLocation - Represnts an edge's location in a graph.  
+The class GeoLocation - Represnts a 3d location.  
 
-![img](https://i.paste.pics/5f95e39de017ccee8c03ba3cd987aef1.png)
-package diagram:
-![enter image description here](https://i.paste.pics/a8d3d2e83353cacd8c4e194380f84700.png)
+The package files list:  
 
-## The package gameClient
+![img](https://i.paste.pics/5f95e39de017ccee8c03ba3cd987aef1.png)  
+package diagram:  
+![enter image description here](https://i.paste.pics/a8d3d2e83353cacd8c4e194380f84700.png)  
+
+## The package gameClient  
 The class Agent - a pokemon catcher. it has the following properties: position, id, speed, current edge, current pokemon, value.
 
 The class Pokemon - Every pokemon has the following properties: edge (on which the pokemon on), value, type (if the type is -1 so the pokemon lies in a slope), position (3d point), minimum distance (every agent set this to mark the distances to all pokemons), from (the node on this pokemon's edge that "behind" the pokemon), to (the node on this pokemon's edge that "in front" of the pokemon), worth (based on the minimum distance + value)
