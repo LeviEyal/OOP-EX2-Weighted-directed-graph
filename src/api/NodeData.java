@@ -14,7 +14,6 @@ public class NodeData implements node_data, Serializable {
 
     /**
      * constructor - create new node
-     * @params: none
      * */
     public NodeData() {
         key = -1;
@@ -26,7 +25,6 @@ public class NodeData implements node_data, Serializable {
     /**
      * constructor - create new node
      * @param key - the key of the node
-     *
      * */
     public NodeData(int key) {
         this.key = key;
@@ -42,7 +40,6 @@ public class NodeData implements node_data, Serializable {
      * @param info - the info of the node
      * @param location - the location of the node
      * @param weight - the weight of the node
-     *
      * */
     public NodeData(int key, int tag, String info, geo_location location, double weight) {
         this.key = key;
@@ -55,7 +52,6 @@ public class NodeData implements node_data, Serializable {
      * constructor - create new node
      * @param key - the key of the node
      * @param location - the location of the node
-     *
      * */
     public NodeData(int key, geo_location location) {
         this.key = key;
@@ -67,7 +63,6 @@ public class NodeData implements node_data, Serializable {
     /**
      * constructor - create new node
      * @param o - the object data of the node
-     *
      * */
     public NodeData(node_data o) {
         this(o.getKey(), o.getTag(), o.getInfo(), o.getLocation(), o.getWeight());
@@ -84,7 +79,6 @@ public class NodeData implements node_data, Serializable {
 
     /**
      * Returns the location of this node, if
-     * none return null.
      * @return location - the location of the node
      */
     @Override
@@ -95,7 +89,6 @@ public class NodeData implements node_data, Serializable {
     /**
      * Allows changing this node's location.
      * @param p - new location (position) of this node.
-     * @return none
      */
     @Override
     public void setLocation(geo_location p) {
@@ -122,7 +115,7 @@ public class NodeData implements node_data, Serializable {
 
     /**
      * Returns the remark (meta data) associated with this node.
-     * @return info
+     * @return info - of the node.
      */
     @Override
     public String getInfo() {
@@ -160,7 +153,7 @@ public class NodeData implements node_data, Serializable {
 
     /**
      * return String of the data by the node
-     * @return key - return the key of the node
+     * @return s - string of the node.
      */
     @Override
     public String toString() {

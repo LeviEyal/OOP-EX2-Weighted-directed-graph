@@ -10,7 +10,9 @@ public class EdgeData implements edge_data {
     private int tag;
     /**
      * constructor for EdgeData to create a new Edge
-     * @return none
+     * @param src - id of src node.
+     * @param dst - id of dest node.
+     * @param weight - double of the weight.
      */
     public EdgeData(int src, int dst, double weight) {
         this.src = src;
@@ -21,8 +23,8 @@ public class EdgeData implements edge_data {
     }
 
     /**
-     * The id of the source node of this edge.
-     * @return src
+     * return the id of the source node of this edge.
+     * @return src - id of src node.
      */
     @Override
     public int getSrc() {
@@ -30,8 +32,8 @@ public class EdgeData implements edge_data {
     }
 
     /**
-     * The id of the destination node of this edge
-     * @return dst
+     * return the id of the destination node of this edge
+     * @return dst - id of dest node.
      */
     @Override
     public int getDest() {
@@ -39,7 +41,8 @@ public class EdgeData implements edge_data {
     }
 
     /**
-     * @return the weight of this edge (positive value).
+     * return the weight of the edge
+     * @return weight - the weight of this edge (positive value).
      */
     @Override
     public double getWeight() {
@@ -48,7 +51,7 @@ public class EdgeData implements edge_data {
 
     /**
      * Returns the remark (meta data) associated with this edge.
-     * @return info
+     * @return info - string of the info by the edge.
      */
     @Override
     public String getInfo() {
@@ -57,7 +60,7 @@ public class EdgeData implements edge_data {
 
     /**
      * Allows changing the remark (meta data) associated with this edge.
-     * @param s String
+     * @param s - String of the new info
      */
     @Override
     public void setInfo(String s) {
@@ -67,7 +70,7 @@ public class EdgeData implements edge_data {
     /**
      * Temporal data (aka color: e,g, white, gray, black)
      * which can be used be algorithms
-     * @return tag
+     * @return tag - int of the tag by this edge.
      */
     @Override
     public int getTag() {
