@@ -7,6 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * This class tests the class of pokemon
+ * */
 class PokemonTest {
 
     private Config con = new Config();
@@ -16,6 +20,11 @@ class PokemonTest {
     private String _fileName = con.Pokemons;
     private Pokemon _pokemon ;
 
+
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the constructor function for the class pokemon
+     * */
     @Test
     void constructor() {
         for (String str : _array){
@@ -31,6 +40,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the get_edge function for the class pokemon
+     * */
     @Test
     void get_edge() {
         for (String str : _array){
@@ -45,6 +58,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the set_edge function for the class pokemon
+     * */
     @Test
     void set_edge() {
         for (String str : _array) {
@@ -60,6 +77,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getLocation function for the class pokemon
+     * */
     @Test
     void getLocation() {
         for (String str : _array) {
@@ -75,6 +96,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getType function for the class pokemon
+     * */
     @Test
     void getType() {
         for (String str : _array) {
@@ -88,6 +113,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getValue function for the class pokemon
+     * */
     @Test
     void getValue() {
         for (String str : _array) {
@@ -101,6 +130,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getMin_dist function for the class pokemon
+     * */
     @Test
     void getMin_dist() {
         for (String str : _array) {
@@ -114,6 +147,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the setMin_dist function for the class pokemon
+     * */
     @Test
     void setMin_dist() {
         for (String str : _array) {
@@ -129,6 +166,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getFrom function for the class pokemon
+     * */
     @Test
     void getFrom() {
      for (String str : _array) {
@@ -142,6 +183,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the setFrom function for the class pokemon
+     * */
     @Test
     void setFrom() {
             for (String str : _array) {
@@ -156,6 +201,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getTo function for the class pokemon
+     * */
     @Test
     void getTo() {
         for (String str : _array) {
@@ -169,6 +218,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the setTo function for the class pokemon
+     * */
     @Test
     void setTo() {
         for (String str : _array) {
@@ -183,6 +236,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the getWorth function for the class pokemon
+     * */
     @Test
     void getWorth() {
         for (String str : _array) {
@@ -195,6 +252,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the setWorth function for the class pokemon
+     * */
     @Test
     void setWorth() {
         for (String str : _array) {
@@ -209,6 +270,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the testToString function for the class pokemon
+     * */
     @Test
     void testToString() {
         for (String str : _array) {
@@ -230,6 +295,10 @@ class PokemonTest {
         }
     }
 
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * This functions tests the testEquals function for the class pokemon
+     * */
     @Test
     void testEquals() {
         for (String str : _array) {

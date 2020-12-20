@@ -10,6 +10,9 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class tests the class of Agent
+ * */
 class AgentTest {
     private Config con = new Config();
     private FunctionForTests _func = new FunctionForTests();
@@ -23,7 +26,11 @@ class AgentTest {
     private String __fileGraph = con.GameGraph;
 
 
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the constructor function for the class Agent
+     * */
     @Test
     void constructor() {
         for (String str : _array){
@@ -46,6 +53,11 @@ class AgentTest {
             }
         }
     }
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getSrcNode function for the class Agent
+     * */
     @Test
     void getSrcNode() {
         for (String str : _array){
@@ -54,7 +66,6 @@ class AgentTest {
             _graph = _func.graphJsonToGraph(jsonGraph);
             _agents = _func.getAgents(jsonAgents,_graph);
             for(Agent a : _agents) {
-                int getSrcNode = a.getSrcNode();
                 int node = 1;
                 a.setCurrNode(_graph.getNode(node).getKey());
                 assertEquals(a.getSrcNode(), node);
@@ -62,7 +73,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setCurrNode function for the class Agent
+     * */
     @Test
     void setCurrNode() {
         for (String str : _array){
@@ -74,16 +89,17 @@ class AgentTest {
                 Random r = new Random();
                 int node = r.nextInt(_graph.nodeSize());
                 int node2 = (node - 1 < 0) ? node + 1 : node - 1;
-                //System.out.println("node = " + node + "  node2 =" + node2);
                 a.setCurrNode(node);
                 assertEquals(a.getSrcNode(), node);
                 assertNotEquals(a.getSrcNode(),node2);
-                //break;
             }
-            //break;
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getID function for the class Agent
+     * */
     @Test
     void getID() {
         for (String str : _array){
@@ -99,7 +115,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setID function for the class Agent
+     * */
     @Test
     void setID() {
         for (String str : _array){
@@ -117,7 +137,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getNextNode function for the class Agent
+     * */
     @Test
     void getNextNode() {
         for (String str : _array){
@@ -133,7 +157,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setNextNode function for the class Agent
+     * */
     @Test
     void setNextNode() {
         for (String str : _array){
@@ -155,7 +183,11 @@ class AgentTest {
         }
 
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getSpeed function for the class Agent
+     * */
     @Test
     void getSpeed() {
         for (String str : _array){
@@ -171,7 +203,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setSpeed function for the class Agent
+     * */
     @Test
     void setSpeed() {
         for (String str : _array){
@@ -187,7 +223,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getValue function for the class Agent
+     * */
     @Test
     void getValue() {
         for (String str : _array){
@@ -203,7 +243,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setMoney function for the class Agent
+     * */
     @Test
     void setMoney() {
         for (String str : _array){
@@ -221,7 +265,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the get_curr_fruit function for the class Agent
+     * */
     @Test
     void get_curr_fruit() {
         for (String str : _array){
@@ -239,7 +287,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the set_curr_fruit function for the class Agent
+     * */
     @Test
     void set_curr_fruit() {
         for (String str : _array){
@@ -257,7 +309,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getLocation function for the class Agent
+     * */
     @Test
     void getLocation() {
         for (String str : _array){
@@ -274,7 +330,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setLocation function for the class Agent
+     * */
     @Test
     void setLocation() {
         for (String str : _array){
@@ -291,7 +351,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the get_curr_edge function for the class Agent
+     * */
     @Test
     void get_curr_edge() {
         for (String str : _array){
@@ -308,62 +372,11 @@ class AgentTest {
             }
         }
     }
-/*
-    @Test
-    void get_sg_dt() {
-        for (String str : _array){
-            String jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            String jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _graph = _func.graphJsonToGraph(jsonGraph);
-            _agents = _func.getAgents(jsonAgents,_graph);
-            for(Agent a : _agents) {
-                Random r = new Random();
-                int node = r.nextInt(_graph.nodeSize());
-                int node2 = (node - 1 < 0) ? node + 1 : node - 1;
-                a.setID(node);
-                assertEquals(a.getID(), node);
-                assertNotEquals(a.getID(),node2);
-            }
-        }
-    }
-/*
-    @Test
-    void set_sg_dt() {
-        for (String str : _array){
-            String jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            String jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _graph = _func.graphJsonToGraph(jsonGraph);
-            _agents = _func.getAgents(jsonAgents,_graph);
-            for(Agent a : _agents) {
-                Random r = new Random();
-                int node = r.nextInt(_graph.nodeSize());
-                int node2 = (node - 1 < 0) ? node + 1 : node - 1;
-                a.setID(node);
-                assertEquals(a.getID(), node);
-                assertNotEquals(a.getID(),node2);
-            }
-        }
-    }
-
-    @Test
-    void set_SDT() {
-        for (String str : _array){
-            String jsonAgents = _func.readJsonFromFileAndGetAsString(str + _fileAgents);
-            String jsonGraph = _func.readJsonFromFileAndGetAsString(str + __fileGraph);
-            _graph = _func.graphJsonToGraph(jsonGraph);
-            _agents = _func.getAgents(jsonAgents,_graph);
-            for(Agent a : _agents) {
-                Random r = new Random();
-                int node = r.nextInt(_graph.nodeSize());
-                int node2 = (node - 1 < 0) ? node + 1 : node - 1;
-                a.setID(node);
-                assertEquals(a.getID(), node);
-                assertNotEquals(a.getID(),node2);
-            }
-        }
-    }
-*/
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the getQ function for the class Agent
+     * */
     @Test
     void getQ() {
         for (String str : _array){
@@ -382,7 +395,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the setQ function for the class Agent
+     * */
     @Test
     void setQ() {
         for (String str : _array){
@@ -401,7 +418,11 @@ class AgentTest {
             }
         }
     }
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the update function for the class Agent
+     * */
     @Test
     void update() {
         for (String str : _array){
@@ -430,12 +451,13 @@ class AgentTest {
                 e.printStackTrace();
             }
         }
-
-
-
     }
 
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the isMoving function for the class Agent
+     * */
     @Test
     void isMoving() {
         for (String str : _array){
@@ -456,7 +478,11 @@ class AgentTest {
         }
     }
 
-
+    /**
+     * We are running by array, this array contains paths for all levels.
+     * we import Json files and create objects from them, that contain the information regarding the rules of the game
+     * This functions tests the toString1 function for the class Agent
+     * */
     @Test
     void toString1() {
         for (String str : _array){
@@ -486,5 +512,4 @@ class AgentTest {
             }
         }
     }
-
 }

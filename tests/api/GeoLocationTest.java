@@ -5,10 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
+
+/**
+ * This class tests the class of GeoLocation
+ * */
+
 class GeoLocationTest {
     private Point3D p;
 
-
+    /**
+     * We are running 100 times, and creating a new Point3D each run
+     * This functions tests the constructor function for the class GeoLocation
+     * */
     @Test
     void constructor() {
         for (int i = 0; i < 100; i++) {
@@ -20,6 +28,10 @@ class GeoLocationTest {
 
     }
 
+    /**
+     * We are running 100 times, and creating a new Point3D each run
+     * This functions tests the distance between 2 points on a 3D platform
+     * */
     @Test
     void distance() {
         for (int i = 0; i < 100; i++) {
