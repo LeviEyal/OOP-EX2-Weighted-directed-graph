@@ -31,7 +31,7 @@ class DWGraph_DSTest {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
             assertNotNull(_graph);
-            graphData =_func.getGraphData(_graph);
+            //graphData =_func.getGraphData(_graph);
         }
     }
     /**
@@ -44,7 +44,7 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
+            //graphData =_func.getGraphData(_graph);
             for (node_data n : _graph.getV()){
                 assertNotNull(n);
                 assertNotNull(_graph.getNode(n.getKey()));
@@ -61,8 +61,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+           // graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             for (node_data n : _graph.getV()) {
                 for (node_data ni : _graph.getV()) {
 
@@ -86,8 +86,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -106,8 +106,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -139,8 +139,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -160,8 +160,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+           // _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -191,8 +191,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -214,8 +214,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -246,8 +246,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -264,8 +264,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -289,8 +289,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
@@ -314,8 +314,8 @@ class DWGraph_DSTest {
         for (String str : _array) {
             _jsonGraph = _func.readJsonFromFileAndGetAsString(str + _fileGraph);
             _graph = _func.graphJsonToGraph(_jsonGraph);
-            graphData =_func.getGraphData(_graph);
-            _func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
+            //graphData =_func.getGraphData(_graph);
+            //_func.createNewTextFileFromString(_func.getToString(graphData),"graphData");
             directed_weighted_graph newG = new DWGraph_DS();
             for (node_data n : _graph.getV()) {
                 newG.addNode(n);
